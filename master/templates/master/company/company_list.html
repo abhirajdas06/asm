@@ -1,0 +1,47 @@
+{% extends 'dashboard/index.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12">
+        {% for message in messages %}
+        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
+            <strong>{{message}}</strong>
+        </div>  
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-body">
+                <div class = " col-md-2 mb-2 ml-auto">
+                <a href="{% url 'CompanyCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Create Company Master</button>
+                </a></div>
+
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    
+                    <thead>
+                    <tr>
+                        <th>company_name</th>
+                        <th>address</th>
+                        <th>contact</th>
+                        
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for company in company  %}
+                    <tr>
+                        <td>{{company.company_name}}</td>
+                        <td>{{company.address}}</td>
+                        <td>{{company.contact}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}

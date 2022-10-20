@@ -1,0 +1,60 @@
+{% extends 'dashboard/index.html' %}
+{% block body %}
+
+<div class="row">
+    <div class="col-12">
+        {% for message in messages %}
+        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
+            <strong>{{message}}</strong>
+        </div>  
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-body">
+                <div class = " col-md-2 mb-2 ml-auto">
+                <a href="{% url 'UserCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Add new employee</button>
+                </a></div>
+
+                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Employee Code</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Office Contact</th>
+                        <th>Personal Contact</th>
+                        <th>Role</th>
+                        <th>Branch</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+
+                    <tbody>
+                        {% for user in user  %}
+                    <tr>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                        <td>{{user.employee_code}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.office_contact}}</td>
+                        <td>{{user.contact}}</td>
+                        <td>{{user.user_type}}</td>
+                        <td>{{user.branch}}</td>
+                        <td>{{user.location}}</td>
+                        <td> <a href="{% url 'UserUpdate' user.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div> <!-- end row -->
+
+{% endblock body %}
