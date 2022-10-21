@@ -26,6 +26,18 @@ class CompanyListView(generic.ListView):
     template_name = "master/company/company_list.html"
     queryset = Company.objects.all()
     context_object_name = "company"
+    
+# COMPANY MASTER Update
+
+@method_decorator(login_required, name='dispatch')
+class CompanyUpdateView(generic.UpdateView):
+    template_name = "master/company/company_create.html"
+    form_class=CompanyForm
+    queryset = Company.objects.all()
+    context_object_name = "company"
+    
+    def get_success_url(self):
+        return reverse("CompanyList")
 
 
 # COMPANY BRANCH CREATE
@@ -36,6 +48,17 @@ class BranchCreateView(generic.CreateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Branch Created Sucessfully')
+        return reverse("BranchList")
+    
+# Company Branch Update
+@method_decorator(login_required, name='dispatch')
+class BranchUpdateView(generic.UpdateView):
+    template_name = "master/branch/branch_create.html"
+    form_class=BranchForm
+    queryset = Branch.objects.all()
+    context_object_name = "branch"
+    
+    def get_success_url(self):
         return reverse("BranchList")
 
 

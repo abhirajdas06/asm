@@ -4,6 +4,7 @@ from .views import (
 
     CompanyCreateView,
     CompanyListView,
+    CompanyUpdateView,
     BranchCreateView,
     BranchListView,
     EmployeeLocationCreateView,
@@ -17,6 +18,7 @@ from .views import (
     SubCategoryCreateView,
     SubCategoryListView,
     BrandCreateView,
+    BranchUpdateView,
     BrandListView,
     SoftwareTypeCreateView,
     SoftwareTypeListView
@@ -26,7 +28,9 @@ from .views import (
 urlpatterns = [
     path('company', CompanyCreateView.as_view(), name="CompanyCreate"),
     path('company_list', CompanyListView.as_view(), name="CompanyList"),
+    path('company/<int:pk>/update',CompanyUpdateView.as_view(), name="CompanyUpdate"),
     path('branch', BranchCreateView.as_view(), name="BranchCreate"),
+    path('branch/<int:pk>/update',BranchUpdateView.as_view(), name="BranchUpdate"),
     path('branch_list', BranchListView.as_view(), name="BranchList"),
     path('employee_location', EmployeeLocationCreateView.as_view(),name="EmployeeLocationCreate"),
     path('employee_location_list', EmployeeLocationListView.as_view(), name="EmployeeLocationList"),

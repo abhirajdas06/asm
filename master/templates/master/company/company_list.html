@@ -22,17 +22,21 @@
                         <th>company_name</th>
                         <th>address</th>
                         <th>contact</th>
+                        <th>Action</th>
                         
                     </tr>
                     </thead>
 
 
                     <tbody>
-                        {% for company in company  %}
+                        {% for comp in company  %}
                     <tr>
-                        <td>{{company.company_name}}</td>
-                        <td>{{company.address}}</td>
-                        <td>{{company.contact}}</td>
+                        <td>{{comp.company_name}}</td>
+                        <td>{{comp.address}}</td>
+                        <td>{{comp.contact}}</td>
+                        <td> <a href="{% url 'CompanyUpdate' comp.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
+
                         
                     </tr>
                     {% endfor %}

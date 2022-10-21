@@ -21,6 +21,7 @@
                     <tr>
                         <th>Company</th>
                         <th>Branch Location</th>
+                        <th>Edit</th>
 
                         
                     </tr>
@@ -32,6 +33,8 @@
                     <tr>
                         <td>{{branch.company}}</td>
                         <td>{{branch.branch_location}}</td>
+                        <td> <a href="{% url 'BranchUpdate' branch.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
 
                         
                     </tr>
