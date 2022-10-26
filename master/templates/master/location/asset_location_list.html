@@ -21,6 +21,7 @@
                     <tr>
                         <th>Branch</th>
                         <th>Location</th>
+                        <th>Action</th>
 
                         
                     </tr>
@@ -32,6 +33,8 @@
                     <tr>
                         <td>{{a_location.branch}}</td>
                         <td>{{a_location.location}}</td>
+                        <td> <a href="{% url 'AssetLocationUpdate' a_location.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
 
                         
                     </tr>

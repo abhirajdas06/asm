@@ -21,6 +21,7 @@
                     <tr>
                         <th>Category</th>
                         <th>Sub Category</th>
+                        <th>Action</th>
 
                         
                     </tr>
@@ -32,6 +33,8 @@
                     <tr>
                         <td>{{subcategory.category}}</td>
                         <td>{{subcategory.name}}</td>
+                        <td> <a href="{% url 'E_locationUpdate' subcategory.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
 
                         
                     </tr>

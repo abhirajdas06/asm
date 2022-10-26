@@ -20,16 +20,16 @@
                             {{form.softwaretype|as_crispy_field}}
 
                         </div>
-                        <div class="form-group col-md-3 mb-0">
+                        {% comment %} <div class="form-group col-md-3 mb-0">
                             {{form.installed_on|as_crispy_field}}
 
-                        </div>
+                        </div> {% endcomment %}
                         
                         <div class="form-group col-md-3 mb-0">
                             <label class=" requiredField">
                                 Purchased on<span class="asteriskField">*</span>
                             </label>
-                            {{form.purchased_on|as_crispy_field}}
+                            {{form.purchased_on |as_crispy_field}}
 
                         </div>
                         <div class="form-group col-md-3 mb-0">

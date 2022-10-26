@@ -25,6 +25,7 @@
                         <th>Email</th>
                         <th>Website</th>
                         <th>Address</th>
+                        <th>Action</th>
 
                         
                     </tr>
@@ -40,6 +41,8 @@
                         <td>{{vendor.email}}</td>
                         <td>{{vendor.website}}</td>
                         <td>{{vendor.address}}</td>
+                        <td> <a href="{% url 'VendorUpdate' vendor.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
+                            edit</button></a></td>
 
                         
                     </tr>

@@ -23,6 +23,7 @@
                         <th>Software Type</th>
                         <th>Purchased On</th>
                         <th>Expiry</th>
+                        <th>Action</th>
                         
                     </tr>
                     </thead>
@@ -35,7 +36,7 @@
                         <td>{{software.softwaretype}}</td>
                         <td>{{software.purchased_on}}</td>
                         <td>{{software.expiry}}</td>
-                        {% comment %} <td> <a href="{% url 'UserUpdate' software.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block"> {% endcomment %}
+                        <td> <a href="{% url 'SoftwareUpdate' software.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
                             edit</button></a></td>
                     </tr>
                     {% endfor %}

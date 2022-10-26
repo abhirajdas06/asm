@@ -77,8 +77,8 @@ class EmployeeLocationCreateView(generic.CreateView):
     form_class = Employee_LocationForm
 
     def get_success_url(self):
-        messages.success(self.request, 'Branch Created Sucessfully')
-        return reverse("BranchList")
+        messages.success(self.request, 'Employee Location Created Sucessfully')
+        return reverse("EmployeeLocationList")
 
 
 # COMPANY EMPLOYEE LOCATION LIST
@@ -87,6 +87,17 @@ class EmployeeLocationListView(generic.ListView):
     template_name = "master/location/employee_location_list.html"
     queryset = Employee_Location.objects.all()
     context_object_name = "e_location"
+    
+# COMPANY EMPLOYEE LOCATION UPDATE
+@method_decorator(login_required, name='dispatch')
+class ElocationUpdateView(generic.UpdateView):
+    template_name = "master/location/employee_location_create.html"
+    form_class=Employee_LocationForm
+    queryset = Employee_Location.objects.all()
+    context_object_name = "e_location"
+    
+    def get_success_url(self):
+        return reverse("EmployeeLocationList")
 
 
 # VENDOR CREATE
@@ -107,6 +118,17 @@ class VendorListView(generic.ListView):
     queryset = Vendor.objects.all()
     context_object_name = "vendor"
 
+# VENDOR Update
+@method_decorator(login_required, name='dispatch')
+class VendorUpdateView(generic.UpdateView):
+    template_name = "master/vendor/vendor_create.html"
+    form_class=VendorForm
+    queryset = Vendor.objects.all()
+    context_object_name = "vendor"
+    
+    def get_success_url(self):
+        return reverse("VendorList")
+
 
 # COMPANY ASSET LOCATION CREATE
 @method_decorator(login_required, name='dispatch')
@@ -116,7 +138,7 @@ class AssetLocationCreateView(generic.CreateView):
 
     def get_success_url(self):
         messages.success(self.request, 'Branch Created Sucessfully')
-        return reverse("EmployeeLocationList")
+        return reverse("AssetLocationList")
 
 
 # COMPANY ASSET LOCATION LIST
@@ -125,6 +147,17 @@ class AssetLocationListView(generic.ListView):
     template_name = "master/location/asset_location_list.html"
     queryset = Asset_Location.objects.all()
     context_object_name = "a_location"
+    
+# COMPANY ASSET LOCATION UPDATE
+@method_decorator(login_required, name='dispatch')
+class AssetLocationUpdateView(generic.UpdateView):
+    template_name = "master/location/asset_location_create.html"
+    form_class=Asset_LocationForm
+    queryset = Asset_Location.objects.all()
+    context_object_name = "a_location"
+    
+    def get_success_url(self):
+        return reverse("AssetLocationList")
 
 
 # PRODUCT CATEGORY CREATE
@@ -144,6 +177,17 @@ class CategoryListView(generic.ListView):
     template_name = "master/category/category_list.html"
     queryset = Category.objects.all()
     context_object_name = "category"
+    
+# PRODUCT CATEGORY UPDATE  
+@method_decorator(login_required, name='dispatch')
+class CategoryUpdateView(generic.UpdateView):
+    template_name = "master/category/category_create.html"
+    form_class=CategoryForm
+    queryset = Category.objects.all()
+    context_object_name = "category"
+    
+    def get_success_url(self):
+        return reverse("CategoryList")
 
 
 # PRODUCT SUBCATEGORY CREATE
@@ -163,6 +207,17 @@ class SubCategoryListView(generic.ListView):
     template_name = "master/category/sub_category_list.html"
     queryset = SubCategory.objects.all()
     context_object_name = "subcategory"
+    
+# PRODUCT SUBCATEGORY UPDATE
+@method_decorator(login_required, name='dispatch')
+class SubCategoryUpdateView(generic.UpdateView):
+    template_name = "master/category/sub_category_create.html"
+    form_class=SubCategoryForm
+    queryset = SubCategory.objects.all()
+    context_object_name = "subcategory"
+    
+    def get_success_url(self):
+        return reverse("SubCategoryList")
 
 
 # PRODUCT BRAND CREATE
@@ -182,6 +237,17 @@ class BrandListView(generic.ListView):
     template_name = "master/brand/brand_list.html"
     queryset = Brand.objects.all()
     context_object_name = "brand"
+    
+# PRODUCT BRAND UPDATE
+@method_decorator(login_required, name='dispatch')
+class BrandUpdateView(generic.UpdateView):
+    template_name = "master/brand/brand_create.html"
+    form_class=BrandForm
+    queryset = Brand.objects.all()
+    context_object_name = "brand"
+    
+    def get_success_url(self):
+        return reverse("BrandList")
 
 
 # SOFTWARE TYPE CREATE
@@ -201,3 +267,14 @@ class SoftwareTypeListView(generic.ListView):
     template_name = "master/type/s_type_list.html"
     queryset = SoftwareType.objects.all()
     context_object_name = "s_type"
+    
+# SOFTWARE TYPE Update
+@method_decorator(login_required, name='dispatch')
+class SoftwareTypeUpdateView(generic.UpdateView):
+    template_name = "master/type/s_type_create.html"
+    form_class=SoftwareTypeForm
+    queryset = SoftwareType.objects.all()
+    context_object_name = "s_type"
+    
+    def get_success_url(self):
+        return reverse("SoftwareTypeList")

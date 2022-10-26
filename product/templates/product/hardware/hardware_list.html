@@ -12,16 +12,16 @@
     {% endfor %}
     <div class="card">
       <div class="card-body">
-        <div class="col-md-2 mb-2 ml-auto">
-          <a href="{% url 'SoftwareCreate' %}"
+        {% comment %} <div class="col-md-2 mb-2 ml-auto">
+          <a href="{% url 'HardwareCreate' %}"
             ><button
               type="button"
               class="btn btn-outline-purple btn-lg btn-block"
             >
-              Add Software
+              Add Hardware
             </button>
           </a>
-        </div>
+        </div> {% endcomment %}
 
         <table
           id="datatable-buttons"
@@ -30,20 +30,24 @@
         >
           <thead>
             <tr>
-                <th>Name</th>
-                <th>Brand</th>
-                {% comment %} <th>Category</th> {% endcomment %}
-                <th>Subcategory</th>
-                <th>Barcode</th>
-                <th>Serial</th>
-                {% comment %} <th>Vendor</th> {% endcomment %}
-                <th>Purchased On</th>
-                <th>Warranty Expiry</th>
-                <th>TPM Expiry</th>
-                <th>Status</th>
-                <th>Location</th>
-                <th>Assigned To</th>
-                
+              <th>Name</th>
+              <th>Brand</th>
+              {% comment %}
+              <th>Category</th>
+              {% endcomment %}
+              <th>Subcategory</th>
+              <th>Barcode</th>
+              <th>Serial</th>
+              {% comment %}
+              <th>Vendor</th>
+              {% endcomment %}
+              <th>Purchased On</th>
+              <th>Warranty Expiry</th>
+              <th>TPM Expiry</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Assigned To</th>
+              <th>Action</th>
             </tr>
           </thead>
 
@@ -52,26 +56,38 @@
             <tr>
               <td>{{hardware.name }}</td>
               <td>{{hardware.brand }}</td>
-              {% comment %} <td>{{hardware.category }}</td> {% endcomment %}
+              {% comment %}
+              <td>{{hardware.category }}</td>
+              {% endcomment %}
               <td>{{hardware.subcategory }}</td>
               <td>{{hardware.barcode }}</td>
               <td>{{hardware.serial }}</td>
-              {% comment %} <td>{{hardware.vendor }}</td> {% endcomment %}
+              {% comment %}
+              <td>{{hardware.vendor }}</td>
+              {% endcomment %}
               <td>{{hardware.purchased_on }}</td>
               <td>{{hardware.warranty_expiry }}</td>
               <td>{{hardware.tpm_expiry }}</td>
               <td>{{hardware.status }}</td>
               <td>{{hardware.location }}</td>
               <td>{{hardware.assigned_to }}</td>
+              <td>
+                <a href="{% url 'HardwareUpdate' hardware.pk %}"
+                  ><button class="btn btn-outline-purple btn-lg btn-block">
+                    edit
+                  </button></a
+                >
+              </td>
 
               {% comment %}
               <td>
                 <a href="{% url 'UserUpdate' software.pk %}"
                   ><button class="btn btn-outline-purple btn-lg btn-block">
-                     edit
+                    edit
                   </button></a
                 >
-              </td>{% endcomment %}
+              </td>
+              {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>

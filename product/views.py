@@ -24,6 +24,18 @@ class SoftwareListView(generic.ListView):
     template_name = "product/software/software_list.html"
     queryset = Software.objects.all()
     context_object_name = "software"
+    
+# SOFTWARE PRODUCT Update
+@method_decorator(login_required, name='dispatch')
+class SoftwareUpdateView(generic.UpdateView):
+    template_name = "product/software/software_create.html"
+    form_class=SoftwareForm
+    queryset = Software.objects.all()
+    context_object_name = "software"
+    
+    def get_success_url(self):
+        return reverse("SoftwareList")
+
 
 
 # HARDWARE PRODUCT CREATE
@@ -43,3 +55,14 @@ class HardwareListView(generic.ListView):
     template_name = "product/hardware/hardware_list.html"
     queryset = Hardware.objects.all()
     context_object_name = "hardware"
+    
+    # HARDWARE PRODUCT UPDATE
+@method_decorator(login_required, name='dispatch')
+class HardwareUpdateView(generic.UpdateView):
+    template_name = "product/hardware/hardware_create.html"
+    form_class=HardwareForm
+    queryset = Hardware.objects.all()
+    context_object_name = "hardware"
+    
+    def get_success_url(self):
+        return reverse("HardwareList")
