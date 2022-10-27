@@ -4112,3 +4112,18 @@ File: Responsive
   color: #2d3b48;
 }
 /*# sourceMappingURL=style.css.map */
+
+body {
+  font: 90%/1.45em "Helvetica Neue", HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #fff;
+}
+
+.td_green {
+  background: linear-gradient(120deg, #e4a0a1 0%, #e4a0a1 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 20%;
+  background-position: 0 60%;
+}

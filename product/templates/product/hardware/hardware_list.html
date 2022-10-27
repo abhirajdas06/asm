@@ -12,7 +12,8 @@
     {% endfor %}
     <div class="card">
       <div class="card-body">
-        {% comment %} <div class="col-md-2 mb-2 ml-auto">
+        {% comment %}
+        <div class="col-md-2 mb-2 ml-auto">
           <a href="{% url 'HardwareCreate' %}"
             ><button
               type="button"
@@ -21,7 +22,8 @@
               Add Hardware
             </button>
           </a>
-        </div> {% endcomment %}
+        </div>
+        {% endcomment %}
 
         <table
           id="datatable-buttons"
@@ -68,11 +70,26 @@
               {% endcomment %}
               <td>{{hardware.purchased_on }}</td>
               <td>{{hardware.warranty_expiry }}</td>
-              
-              {% comment %} <td>Valid till: {{hardware.years}}, {{hardware.months}}  months,  {{harware.days}} days.</td> {% endcomment %}
+
+              {% comment %}
+              <td>
+                Valid till: {{hardware.years}}, {{hardware.months}} months,
+                {{harware.days}} days.
+              </td>
+              {% endcomment %}
+              {% if hardware.warranty_expiry.day -  < 365 %}
               <td>Valid till: {{hardware.warranty_expiry | timeuntil}}</td>
+              {% endif %}
               <td>{{hardware.tpm_expiry }}</td>
-              <td>{{hardware.status }}</td>
+              {% if hardware.status == "working" %}
+              <td>
+                <span class="badge badge-success"> {{hardware.status }}</span>
+              </td>
+              {% else %}
+              <td>
+                <span class="badge badge-danger"> {{hardware.status }}</span>
+              </td>
+              {% endif %}
               <td>{{hardware.location }}</td>
               <td>{{hardware.assigned_to }}</td>
               <td>
