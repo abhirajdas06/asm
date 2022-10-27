@@ -77,19 +77,15 @@
                 {{harware.days}} days.
               </td>
               {% endcomment %}
-              {% if hardware.warranty_expiry.day -  < 365 %}
+              {% comment %} {% if hardware.warranty_expiry.day -  < 365 %} {% endcomment %}
               <td>Valid till: {{hardware.warranty_expiry | timeuntil}}</td>
-              {% endif %}
+              {% comment %} {% endif %} {% endcomment %}
               <td>{{hardware.tpm_expiry }}</td>
-              {% if hardware.status == "working" %}
+              
               <td>
-                <span class="badge badge-success"> {{hardware.status }}</span>
+                <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger {% endif %}"> {{hardware.status }}</span>
               </td>
-              {% else %}
-              <td>
-                <span class="badge badge-danger"> {{hardware.status }}</span>
-              </td>
-              {% endif %}
+             
               <td>{{hardware.location }}</td>
               <td>{{hardware.assigned_to }}</td>
               <td>
