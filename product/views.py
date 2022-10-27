@@ -54,6 +54,7 @@ class HardwareCreateView(generic.CreateView):
 class HardwareListView(generic.ListView):
     template_name = "product/hardware/hardware_list.html"
     queryset = Hardware.objects.all()
+
     context_object_name = "hardware"
     
     # HARDWARE PRODUCT UPDATE
