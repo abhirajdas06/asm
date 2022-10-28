@@ -94,17 +94,15 @@
                     edit
                   </button></a
                 >
-              </td>
+              </td> 
 
-              {% comment %}
-              <td>
-                <a href="{% url 'UserUpdate' software.pk %}"
-                  ><button class="btn btn-outline-purple btn-lg btn-block">
-                    edit
-                  </button></a
-                >
-              </td>
-              {% endcomment %}
+              {% comment %} <td>                                                       
+                <a href="{% url 'HardwareUpdate' hardware.pk %}"> 
+                  <button type="button" class="btn btn-sm btn-success">Assign</button></a>
+                <button type="button" class="btn btn-sm btn-info">View</button>
+            </td> {% endcomment %}
+
+            
             </tr>
             {% endfor %}
           </tbody>
