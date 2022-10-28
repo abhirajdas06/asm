@@ -10,7 +10,7 @@ class Software(models.Model):
     softwaretype = models.ForeignKey(SoftwareType, on_delete=models.PROTECT)
     purchased_on = models.DateField((""), auto_now=False, auto_now_add=False)
     expiry = models.DateField((""), auto_now=False, auto_now_add=False)
-    installed_on = models.ForeignKey("Hardware", null=True, on_delete=models.PROTECT)
+    installed_on = models.ForeignKey("Hardware", null=True, blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -31,7 +31,7 @@ class Hardware(models.Model):
     status = models.CharField(max_length=30, choices=(
         ('working', 'working'), ('damaged', 'damaged')))
     location = models.ForeignKey(Asset_Location, on_delete=models.PROTECT)
-    assigned_to = models.ForeignKey(User, on_delete=models.PROTECT, null=True,)
+    assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name

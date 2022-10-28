@@ -1,0 +1,88 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="mt-0 header-title"></h4>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.name|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.brand|as_crispy_field}}
+
+                        </div>
+                        
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.category|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.subcategory|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.barcode|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.serial|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.vendor|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.purchased_on|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.warranty_expiry|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.tpm_expiry|as_crispy_field}}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                        {{form.status|as_crispy_field}}
+
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                        {{form.location|as_crispy_field}}
+
+                    </div>
+                    {% comment %} <div class="form-group col-md-3 mb-0">
+                        {{form.assigned_to|as_crispy_field}}
+
+                    </div> {% endcomment %}
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </form>
+                {% comment %} {{form.errors}} {% endcomment %}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+// In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#id_softwaretype').select2();
+    });
+
+</script>
+{% endblock body %}

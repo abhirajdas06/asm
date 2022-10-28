@@ -23,6 +23,7 @@
                         <th>Software Type</th>
                         <th>Purchased On</th>
                         <th>Expiry</th>
+                        <th>Installed on</th>
                         <th>Action</th>
                         
                     </tr>
@@ -36,6 +37,7 @@
                         <td>{{software.softwaretype}}</td>
                         <td>{{software.purchased_on}}</td>
                         <td>{{software.expiry}}</td>
+                        <td>{{software.installed_on}}</td>
                         <td> <a href="{% url 'SoftwareUpdate' software.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
                             edit</button></a></td>
                     </tr>

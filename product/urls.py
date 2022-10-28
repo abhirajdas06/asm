@@ -1,7 +1,7 @@
 from django.urls import path
 from users import views
 from .views import (SoftwareCreateView, SoftwareListView,
-                    HardwareCreateView, HardwareListView,SoftwareUpdateView,HardwareUpdateView)
+                    HardwareCreateView, HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,AssignedView)
 
 
 urlpatterns = [
@@ -13,6 +13,9 @@ urlpatterns = [
     path('hardware', HardwareCreateView.as_view(), name="HardwareCreate"),
     path('hardware_list', HardwareListView.as_view(), name="HardwareList"),
     path('hardware/update/<int:pk>', HardwareUpdateView.as_view(), name="HardwareUpdate"),
+    
+     path('assignassets', AssignedView.as_view(), name="AssignAsset"),
+    path('unassignassets', UnAssignedView.as_view(), name="UnAssignAsset"),
     
     
 ]

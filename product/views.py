@@ -60,10 +60,25 @@ class HardwareListView(generic.ListView):
     # HARDWARE PRODUCT UPDATE
 @method_decorator(login_required, name='dispatch')
 class HardwareUpdateView(generic.UpdateView):
-    template_name = "product/hardware/hardware_create.html"
+    template_name = "product/hardware/hardware_update.html"
     form_class=HardwareForm
     queryset = Hardware.objects.all()
     context_object_name = "hardware"
     
     def get_success_url(self):
         return reverse("HardwareList")
+    
+    
+@method_decorator(login_required, name='dispatch') 
+class UnAssignedView(generic.ListView):
+    template_name = "product/hardware/hardware_unassigned_list.html"
+    # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NULL')
+    queryset = Hardware.objects.filter(assigned_to__id = None)
+    context_object_name = "hardware"
+
+@method_decorator(login_required, name='dispatch')    
+class AssignedView(generic.ListView):
+    template_name = "product/hardware/hardware_assigned_list.html"
+    # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NOT NULL')
+    queryset = Hardware.objects.exclude(assigned_to__id = None)
+    context_object_name = "hardware"

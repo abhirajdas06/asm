@@ -6,7 +6,7 @@ from .models import (Software, Hardware)
 class SoftwareForm(forms.ModelForm):
     class Meta:
         model = Software
-        fields = ['name', 'softwaretype', 'purchased_on', 'expiry']
+        fields = ['name', 'softwaretype', 'purchased_on','installed_on', 'expiry']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
             'expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
