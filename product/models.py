@@ -38,6 +38,7 @@ class Hardware(models.Model):
     
     
     
+    
     # def remaining_days(self):
     #     remaining_days = (self.warranty_expiry - self.purchased_on).days
         
