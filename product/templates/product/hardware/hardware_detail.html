@@ -1,0 +1,16 @@
+{% extends 'dashboard/index.html' %}
+
+{% block body %}
+<h1>{{hardware.name}}</h1>
+{{hardware.brand }}
+{{hardware.category }}
+{{hardware.subcategory }}
+{{hardware.barcode }}
+{{hardware.serial}}
+{{hardware.vendor}}
+{{hardware.purchased_on }}
+{{hardware.warranty_expiry }}
+{{hardware.tpm_expiry }}
+{{hardware.location }}
+{{hardware.assigned_to}}
+{% endblock body %}
