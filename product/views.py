@@ -94,21 +94,8 @@ class HardwareAssignView(generic.UpdateView):
     
     def get_success_url(self):
         return reverse("AssignAsset")
-    
-    
-        # HARDWARE PRODUCT Return in Stock
 
-# class HardwareReturnView(generic.UpdateView):
-#     # template_name = "product/hardware/hardware_update.html"
-#     # form_class=HardwareAssignForm
-    
-#     # queryset = Hardware.objects.update(assigned_to__id = None)
-#     context_object_name = "hardware"
-    
-#     def get_success_url(self):
-#         return reverse("UnAssignAsset")
-    
-    
+# HARDWARE PRODUCT Return in Stock
 @login_required
 def HardwareReturn(request,pk):
     
@@ -123,7 +110,11 @@ def HardwareReturn(request,pk):
     # q.save()
     return redirect ("UnAssignAsset")
 
-
+# HARDWARE PRODUCT Detailview
+class HardwareDetailView(generic.DetailView):
+    model = Hardware
+  
+    template_name= "product/hardware/hardware_detail.html"
     
 
     

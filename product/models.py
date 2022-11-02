@@ -37,6 +37,8 @@ class Hardware(models.Model):
         return self.name
     
     
+    def abc():
+        pass    
     
     
     # def remaining_days(self):
