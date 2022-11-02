@@ -105,6 +105,14 @@
                 >
               </td>
               {% endcomment %}
+              <td>                                                       
+                <a href="{% url 'HardwareAssign' hardware.pk %}"> 
+                    <button type="button" class="btn btn-sm btn-success">Assign</button>
+                </a>
+                <a href="#">
+                    <button type="button" class="btn btn-sm btn-info">View</button>
+                </a>
+              </td>
             </tr>
             {% endfor %}
           </tbody>

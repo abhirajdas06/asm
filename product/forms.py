@@ -24,3 +24,10 @@ class HardwareForm(forms.ModelForm):
             'tpm_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
  
+ 
+class HardwareAssignForm(forms.ModelForm):
+    class Meta:
+        model = Hardware
+        fields = ['name',	'brand','barcode',	'serial',	
+                  	'status',	'location',	'assigned_to']
+        
