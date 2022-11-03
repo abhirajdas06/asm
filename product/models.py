@@ -36,9 +36,8 @@ class Hardware(models.Model):
     def __str__(self):
         return self.name
     
-    
-    def abc():
-        pass    
+  
+
     
     
     # def remaining_days(self):
@@ -53,5 +52,7 @@ class Hardware(models.Model):
     #     days = (remaining_days - years * 365 - months*30)
         
     #     return years,months,days
+    #    
+
     
     

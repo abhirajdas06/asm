@@ -44,7 +44,7 @@ class Vendor(models.Model):
     vendor_number = models.CharField(max_length=50)
     vendor_contact = models.IntegerField()
     email = models.EmailField()
-    website = models.CharField(max_length=50)
+    website = models.CharField(max_length=50,null=True)
     address = models.CharField(max_length=100)
 
     def __str__(self):

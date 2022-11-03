@@ -1,7 +1,7 @@
 {% extends 'dashboard/index.html' %}
 
 {% block body %}
-<h1>{{hardware.name}}</h1>
+<h1>{{profile.name}}</h1>
 {{hardware.brand }}
 {{hardware.category }}
 {{hardware.subcategory }}
@@ -13,4 +13,12 @@
 {{hardware.tpm_expiry }}
 {{hardware.location }}
 {{hardware.assigned_to}}
+
+
+<hr>
+{% for data in software %}
+<p>{{data.name}}</p>
+{% endfor %}
+
+
 {% endblock body %}
