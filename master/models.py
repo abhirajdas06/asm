@@ -2,6 +2,7 @@ import email
 from unicodedata import category
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 # COMPANY
@@ -10,7 +11,7 @@ from django.db import models
 class Company(models.Model):
     company_name = models.CharField(max_length=50)
     address = models.CharField(max_length=150)
-    contact = models.IntegerField()
+    contact =PhoneNumberField(blank=True, help_text='Contact phone number')
 
     def __str__(self):
         return self.company_name

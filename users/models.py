@@ -20,3 +20,4 @@ class User(AbstractUser):
     location = models.ForeignKey(
         Employee_Location, on_delete=models.CASCADE, null=True)
     active = models.BooleanField(("active"), default=True,)
+    

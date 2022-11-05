@@ -41,4 +41,12 @@ class HardwareAssignForm(forms.ModelForm):
         model = Hardware
         fields = ['name',	'brand','barcode',	'serial',	
                   	'status',	'location',	'assigned_to']
+        widgets={
+            "name": forms.TextInput(attrs={'readonly':True}),
+            "brand": forms.TextInput(attrs={'readonly':True}),
+            "barcode": forms.TextInput(attrs={'readonly':True}),
+            "serial": forms.TextInput(attrs={'readonly':True}),
+            "status": forms.TextInput(attrs={'readonly':True}),
+            "location": forms.TextInput(attrs={'readonly':True}),
+        }
         
