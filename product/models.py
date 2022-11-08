@@ -38,6 +38,13 @@ class Hardware(models.Model):
     def __str__(self):
         return self.name
     
+    # def __init__(self, *args, **kwargs):
+    #         super().__init__(*args, **kwargs)
+    #         print('subcategory')
+    #         # self.subcategory.queryset = SubCategory.objects.none()
+    #         # # print(self.subcategory)
+    #         # self.brand.queryset = Brand.objects.none()
+    
   
 
     
