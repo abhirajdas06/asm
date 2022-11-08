@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.views import generic
 from django.contrib import messages
-from users.models import (User, Company)
+from users.models import (User, Company,Employee_Location)
 from .forms import (CreateUser, UpdateUser, CompanyForm)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -88,3 +88,10 @@ def LogoutUser(request):
 @method_decorator(login_required, name='dispatch')
 class Dashboard(generic.TemplateView):
     template_name = "dashboard/dashboard.html"
+
+
+@login_required
+def load_emp_location(request):
+    branch_id = request.GET.get('branch_id')
+    location = Employee_Location.objects.filter(branch_id=branch_id)
+    return render(request, 'user/location_dropdown_list.html', {'location': location})

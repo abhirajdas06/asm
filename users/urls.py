@@ -15,5 +15,7 @@ urlpatterns = [
     path('<int:pk>/update', UserUpdateView.as_view(), name="UserUpdate"),
     # path('add', views.UserCreateView, name="UserCreate"),
     
-    path('<int:pk>', UserDetailView.as_view(), name="UserDetail")
+    path('<int:pk>', UserDetailView.as_view(), name="UserDetail"),
+    
+    path('ajax/load-location', views.load_emp_location, name='ajax_load_location'), # AJAX
 ]
