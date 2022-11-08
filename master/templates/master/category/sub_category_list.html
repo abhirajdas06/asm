@@ -7,7 +7,7 @@
                                   <h4 class="font-size-18">Sub Category List</h4>
                                   <ol class="breadcrumb mb-0">
                                       <li class="breadcrumb-item"><a href="{% url 'SubCategoryList' %}">Sub Category</a></li>
-                                      <li class="breadcrumb-item active">Add Sub Category</li>
+                                      <li class="breadcrumb-item active">Sub Category List</li>
                                   </ol>
                               </div>
                           </div>
@@ -53,9 +53,10 @@
                     <tr>
                         <td>{{subcategory.category}}</td>
                         <td>{{subcategory.name}}</td>
-                        <td> <a href="{% url 'SubCategoryUpdate' subcategory.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
-                            edit</button></a></td>
-
+                        <td> <a href="{% url 'SubCategoryUpdate' subcategory.pk %}">
+                                    <button type="button" class="btn btn-sm btn-info">Edit</button>
+                                </a>
+                            </td>
                         
                     </tr>
                     {% endfor %}
