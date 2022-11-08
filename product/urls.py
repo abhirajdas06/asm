@@ -24,5 +24,7 @@ urlpatterns = [
     path('assignassets', AssignedView.as_view(), name="AssignAsset"),
     path('unassignassets', UnAssignedView.as_view(), name="UnAssignAsset"),
     
+    path('ajax/load-category/', views.load_category, name='ajax_load_category'), # AJAX
+    
     
 ]
