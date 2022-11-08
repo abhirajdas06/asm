@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
 from .models import (Software, Hardware)
-from .forms import (SoftwareForm, HardwareForm, HardwareAssignForm)
+from .forms import (SoftwareForm, HardwareForm, HardwareAssignForm, HardwareCreateForm)
 
 
 # SOFTWARE PRODUCT CREATE
@@ -42,7 +42,7 @@ class SoftwareUpdateView(generic.UpdateView):
 @method_decorator(login_required, name='dispatch')
 class HardwareCreateView(generic.CreateView):
     template_name = 'product/hardware/hardware_create.html'
-    form_class = HardwareForm
+    form_class = HardwareCreateForm
 
     def get_success_url(self):
         messages.success(self.request, 'Hardware Created Sucessfully')
@@ -111,11 +111,21 @@ def HardwareReturn(request,pk):
     return redirect ("UnAssignAsset")
 
 # HARDWARE PRODUCT Detailview
-class HardwareDetailView(generic.DetailView):
-    model = Hardware
+# class HardwareDetailView(generic.DetailView):
+#     model = Hardware
   
-    template_name= "product/hardware/hardware_detail.html"
+#     template_name= "product/hardware/hardware_detail.html"
     
+    
+@login_required
+def HardwareDetailView(request,pk):
+    pkid= Hardware.objects.get(id=pk)
+    soft= Software.objects.filter(installed_on=pkid)
+    context ={
+        "hardware":pkid,
+        "software":soft
+    }
+    return render(request,'product/hardware/hardware_detail.html',context)
 
     
     

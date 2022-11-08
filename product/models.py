@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+import datetime
 from master.models import (Vendor, Asset_Location,
                             Category, SubCategory, Brand, SoftwareType)
 
@@ -14,7 +15,8 @@ class Software(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+    
 
 # HARDWARE PRODUCT
 class Hardware(models.Model):
@@ -36,9 +38,8 @@ class Hardware(models.Model):
     def __str__(self):
         return self.name
     
-    
-    def abc():
-        pass    
+  
+
     
     
     # def remaining_days(self):
@@ -53,5 +54,7 @@ class Hardware(models.Model):
     #     days = (remaining_days - years * 365 - months*30)
         
     #     return years,months,days
+    #    
+
     
     

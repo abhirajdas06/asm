@@ -1,12 +1,16 @@
 from django import forms
 from .models import (Company, Branch, Employee_Location, Vendor, Asset_Location, Category, SubCategory, Brand, SoftwareType)
-
+from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 # COMPANY MASTER FORM
 class CompanyForm(forms.ModelForm):
+    contact = PhoneNumberField(widget=PhoneNumberPrefixWidget(initial="IN"))
+    
     class Meta:
         model = Company
         fields = ['company_name', 'address', 'contact']
+        
 
 # BRANCH MASTER FORM
 
