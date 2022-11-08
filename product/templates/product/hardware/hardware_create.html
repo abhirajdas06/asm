@@ -1,6 +1,7 @@
 {% extends 'dashboard/index.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -8,7 +9,7 @@
 
                 <h4 class="mt-0 header-title"></h4>
 
-                <form method="post"   id="HardwareCreateForm" data-category-url="{% url 'ajax_load_category' %}>
+                <form method="post"   id="HardwareCreateForm" action="{% url 'ajax_load_category' %}">
                     {% csrf_token %}
 
                     <div class="form-row">
@@ -20,6 +21,7 @@
                             {{form.brand|as_crispy_field}}
 
                         </div>
+
                         
                         <div class="form-group col-md-3 mb-0">
                             {{form.category|as_crispy_field}}
@@ -80,39 +82,43 @@
 
 <script type="text/javascript">
 // In your Javascript (external .js resource or <script> tag)
-    $(document).ready(function() {
-        $('#id_softwaretype').select2();
-    });
+    $(document).ready(function () {
+        
+        $('#id_category').change(function () {
+            
+            const url = $('#HardwareCreateForm');  // get the url of the `load_cities` view
+            
 
-</script>
-{% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> {% endcomment %}
-<script>
-    $(document).ready(function() {
-        $("#id_category").change(function () {
-                    const url = $("#HardwareCreateForm").attr("data-category-url");  // get the url of the `load_cities` view
             const categoryId = $(this).val();  // get the selected country ID from the HTML input
+            
 
-            $.ajax({                       // initialize an AJAX request
-                url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            $.ajax({                                       // initialize an AJAX request
+                url: url.attr('action'),                    // set the url of the request (= /persons/ajax/load-cities/ )
                 data: {
                     'category_id': categoryId       // add the country id to the GET parameters
                 },
-                success: function (data) {   // `data` is the return of the `load_cities` view function
+                
+                success: function (data) 
+                {   // `data` is the return of the `load_cities` view function
+                
                     $("#id_subcategory").html(data);  // replace the contents of the city input with the data that came from the server
-                    {% comment %} /*
+                    
+                    // {% comment %}                    
 
-                    let html_data = '<option value="">---------</option>';
-                    data.forEach(function (city) {
-                        html_data += `<option value="${city.id}">${city.name}</option>`
-                    });
-                    console.log(html_data);
-                    $("#id_city").html(html_data);
+                    // let html_data = '<option value="">---------</option>';
+                    // data.forEach(function (city) {
+                    //     html_data += `<option value="${city.id}">${city.name}</option>`
+                    // });
+                    // console.log(html_data);
+                    // $('#id_city').html(html_data); {% endcomment %}
 
-                    */ {% endcomment %}
+                    
                 }
             });
 
         });
-    });
+});
+
+    
 </script>
 {% endblock body %}

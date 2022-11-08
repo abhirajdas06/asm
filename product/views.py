@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
-from .models import (Software, Hardware,SubCategory)
+from .models import (Software, Hardware)
+from master.models import SubCategory
 from .forms import (SoftwareForm, HardwareForm, HardwareAssignForm, HardwareCreateForm)
 
 
@@ -130,7 +131,7 @@ def HardwareDetailView(request,pk):
 @login_required
 def load_category(request):
     category_id = request.GET.get('category_id')
-    subcategory = SubCategory.objects.filter(category_id=category_id).all()
+    subcategory = SubCategory.objects.filter(category_id=category_id)
     return render(request, 'product/hardware/subcategory_dropdown_list.html', {'subcategory': subcategory})
 
 

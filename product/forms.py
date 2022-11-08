@@ -1,6 +1,6 @@
 from django import forms
-from .models import (Software, Hardware, SubCategory)
-
+from .models import (Software, Hardware)
+from master.models import SubCategory,Brand
 
 # COMPANY MASTER FORM
 class SoftwareForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class SoftwareForm(forms.ModelForm):
 class HardwareCreateForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',	'brand',	'category',	'subcategory',	'barcode',	'serial',	'vendor',
+        fields = ['name',	'brand', 'category','subcategory',	'barcode',	'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
@@ -24,10 +24,11 @@ class HardwareCreateForm(forms.ModelForm):
             'tpm_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
         
-        def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+            
             super().__init__(*args, **kwargs)
             self.fields['subcategory'].queryset = SubCategory.objects.none()
-
+                    
             if 'category' in self.data:
                 try:
                     category_id = int(self.data.get('category'))
@@ -47,6 +48,7 @@ class HardwareForm(forms.ModelForm):
             'warranty_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
             'tpm_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
+       
  
  
 class HardwareAssignForm(forms.ModelForm):
