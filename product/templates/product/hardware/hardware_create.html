@@ -87,30 +87,32 @@
 </script>
 {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> {% endcomment %}
 <script>
-    $("#id_category").change(function () {
-        const url = $("#HardwareCreateForm").attr("data-category-url");  // get the url of the `load_cities` view
-        const categoryId = $(this).val();  // get the selected country ID from the HTML input
+    $(document).ready(function() {
+        $("#id_category").change(function () {
+                    const url = $("#HardwareCreateForm").attr("data-category-url");  // get the url of the `load_cities` view
+            const categoryId = $(this).val();  // get the selected country ID from the HTML input
 
-        $.ajax({                       // initialize an AJAX request
-            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
-            data: {
-                'category_id': categoryId       // add the country id to the GET parameters
-            },
-            success: function (data) {   // `data` is the return of the `load_cities` view function
-                $("#id_subcategory").html(data);  // replace the contents of the city input with the data that came from the server
-                {% comment %} /*
+            $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+                data: {
+                    'category_id': categoryId       // add the country id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                    $("#id_subcategory").html(data);  // replace the contents of the city input with the data that came from the server
+                    {% comment %} /*
 
-                let html_data = '<option value="">---------</option>';
-                data.forEach(function (city) {
-                    html_data += `<option value="${city.id}">${city.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_city").html(html_data);
+                    let html_data = '<option value="">---------</option>';
+                    data.forEach(function (city) {
+                        html_data += `<option value="${city.id}">${city.name}</option>`
+                    });
+                    console.log(html_data);
+                    $("#id_city").html(html_data);
 
-                */ {% endcomment %}
-            }
+                    */ {% endcomment %}
+                }
+            });
+
         });
-
     });
 </script>
 {% endblock body %}
