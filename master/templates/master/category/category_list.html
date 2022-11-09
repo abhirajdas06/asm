@@ -52,8 +52,19 @@
                     <tr>
                         <td>{{category.pk}}</td>
                         <td>{{category.name}}</td>
-                        <td> <a href="{% url 'CategoryUpdate' category.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
-                            edit</button></a></td>
+                        <td>
+                            <a href="{% url 'CategoryUpdate' category.pk %}">
+                                <button
+                                  class="btn btn-success"
+                                  type="button"
+                                  aria-haspopup="true"
+                                  aria-expanded="false"
+                                >
+                                  Edit
+                                </button>
+                              </a>
+                            
+                           </td>
 
                         
                     </tr>

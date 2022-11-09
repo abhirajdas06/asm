@@ -1,58 +1,75 @@
-{% extends 'dashboard/index.html' %}
-{% block body %}
+{% extends 'dashboard/index.html' %} {% block body %}
 
 <div class="row">
-    <div class="col-12">
-        {% for message in messages %}
-        <div class="alert  alert-outline-success text-gradient-success mb-0" role="alert">
-            <strong>{{message}}</strong>
-        </div>  
-        {% endfor %}
-        <div class="card">
-
-            <div class="card-body">
-                <div class = " col-md-2 mb-2 ml-auto">
-                <a href="{% url 'VendorCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Create Vendor</button>
-                </a></div>
-
-                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    
-                    <thead>
-                    <tr>
-                        <th>Vendor Name</th>
-                        <th>Vendor Number</th>
-                        <th>Contact Number</th>
-                        <th>Email</th>
-                        <th>Website</th>
-                        <th>Address</th>
-                        <th>Action</th>
-
-                        
-                    </tr>
-                    </thead>
-
-
-                    <tbody>
-                        {% for vendor in vendor  %}
-                    <tr>
-                        <td>{{vendor.vendor_name}}</td>
-                        <td>{{vendor.vendor_number}}</td>
-                        <td>{{vendor.vendor_contact}}</td>
-                        <td>{{vendor.email}}</td>
-                        <td>{{vendor.website}}</td>
-                        <td>{{vendor.address}}</td>
-                        <td> <a href="{% url 'VendorUpdate' vendor.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
-                            edit</button></a></td>
-
-                        
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-
-            </div>
+  <div class="col-12">
+    {% for message in messages %}
+    <div
+      class="alert alert-outline-success text-gradient-success mb-0"
+      role="alert"
+    >
+      <strong>{{message}}</strong>
+    </div>
+    {% endfor %}
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-2 mb-2 ml-auto">
+          <a href="{% url 'VendorCreate' %}"
+            ><button
+              type="button"
+              class="btn btn-outline-purple btn-lg btn-block"
+            >
+              Create Vendor
+            </button>
+          </a>
         </div>
-    </div> <!-- end col -->
-</div> <!-- end row -->
+
+        <table
+          id="datatable-buttons"
+          class="table table-bordered dt-responsive nowrap"
+          style="border-collapse: collapse; border-spacing: 0; width: 100%"
+        >
+          <thead>
+            <tr>
+              <th>Vendor Name</th>
+              <th>Vendor Number</th>
+              <th>Contact Number</th>
+              <th>Email</th>
+              <th>Website</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for vendor in vendor %}
+            <tr>
+              <td>{{vendor.vendor_name | title}}</td>
+              <td>{{vendor.vendor_number}}</td>
+              <td>{{vendor.vendor_contact}}</td>
+              <td>{{vendor.email}}</td>
+              <td>{{vendor.website}}</td>
+              <td>{{vendor.address}}</td>
+              <td>
+                <a href="{% url 'VendorUpdate' vendor.pk  %}">
+                  <button
+                    class="btn btn-success"
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Edit
+                  </button>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end col -->
+</div>
+<!-- end row -->
 
 {% endblock body %}
