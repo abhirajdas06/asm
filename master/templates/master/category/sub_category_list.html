@@ -53,9 +53,18 @@
                     <tr>
                         <td>{{subcategory.category}}</td>
                         <td>{{subcategory.name}}</td>
-                        <td> <a href="{% url 'SubCategoryUpdate' subcategory.pk %}">
-                                    <button type="button" class="btn btn-sm btn-info">Edit</button>
-                                </a>
+                        <td> 
+                            <a href="{% url 'SubCategoryUpdate' subcategory.pk %}">
+                                <button
+                                  class="btn btn-success"
+                                  type="button"
+                                  aria-haspopup="true"
+                                  aria-expanded="false"
+                                >
+                                  Edit
+                                </button>
+                              </a>
+                            
                             </td>
                         
                     </tr>

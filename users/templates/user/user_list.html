@@ -47,7 +47,7 @@
       <tbody>
         {% for user in user  %}
         <tr>
-          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{user.first_name|title }} {{user.last_name|title }}</td>
           <td>{{user.employee_code}}</td>
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
@@ -60,17 +60,12 @@
           {% comment %} <td> <a href="{% url 'UserUpdate' user.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
               edit</button></a></td> {% endcomment %}
               <td>
-                <div class="dropdown mr-1 mt-2">
-                  <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" 
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Action <i class="mdi mdi-chevron-down"></i>
+                <a href="{% url 'UserUpdate' user.pk %}">
+                  <button class="btn btn-success " type="button"  aria-haspopup="true" aria-expanded="false">
+                      Edit 
                   </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item" href="#">Edit</a>
-                      <a class="dropdown-item" href="#">View</a>
-                      {% comment %} <a class="dropdown-item" href="#">Something else here</a> {% endcomment %}
-                  </div>
-              </div>
+                </a>
+              
               </td>
       </tr>
     {% endfor %}
