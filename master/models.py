@@ -42,14 +42,28 @@ class Employee_Location(models.Model):
 
 class Vendor(models.Model):
     vendor_name = models.CharField(max_length=50)
-    vendor_number = models.CharField(max_length=50)
+    vendor_code = models.CharField(max_length=50)
     vendor_contact = models.IntegerField()
     email = models.EmailField()
-    website = models.CharField(max_length=50,null=True)
+    website = models.CharField(max_length=50,null=True,blank=True)
     address = models.CharField(max_length=100)
 
     def __str__(self):
         return self.vendor_name
+    
+    def vendor_code1(self):
+        print(self.pk)
+        if len(str(self.pk))== 1:
+            vendor_code1="ZITV0001" + str(self.pk)
+            return vendor_code1
+        elif len(str(self.pk))==2:
+            vendor_code1="ZITV001" + str(self.pk)
+            return vendor_code1
+        elif len(str(self.pk))== 3:
+            vendor_code1="ZITV01" + str(self.pk)
+            return vendor_code1
+    
+    
 
 # ASSET LOCATION
 
