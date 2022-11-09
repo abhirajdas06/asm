@@ -10,5 +10,5 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('master/', include('master.urls')),
     path('product/', include('product.urls')),
-    path('dashboard/', views.Dashboard.as_view(),name='Dashboard'),
+    path('dashboard/', views.Dashboard,name='Dashboard'),
 ]

@@ -1,4 +1,29 @@
-{% extends 'dashboard/index.html' %} {% block body %}
+
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Hardware Product List</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Hardware</a></li>
+                                      <li class="breadcrumb-item active">Hardware Product List</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                          <a href="{% url 'HardwareCreate' %}">
+                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Add Hardware Product </button>
+                            </a>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+ {% block body %}
 
 <div class="row">
   <div class="col-12">
@@ -89,11 +114,12 @@
               <td>{{hardware.location }}</td>
               <td>{{hardware.assigned_to }}</td>
               <td>
-                <a href="{% url 'HardwareUpdate' hardware.pk %}"
-                  ><button class="btn btn-outline-purple btn-lg btn-block">
-                    edit
-                  </button></a
-                >
+                <a href="{% url 'HardwareUpdate' hardware.pk %}">       
+                  <button type="button" class="btn btn-sm btn-success">Edit</button>
+                </a>
+                <a href="{% url 'HardwareDetail' hardware.pk %}">
+                  <button type="button" class="btn btn-sm btn-info">View</button>
+              </a>
               </td> 
 
               {% comment %} <td>                                                       

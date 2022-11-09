@@ -5,7 +5,7 @@
 
         <li>
             <a href="{% url 'Dashboard' %}" class="waves-effect">
-                <i class="ti-home"></i><span class="badge badge-pill badge-primary float-right">2</span>
+                <i class="ti-home"></i>
                 <span>Dashboard</span>
             </a>
         </li>
@@ -32,8 +32,8 @@
         <span>Assets </span>
     </a>
     <ul class="sub-menu" aria-expanded="true">
-        <li><a href="{% url 'AssignAsset' %}">Assign Assets </a></li>
-        <li><a href="{% url 'UnAssignAsset' %}">Unassign Assets</a></li>
+        <li><a href="{% url 'AssignAsset' %}">Assigned Assets </a></li>
+        <li><a href="{% url 'UnAssignAsset' %}">Assets In Stock</a></li>
     </ul>
 </li>
 {% comment %} Assets Menu End {% endcomment %}

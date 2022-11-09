@@ -6,6 +6,7 @@ from users.models import (User, Company,Employee_Location)
 from .forms import (CreateUser, UpdateUser, CompanyForm)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from product.models import Hardware, Software
 
 # User Create View
 @method_decorator(login_required, name='dispatch')
@@ -16,10 +17,6 @@ class UserCreateView(generic.CreateView):
     def get_success_url(self):
         messages.success(self.request, 'User Created Sucessfully')
         return reverse("UserList")
-
-
-def Dashboard(request):
-    return render(request,"dashboard/dashboard.html")
     
 # User List View
 
@@ -71,7 +68,7 @@ def LoginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('UserList')
+            return redirect('Dashboard')
         else:
             messages.info(request, 'Username Or Password Is Incorrect')
 
@@ -96,3 +93,25 @@ def load_emp_location(request):
     branch_id = request.GET.get('branch_id')
     location = Employee_Location.objects.filter(branch_id=branch_id)
     return render(request, 'user/location_dropdown_list.html', {'location': location})
+
+def Dashboard(request):
+    hardware = Hardware.objects.all()
+    hardware_count =hardware.count()
+    software = Software.objects.all()
+    software_count =software.count()
+    in_stock = Hardware.objects.exclude(assigned_to__id = None)
+    in_stock_count =in_stock.count()    
+    assign = Hardware.objects.filter(assigned_to__id = None)
+    assign_count =assign.count()
+    context = {
+         'in_stock' : in_stock,
+         'hardware' : hardware,
+         'software' : software,
+         'assign' : assign,
+         'in_stock_count' : in_stock_count,
+         'hardware_count' : hardware_count,
+         'software_count' : software_count,
+         'assign_count' : assign_count,
+     }
+    
+    return render(request,'dashboard/dashboard.html', context)
