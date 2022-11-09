@@ -1,24 +1,142 @@
 {% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18"> Detail: {{hardware.name | title}} - {{hardware.barcode}}</h4>
+                                  <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'HardwareList' %}">Hardware</a></li>
+                                    <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                       
+                            <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+                            
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
 
 {% block body %}
-<h1>{{profile.name}}</h1>
-{{hardware.brand }}
-{{hardware.category }}
-{{hardware.subcategory }}
-{{hardware.barcode }}
-{{hardware.serial}}
-{{hardware.vendor}}
-{{hardware.purchased_on }}
-{{hardware.warranty_expiry }}
-{{hardware.tpm_expiry }}
-{{hardware.location }}
-{{hardware.assigned_to}}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="mt-0 header-title"></h4>
 
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.name|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.brand|as_crispy_field}}
+
+                        </div>
+
+                        
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.category|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.subcategory|as_crispy_field}}
+
+                        </div>
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.barcode|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.serial|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.vendor|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.purchased_on|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.warranty_expiry|as_crispy_field}}
+
+                        </div>
+
+                        <div class="form-group col-md-3 mb-0">
+                            {{form.tpm_expiry|as_crispy_field}}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{form.status|as_crispy_field}}
+
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{form.location|as_crispy_field}}
+
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                        {{form.assigned_to|as_crispy_field}}
+
+                    </div>
+                    </div>
+                    {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
+                </form>
+                
+        </div>
+    </div>
+</div>
+</div>
+</div>
 
 <hr>
-{% for data in software %}
-<p>{{data.name}}</p>
-{% endfor %}
 
+<h4 class="font-size-18"> Software Installed on: {{hardware.name | title}} - {{hardware.barcode}}</h4>
+<br>
+<div class="card">
+    <div class="card-body">
+<table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Software Type</th>
+        <th>Purchased On</th>
+        <th>Expiry</th>
+
+
+        
+    </tr>
+    </thead>
+
+
+    <tbody>
+        {% for software in software  %}
+    <tr>
+        <td>{{software.name}}</td>
+        <td>{{software.softwaretype}}</td>
+        <td>{{software.purchased_on}}</td>
+        <td>{{software.expiry}}</td>
+
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock body %}

@@ -121,7 +121,7 @@ class VendorListView(generic.ListView):
 # VENDOR Update
 @method_decorator(login_required, name='dispatch')
 class VendorUpdateView(generic.UpdateView):
-    template_name = "master/vendor/vendor_create.html"
+    template_name = "master/vendor/vendor_update.html"
     form_class=VendorForm
     queryset = Vendor.objects.all()
     context_object_name = "vendor"

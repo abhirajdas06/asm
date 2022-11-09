@@ -1,5 +1,26 @@
 {% extends 'dashboard/index.html' %}
 {% load crispy_forms_tags %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Add Hardware Product</h4>
+                                  <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'HardwareList' %}">Hardware</a></li>
+                                    <li class="breadcrumb-item active">Add Hardware Product</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          <div class="col-sm-6">
+
+                            <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+                      </div>     
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
 {% block body %}
 
 <div class="row">

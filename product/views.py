@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib import messages
 from .models import (Software, Hardware)
 from master.models import SubCategory
-from .forms import (SoftwareForm, HardwareForm, HardwareAssignForm, HardwareCreateForm)
+from .forms import (SoftwareForm, HardwareForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
 
 
 # SOFTWARE PRODUCT CREATE
@@ -29,7 +29,7 @@ class SoftwareListView(generic.ListView):
 # SOFTWARE PRODUCT Update
 @method_decorator(login_required, name='dispatch')
 class SoftwareUpdateView(generic.UpdateView):
-    template_name = "product/software/software_create.html"
+    template_name = "product/software/software_update.html"
     form_class=SoftwareForm
     queryset = Software.objects.all()
     context_object_name = "software"
@@ -122,9 +122,12 @@ def HardwareReturn(request,pk):
 def HardwareDetailView(request,pk):
     pkid= Hardware.objects.get(id=pk)
     soft= Software.objects.filter(installed_on=pkid)
+    form = HardwareDetailForm(instance=pkid)  
     context ={
+        "form": form,
         "hardware":pkid,
-        "software":soft
+        "software":soft,
+        
     }
     return render(request,'product/hardware/hardware_detail.html',context)
 

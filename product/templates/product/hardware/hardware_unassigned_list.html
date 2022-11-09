@@ -1,4 +1,23 @@
-{% extends 'dashboard/index.html' %} {% block body %}
+
+{% extends 'dashboard/index.html' %}
+{% block title_add %}
+                        <!-- start page title -->
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                              <div class="page-title-box">
+                                  <h4 class="font-size-18">Assets In Stock</h4>
+                                  <ol class="breadcrumb mb-0">
+                                      <li class="breadcrumb-item"><a href="javascript: void(0);">Asset</a></li>
+                                      <li class="breadcrumb-item active">Assets In Stock</li>
+                                  </ol>
+                              </div>
+                          </div>
+                          
+                    </div>     
+                      <!-- end page title -->
+
+{% endblock title_add %}
+ {% block body %}
 
 <div class="row">
   <div class="col-12">
@@ -109,9 +128,9 @@
                 <a href="{% url 'HardwareAssign' hardware.pk %}"> 
                     <button type="button" class="btn btn-sm btn-success">Assign</button>
                 </a>
-                <a href="#">
-                    <button type="button" class="btn btn-sm btn-info">View</button>
-                </a>
+                <a href="{% url 'HardwareDetail' hardware.pk %}">
+                  <button type="button" class="btn btn-sm btn-info">View</button>
+              </a>
               </td>
             </tr>
             {% endfor %}

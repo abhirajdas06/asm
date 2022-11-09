@@ -64,4 +64,24 @@ class HardwareAssignForm(forms.ModelForm):
             "status": forms.TextInput(attrs={'readonly':True}),
             "location": forms.TextInput(attrs={'readonly':True}),
         }
-        
+   
+class HardwareDetailForm(forms.ModelForm):
+    class Meta:
+        model = Hardware
+        fields = ['name',	'brand', 'category','subcategory',	'barcode',	'serial',	'vendor',
+                  'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
+        widgets = {
+            "name": forms.TextInput(attrs={'readonly':True}),
+            'category': forms.TextInput(attrs={'readonly':True}),
+            'subcategory': forms.TextInput(attrs={'readonly':True}),
+            'vendor': forms.TextInput(attrs={'readonly':True}),
+            'purchased_on': forms.TextInput(attrs={'readonly':True}),
+            'warranty_expiry': forms.TextInput(attrs={'readonly':True}),
+            'tpm_expiry': forms.TextInput(attrs={'readonly':True}),
+            'assigned_to': forms.TextInput(attrs={'readonly':True}),
+            "brand": forms.TextInput(attrs={'readonly':True}),
+            "barcode": forms.TextInput(attrs={'readonly':True}),
+            "serial": forms.TextInput(attrs={'readonly':True}),
+            "status": forms.TextInput(attrs={'readonly':True}),
+            "location": forms.TextInput(attrs={'readonly':True}),
+        }        
