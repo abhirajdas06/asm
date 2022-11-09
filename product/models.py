@@ -36,7 +36,7 @@ class Hardware(models.Model):
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + self.barcode
     
     # def __init__(self, *args, **kwargs):
     #         super().__init__(*args, **kwargs)
