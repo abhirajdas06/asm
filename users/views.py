@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 # User Create View
-
-
 @method_decorator(login_required, name='dispatch')
 class UserCreateView(generic.CreateView):
     template_name = 'user/user_create.html'
@@ -20,6 +18,9 @@ class UserCreateView(generic.CreateView):
         return reverse("UserList")
 
 
+def Dashboard(request):
+    return render(request,"dashboard/dashboard.html")
+    
 # User List View
 
 @method_decorator(login_required, name='dispatch')
