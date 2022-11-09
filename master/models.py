@@ -52,7 +52,7 @@ class Vendor(models.Model):
         return self.vendor_name
     
     def vendor_code(self):
-        print(self.pk)
+        
         if len(str(self.pk))== 1:
             vendor_code="ZITV000" + str(self.pk)
             return vendor_code
