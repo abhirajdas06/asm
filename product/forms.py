@@ -78,7 +78,7 @@ class HardwareDetailForm(forms.ModelForm):
             'purchased_on': forms.TextInput(attrs={'readonly':True}),
             'warranty_expiry': forms.TextInput(attrs={'readonly':True}),
             'tpm_expiry': forms.TextInput(attrs={'readonly':True}),
-            'assigned_to': forms.TextInput(attrs={'readonly':True}),
+            # 'assigned_to': forms.TextInput(attrs={'readonly':True}),
            
             "barcode": forms.TextInput(attrs={'readonly':True}),
             "serial": forms.TextInput(attrs={'readonly':True}),

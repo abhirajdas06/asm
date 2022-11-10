@@ -2,7 +2,8 @@ $(document).ready(function () {
   $("#datatable").DataTable({scrollX: true}),
     $("#datatable-buttons")
       .DataTable({
-        scrollX: true,
+        scrollX:        false,
+        scrollCollapse: false,
         lengthChange: !1,
         buttons: ["copy", "excel", "pdf", "colvis"],
         
