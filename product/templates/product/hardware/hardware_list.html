@@ -33,16 +33,6 @@
     {% endfor %}
     <div class="card">
       <div class="card-body table-responsive">
-        {% comment %}
-        <div class="col-md-2 mb-2 ml-auto">
-          <a href="{% url 'HardwareCreate' %}"><button type="button" class="btn btn-outline-purple btn-lg btn-block">
-              Add Hardware
-            </button>
-          </a>
-        </div>
-        {% endcomment %}
-        {% comment %} 
-        <div class=""> {% endcomment %}
           <table id="datatable-buttons" class="table table-bordered ">
             <thead>
               <tr>
@@ -76,41 +66,23 @@
                 <td>{{hardware.vendor }}</td>
                 <td>{{hardware.purchased_on }}</td>
                 <td>{{hardware.warranty_expiry }}</td>
-
-                {% comment %}
+                <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
+                <td>{{hardware.tpm_expiry }}</td>
                 <td>
-                  Valid till: {{hardware.years}}, {{hardware.months}} months,
-                  {{harware.days}} days.
+                  <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger
+                    {% endif %}"> {{hardware.status }}
+                  </span>
                 </td>
-                {% endcomment %}
-                {% comment %} {% if hardware.warranty_expiry.day - < 365 %} {% endcomment %} <td>Valid till:
-                  {{hardware.warranty_expiry | timeuntil}}</td>
-                  {% comment %} {% endif %} {% endcomment %}
-                  <td>{{hardware.tpm_expiry }}</td>
-
-                  <td>
-                    <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger
-                      {% endif %}"> {{hardware.status }}</span>
-                  </td>
-
-                  <td>{{hardware.location }}</td>
-                  <td>{{hardware.assigned_to }}</td>
-                  <td>
-                    <a href="{% url 'HardwareUpdate' hardware.pk %}">
-                      <button type="button" class="btn btn-sm btn-success">Edit</button>
-                    </a>
-                    <a href="{% url 'HardwareDetail' hardware.pk %}">
-                      <button type="button" class="btn btn-sm btn-info">View</button>
-                    </a>
-                  </td>
-
-                  {% comment %} <td>
-                    <a href="{% url 'HardwareUpdate' hardware.pk %}">
-                      <button type="button" class="btn btn-sm btn-success">Assign</button></a>
+                <td>{{hardware.location }}</td>
+                <td>{{hardware.assigned_to }}</td>
+                <td>
+                  <a href="{% url 'HardwareUpdate' hardware.pk %}">
+                    <button type="button" class="btn btn-sm btn-success">Edit</button>
+                  </a>
+                  <a href="{% url 'HardwareDetail' hardware.pk %}">
                     <button type="button" class="btn btn-sm btn-info">View</button>
-                  </td> {% endcomment %}
-
-
+                  </a>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
