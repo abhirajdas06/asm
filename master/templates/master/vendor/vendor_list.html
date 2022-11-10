@@ -60,6 +60,8 @@
               <th>Email</th>
               <th>Website</th>
               <th>Address</th>
+              <th>Contact Person Name</th>
+              <th>Contact Person Contact</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -70,9 +72,11 @@
               <td>{{vendor.vendor_name | title}}</td>
               <td>{{vendor.vendor_code}}</td>
               <td>{{vendor.vendor_contact}}</td>
-              <td>{{vendor.email}}</td>
-              <td>{{vendor.website}}</td>
-              <td>{{vendor.address}}</td>
+              <td>{{vendor.vendor_email}}</td>
+              <td>{{vendor.vendor_website}}</td>
+              <td>{{vendor.vendor_address}}</td>
+              <td>{{vendor.vendor_contact_person}}</td>
+              <td>{{vendor.vendor_contact_person_contact}}</td>
               <td>
                 <a href="{% url 'VendorUpdate' vendor.pk  %}">
                   <button

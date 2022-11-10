@@ -39,10 +39,10 @@
                             {{form.name|as_crispy_field}}
 
                         </div>
-                        <div class="form-group col-md-3 mb-0">
+                        {% comment %} <div class="form-group col-md-3 mb-0">
                             {{form.brand|as_crispy_field}}
 
-                        </div>
+                        </div> {% endcomment %}
                         
                         <div class="form-group col-md-3 mb-0">
                             {{form.category|as_crispy_field}}
@@ -101,11 +101,11 @@
     </div>
 </div>
 
-<script type="text/javascript">
+{% comment %} <script type="text/javascript">
 // In your Javascript (external .js resource or <script> tag)
     $(document).ready(function() {
         $('#id_softwaretype').select2();
     });
 
-</script>
+</script> {% endcomment %}
 {% endblock body %}

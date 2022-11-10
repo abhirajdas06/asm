@@ -9,7 +9,7 @@ class CompanyForm(forms.ModelForm):
     
     class Meta:
         model = Company
-        fields = ['company_name', 'address', 'contact']
+        fields = ['company_name','address','contact','email','website']
         
 
 # BRANCH MASTER FORM
@@ -18,7 +18,7 @@ class CompanyForm(forms.ModelForm):
 class BranchForm(forms.ModelForm):
     class Meta:
         model = Branch
-        fields = ['company', 'branch_location']
+        fields = ['company', 'branch_name','address']
 
 # EMPLOYEE LOCATION MASTER FORM
 
@@ -34,8 +34,7 @@ class Employee_LocationForm(forms.ModelForm):
 class VendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ['vendor_name', 
-                'vendor_contact', 'email', 'website', 'address']
+        fields = '__all__'
 
 
 #ASSET LOCATION FORM

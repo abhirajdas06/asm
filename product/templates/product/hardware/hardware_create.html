@@ -30,7 +30,7 @@
 
                 <h4 class="mt-0 header-title"></h4>
 
-                <form method="post"   id="HardwareCreateForm" action="{% url 'ajax_load_category' %}">
+                <form method="post"   id="HardwareCreateForm" data-category-url="{% url 'ajax_load_category' %}">
                     {% csrf_token %}
 
                     <div class="form-row">
@@ -38,10 +38,10 @@
                             {{form.name|as_crispy_field}}
 
                         </div>
-                        <div class="form-group col-md-3 mb-0">
+                        {% comment %} <div class="form-group col-md-3 mb-0">
                             {{form.brand|as_crispy_field}}
 
-                        </div>
+                        </div> {% endcomment %}
 
                         
                         <div class="form-group col-md-3 mb-0">
@@ -114,7 +114,7 @@
             
 
             $.ajax({                                       // initialize an AJAX request
-                url: url.attr('action'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
                 data: {
                     'category_id': categoryId       // add the country id to the GET parameters
                 },

@@ -21,7 +21,7 @@ class Software(models.Model):
 # HARDWARE PRODUCT
 class Hardware(models.Model):
     name = models.CharField(max_length=50)
-    brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
+    # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT)
     barcode = models.CharField(max_length=50)

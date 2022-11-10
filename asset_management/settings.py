@@ -17,6 +17,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'gst_field',
     'phonenumber_field',
     'product.apps.ProductConfig',
     'master.apps.MasterConfig',

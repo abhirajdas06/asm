@@ -52,7 +52,7 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Brand</th>
+              {% comment %} <th>Brand</th> {% endcomment %}
               {% comment %}
               <th>Category</th>
               {% endcomment %}
@@ -77,7 +77,7 @@
             {% for hardware in hardware %}
             <tr>
               <td>{{hardware.name }}</td>
-              <td>{{hardware.brand }}</td>
+              {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
               {% comment %}
               <td>{{hardware.category }}</td>
               {% endcomment %}

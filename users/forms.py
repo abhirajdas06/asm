@@ -31,7 +31,7 @@ class UpdateUser(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'employee_code', 'email', 'branch',
                   'user_type', 'office_contact', 'contact', 'location', 'active']
-
+    
 
 #COMPANY MASTER FORM
 class CompanyForm(forms.ModelForm):
@@ -43,7 +43,7 @@ class CompanyForm(forms.ModelForm):
 class BranchForm(forms.ModelForm):
     class Meta:
         model = Branch
-        fields = ['company', 'branch_location']
+        fields = ['company', 'branch_name']
 
 #EMPLOYEE LOCATION MASTER FORM
 class Employee_LocationForm(forms.ModelForm):
