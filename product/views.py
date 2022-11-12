@@ -4,7 +4,8 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
 from .models import (Software, Hardware)
-from master.models import SubCategory
+from users.models import User
+from master.models import SubCategory,Employee_Location
 from .forms import (SoftwareForm, HardwareForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
 
 
@@ -80,9 +81,25 @@ class UnAssignedView(generic.ListView):
 @method_decorator(login_required, name='dispatch')    
 class AssignedView(generic.ListView):
     template_name = "product/hardware/hardware_assigned_list.html"
-    # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NOT NULL')
+    # queryset = Product.objects.raw('Select * From product_product Where NOT (assign_to_id=None)
     queryset = Hardware.objects.exclude(assigned_to__id = None)
     context_object_name = "hardware"
+
+# @login_required
+# def AssignedView(request):
+#     pkid= Hardware.objects.exclude(assigned_to__id = None)
+#     print(pkid)
+#     # soft= User.objects.filter(location=pkid)
+#     soft= Employee_Location.objects.select_related(pkid)
+#     print(soft)
+#     # form = HardwareDetailForm(instance=pkid)  
+#     context ={
+       
+#         "hardware":pkid,
+#         "software":soft,
+        
+#     }
+#     return render(request,'product/hardware/hardware_assigned_list.html',context)
     
     
        # HARDWARE PRODUCT Assign

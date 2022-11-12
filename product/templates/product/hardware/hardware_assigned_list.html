@@ -104,6 +104,7 @@
                 <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger {% endif %}"> {{hardware.status }}</span>
               </td>
              
+              {% comment %} <td>{{hardware.location }}</td> {% endcomment %}
               <td>{{hardware.location }}</td>
               <td>{{hardware.assigned_to }}</td>
               
@@ -130,6 +131,9 @@
             {% endfor %}
           </tbody>
         </table>
+
+
+        
       </div>
     </div>
   </div>
