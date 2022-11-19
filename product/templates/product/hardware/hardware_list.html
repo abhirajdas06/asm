@@ -23,6 +23,27 @@
 
 {% endblock title_add %}
 {% block body %}
+<div class="table-responsive col-12">
+  <table id="datatable-buttons" class="table table-bordered nowrap">
+    <thead>
+      <tr>
+        <th>Name</th>
+        {% comment %} <th>Brand</th> {% endcomment %}
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Barcode</th>
+        <th>Serial</th>
+        <th>Vendor</th>
+        <th>Purchased On</th>
+        <th>Warranty Expiry</th>
+        <th>Warranty Status</th>
+        <th>TPM Expiry</th>
+        <th>Status</th>
+        <th>Location</th>
+        <th>Assigned To</th>
+        <th>Action</th>
+      </tr>
+    </thead>
 
 <div class="row">
   <div class="col-12">
@@ -101,4 +122,4 @@
   </div>
   <!-- end row -->
 </div>
-  {% endblock body %}
+{% endblock body %}

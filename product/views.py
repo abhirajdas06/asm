@@ -4,7 +4,8 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
 from .models import (Software, Hardware)
-from master.models import SubCategory
+from users.models import User
+from master.models import SubCategory,Employee_Location
 from .forms import (SoftwareForm, HardwareForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
 
 
@@ -77,12 +78,27 @@ class UnAssignedView(generic.ListView):
     queryset = Hardware.objects.filter(assigned_to__id = None)
     context_object_name = "hardware"
 
-@method_decorator(login_required, name='dispatch')    
-class AssignedView(generic.ListView):
-    template_name = "product/hardware/hardware_assigned_list.html"
-    # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NOT NULL')
-    queryset = Hardware.objects.exclude(assigned_to__id = None)
-    context_object_name = "hardware"
+# @method_decorator(login_required, name='dispatch')    
+# class AssignedView(generic.ListView):
+#     template_name = "product/hardware/hardware_assigned_list.html"
+#     # queryset = Product.objects.raw('Select * From product_product Where NOT (assign_to_id=None)
+#     queryset = Hardware.objects.exclude(assigned_to__id = None)
+#     context_object_name = "hardware"
+
+@login_required
+def AssignedView(request):
+    sql = "SELECT product_hardware.id, product_hardware.name, product_hardware.assigned_to_id, users_user.username, master_employee_location.location FROM ((product_hardware INNER JOIN users_user ON users_user.id=product_hardware.assigned_to_id)INNER JOIN master_employee_location ON master_employee_location.id=users_user.location_id) "
+    # abc="WHERE assigned_to_id  IS NOT NULL"
+    # sql2 = ""
+    # sql3 = sql+sql2
+    pkid= Hardware.objects.raw(sql) 
+    print(pkid)
+    
+    
+    context ={
+               "hardware":pkid,
+         }
+    return render(request,'product/hardware/hardware_assigned_list2.html',context)
     
     
        # HARDWARE PRODUCT Assign
@@ -136,6 +152,14 @@ def load_category(request):
     category_id = request.GET.get('category_id')
     subcategory = SubCategory.objects.filter(category_id=category_id)
     return render(request, 'product/hardware/subcategory_dropdown_list.html', {'subcategory': subcategory})
+
+@login_required
+def load_location(request):
+    user_id = request.GET.get('id_assigned_to')
+    print(user_id)
+    location=User.objects.filter(location=user_id)
+    print (location)
+    return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
 
 
     
