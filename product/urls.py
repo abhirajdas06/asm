@@ -3,7 +3,7 @@ from users import views
 from product import views
 
 from .views import (SoftwareCreateView, SoftwareListView,
-                    HardwareCreateView, HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,AssignedView,HardwareAssignView,HardwareDetailView)
+                    HardwareCreateView, HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,HardwareDetailView)
 
 urlpatterns = [
     path('software', SoftwareCreateView.as_view(), name="SoftwareCreate"),
@@ -21,10 +21,11 @@ urlpatterns = [
     path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
     
     
-    path('assignassets', AssignedView.as_view(), name="AssignAsset"),
+    path('assignassets', views.AssignedView, name="AssignAsset"),
     path('unassignassets', UnAssignedView.as_view(), name="UnAssignAsset"),
     
     path('ajax/load-category', views.load_category, name='ajax_load_category'), # AJAX
+    path('ajax/load-location', views.load_location, name='ajax_load_location'), # AJAX
     
     
 ]

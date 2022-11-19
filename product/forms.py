@@ -1,6 +1,7 @@
 from django import forms
 from .models import (Software, Hardware)
-from master.models import SubCategory,Brand
+from master.models import SubCategory,Brand,Employee_Location 
+from users.models import User
 
 # COMPANY MASTER FORM
 class SoftwareForm(forms.ModelForm):
@@ -56,14 +57,29 @@ class HardwareAssignForm(forms.ModelForm):
         model = Hardware
         fields = ['name',	'barcode',	'serial',	
                   	'status',	'location',	'assigned_to']
-        widgets={
-            "name": forms.TextInput(attrs={'readonly':True}),
+        # widgets={
+        #     "name": forms.TextInput(attrs={'readonly':True}),
             
-            "barcode": forms.TextInput(attrs={'readonly':True}),
-            "serial": forms.TextInput(attrs={'readonly':True}),
-            "status": forms.TextInput(attrs={'readonly':True}),
-            "location": forms.TextInput(attrs={'readonly':True}),
-        }
+        #     "barcode": forms.TextInput(attrs={'readonly':True}),
+        #     "serial": forms.TextInput(attrs={'readonly':True}),
+        #     "status": forms.TextInput(attrs={'readonly':True}),
+        #     "location": forms.TextInput(attrs={'readonly':True}),
+       # }
+    # def __init__(self, *args, **kwargs):
+            
+    #         super().__init__(*args, **kwargs)
+    #         self.fields['location'].queryset = Employee_Location.objects.all()
+           
+                    
+    #         if 'assigned_to' in self.data:
+    #             try:
+    #                 location_id = int(self.data.get('assigned_to'))
+    #                 self.fields['location'].queryset = User.objects.filter(location=location_id).order_by('location')
+    #             except (ValueError, TypeError):
+    #                 pass  # invalid input from the client; ignore and fallback to empty City queryset
+    #         elif self.instance.pk:
+    #             pass
+    #             # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
    
 class HardwareDetailForm(forms.ModelForm):
     class Meta:

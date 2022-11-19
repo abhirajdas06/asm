@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 import datetime
-from master.models import (Vendor, Asset_Location,
+from master.models import (Vendor, Asset_Location,Employee_Location,
                             Category, SubCategory, Brand, SoftwareType)
 
 
@@ -32,7 +32,8 @@ class Hardware(models.Model):
     tpm_expiry = models.DateField(auto_now=False, auto_now_add=False)
     status = models.CharField(max_length=30, choices=(
         ('working', 'working'), ('damaged', 'damaged')))
-    location = models.ForeignKey(Asset_Location, on_delete=models.PROTECT)
+    location = models.ForeignKey(Asset_Location, on_delete=models.PROTECT,blank=True)
+    emp_loc = models.CharField( max_length=50, blank=True)
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -44,6 +45,14 @@ class Hardware(models.Model):
     #         # self.subcategory.queryset = SubCategory.objects.none()
     #         # # print(self.subcategory)
     #         # self.brand.queryset = Brand.objects.none()
+    @property
+    def locat(self):
+        if self.assigned_to == None:
+            return self.location
+        else:
+            return self.emp_loc
+    
+  
     
   
 
