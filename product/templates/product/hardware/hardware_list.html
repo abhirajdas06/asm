@@ -31,9 +31,13 @@
       <strong>{{message}}</strong>
     </div>
     {% endfor %}
-    <div class="card">
-      <div class="card-body table-responsive">
-          <table id="datatable-buttons" class="table table-bordered ">
+
+    <table
+    id="example"
+    class="display"
+    {% comment %} style="border-collapse: collapse; border-spacing: 0; width: 100%" {% endcomment %}
+  >
+    
             <thead>
               <tr>
                 <th>Name</th>
@@ -42,47 +46,50 @@
                 <th>Subcategory</th>
                 <th>Barcode</th>
                 <th>Serial</th>
+                <th>Assigned To</th>
+                <th>Status</th>
                 <th>Vendor</th>
                 <th>Purchased On</th>
                 <th>Warranty Expiry</th>
                 <th>Warranty Status</th>
                 <th>TPM Expiry</th>
-                <th>Status</th>
                 <th>Location</th>
-                <th>Assigned To</th>
-                <th>Action</th>
+
+                {% comment %} <th>Action</th> {% endcomment %}
               </tr>
             </thead>
 
             <tbody>
               {% for hardware in hardware %}
               <tr>
-                <td>{{hardware.name }}</td>
+                <td><a href="{% url 'HardwareDetail' hardware.pk %}">{{hardware.name }}</a></td>
                 {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
                 <td>{{hardware.category }}</td>
                 <td>{{hardware.subcategory }}</td>
                 <td>{{hardware.barcode }}</td>
                 <td>{{hardware.serial }}</td>
-                <td>{{hardware.vendor }}</td>
-                <td>{{hardware.purchased_on }}</td>
-                <td>{{hardware.warranty_expiry }}</td>
-                <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
-                <td>{{hardware.tpm_expiry }}</td>
+                <td>{{hardware.assigned_to }}</td>
                 <td>
                   <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger
                     {% endif %}"> {{hardware.status }}
                   </span>
                 </td>
+                <td>{{hardware.vendor }}</td>
+                <td>{{hardware.purchased_on }}</td>
+                <td>{{hardware.warranty_expiry }}</td>
+                <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
+                <td>{{hardware.tpm_expiry }}</td>
+                
                 <td>{{hardware.location }}</td>
-                <td>{{hardware.assigned_to }}</td>
-                <td>
-                  <a href="{% url 'HardwareUpdate' hardware.pk %}">
+                
+                {% comment %} <td>
+                  
                     <button type="button" class="btn btn-sm btn-success">Edit</button>
-                  </a>
-                  <a href="{% url 'HardwareDetail' hardware.pk %}">
+                  
+                  
                     <button type="button" class="btn btn-sm btn-info">View</button>
                   </a>
-                </td>
+                </td> {% endcomment %}
               </tr>
               {% endfor %}
             </tbody>

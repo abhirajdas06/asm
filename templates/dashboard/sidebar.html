@@ -25,11 +25,60 @@
 {% comment %} Employee Menu End {% endcomment %}
 
 
+
+
 {% comment %} Assets Menu {% endcomment %}
 <li>
     <a href="javascript: void(0);" class="has-arrow waves-effect">
         <i class="fas fa-laptop"></i>
-        <span>Assets </span>
+        <span>IT Assets </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="{% url 'HardwareList' %}">Assets List</a></li>
+        <li><a href="#">Add Asset</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-print"></i>
+        <span>Non-IT Assets </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="#">Assets List</a></li>
+        <li><a href="#">Add Asset</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fab fa-windows"></i>
+        <span>Software </span>
+    </a>
+    <ul class="sub-menu" aria-expanded="true">
+        <li><a href="#">Assets List</a></li>
+        <li><a href="#">Add Asset</a></li>
+    </ul>
+</li>
+{% comment %} Assets Menu End {% endcomment %}
+
+
+
+
+
+
+
+{% comment %} Assets Menu {% endcomment %}
+<li>
+    <a href="javascript: void(0);" class="has-arrow waves-effect">
+        <i class="fas fa-laptop"></i>
+        <span>Old Assets </span>
     </a>
     <ul class="sub-menu" aria-expanded="true">
         <li><a href="{% url 'AssignAsset' %}">Assigned Assets </a></li>
@@ -48,7 +97,8 @@
     <ul class="sub-menu" aria-expanded="true">
         <li><a href="javascript: void(0);" class="has-arrow">Hardware</a>
             <ul class="sub-menu" aria-expanded="true">
-                <li><a href="{% url 'HardwareList' %}">Hardware List </a></li>
+                {% comment %} <li><a href="{% url 'HardwareList' %}">Hardware List </a></li> {% endcomment %}
+                <li><a href="#">Hardware List </a></li>
                 <li><a href="{% url 'HardwareCreate' %}"> Add Hardware</a></li>
             </ul>
         </li>

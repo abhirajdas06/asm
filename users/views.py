@@ -113,5 +113,7 @@ def Dashboard(request):
          'software_count' : software_count,
          'assign_count' : assign_count,
      }
+    context["in_stock"] = Hardware.objects.exclude(assigned_to__id = None)
+    context["assign"] = Hardware.objects.filter(assigned_to__id = None)
     
     return render(request,'dashboard/dashboard.html', context)
