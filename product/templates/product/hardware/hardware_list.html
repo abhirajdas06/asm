@@ -24,7 +24,7 @@
 {% endblock title_add %}
 {% block body %}
 <div class="table-responsive col-12">
-  <table id="datatable-buttons" class="table table-bordered nowrap">
+  <!--table id="datatable-buttons" class="table table-bordered nowrap">
     <thead>
       <tr>
         <th>Name</th>
@@ -43,83 +43,80 @@
         <th>Assigned To</th>
         <th>Action</th>
       </tr>
-    </thead>
+    </thead-->
 
-<div class="row">
-  <div class="col-12">
-    {% for message in messages %}
-    <div class="alert alert-outline-success text-gradient-success mb-0" role="alert">
-      <strong>{{message}}</strong>
-    </div>
-    {% endfor %}
-
-    <table
-    id="example"
-    class="display"
-    {% comment %} style="border-collapse: collapse; border-spacing: 0; width: 100%" {% endcomment %}
-  >
-    
-            <thead>
-              <tr>
-                <th>Name</th>
-                {% comment %} <th>Brand</th> {% endcomment %}
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Barcode</th>
-                <th>Serial</th>
-                <th>Assigned To</th>
-                <th>Status</th>
-                <th>Vendor</th>
-                <th>Purchased On</th>
-                <th>Warranty Expiry</th>
-                <th>Warranty Status</th>
-                <th>TPM Expiry</th>
-                <th>Location</th>
-
-                {% comment %} <th>Action</th> {% endcomment %}
-              </tr>
-            </thead>
-
-            <tbody>
-              {% for hardware in hardware %}
-              <tr>
-                <td><a href="{% url 'HardwareDetail' hardware.pk %}">{{hardware.name }}</a></td>
-                {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
-                <td>{{hardware.category }}</td>
-                <td>{{hardware.subcategory }}</td>
-                <td>{{hardware.barcode }}</td>
-                <td>{{hardware.serial }}</td>
-                <td>{{hardware.assigned_to }}</td>
-                <td>
-                  <span class="badge badge-{% if hardware.status == "working" %}success {% else %}badge badge-danger
-                    {% endif %}"> {{hardware.status }}
-                  </span>
-                </td>
-                <td>{{hardware.vendor }}</td>
-                <td>{{hardware.purchased_on }}</td>
-                <td>{{hardware.warranty_expiry }}</td>
-                <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
-                <td>{{hardware.tpm_expiry }}</td>
-                
-                <td>{{hardware.location }}</td>
-                
-                {% comment %} <td>
-                  
-                    <button type="button" class="btn btn-sm btn-success">Edit</button>
-                  
-                  
-                    <button type="button" class="btn btn-sm btn-info">View</button>
-                  </a>
-                </td> {% endcomment %}
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+    <div class="row">
+      <div class="col-12">
+        {% for message in messages %}
+        <div class="alert alert-outline-success text-gradient-success mb-0" role="alert">
+          <strong>{{message}}</strong>
         </div>
+        {% endfor %}
+
+        <table id="example" class="display" {% comment %}
+          style="border-collapse: collapse; border-spacing: 0; width: 100%" {% endcomment %}>
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              {% comment %} <th>Brand</th> {% endcomment %}
+              <th>Category</th>
+              <th>Subcategory</th>
+              <th>Barcode</th>
+              <th>Serial</th>
+              <th>Assigned To</th>
+              <th>Status</th>
+              <th>Vendor</th>
+              <th>Purchased On</th>
+              <th>Warranty Expiry</th>
+              <th>Warranty Status</th>
+              <th>TPM Expiry</th>
+              <th>Location</th>
+
+              {% comment %} <th>Action</th> {% endcomment %}
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for hardware in hardware %}
+            <tr>
+              <td><a href="{% url 'HardwareDetail' hardware.pk %}">{{hardware.name }}</a></td>
+              {% comment %} <td>{{hardware.brand }}</td> {% endcomment %}
+              <td>{{hardware.category }}</td>
+              <td>{{hardware.subcategory }}</td>
+              <td>{{hardware.barcode }}</td>
+              <td>{{hardware.serial }}</td>
+              <td>{{hardware.assigned_to }}</td>
+              <td>
+                <span class="badge badge-{% if hardware.status == " working" %}success {% else %}badge badge-danger 
+                {% endif %}"> {{hardware.status }}
+                </span>
+              </td>
+              <td>{{hardware.vendor }}</td>
+              <td>{{hardware.purchased_on }}</td>
+              <td>{{hardware.warranty_expiry }}</td>
+              <td>Valid till:{{hardware.warranty_expiry | timeuntil}}</td>
+              <td>{{hardware.tpm_expiry }}</td>
+
+              <td>{{hardware.location }}</td>
+
+              {% comment %} <td>
+
+                <button type="button" class="btn btn-sm btn-success">Edit</button>
+
+
+                <button type="button" class="btn btn-sm btn-info">View</button>
+                </a>
+              </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
-    <!-- end col -->
-  </div>
-  <!-- end row -->
+</div>
+<!-- end col -->
+</div>
+<!-- end row -->
 </div>
 {% endblock body %}
