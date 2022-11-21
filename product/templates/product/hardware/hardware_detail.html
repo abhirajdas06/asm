@@ -20,8 +20,8 @@
                             <a href="{% url 'HardwareUpdate' hardware.pk %}">
                             <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button></a>  
 
-                            <a href="{% url 'HardwareUpdate' hardware.pk %}">
-                                <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Assign</button></a>
+                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal" data-target="#myModal{{hardware.pk}}">Standard Modal</button>
+
 
                             
                       </div>     
@@ -31,6 +31,10 @@
 {% endblock title_add %}
 
 {% block body %}
+
+{% include 'product/hardware/hardware_assign.html' %}
+
+
 <div class="row">
     <div class="col-12">
         <div class="card">

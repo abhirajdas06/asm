@@ -21,10 +21,11 @@
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.colVis.min.js" crossorigin="anonymous"></script>
         <link href="{% static 'assets/libs/select2/css/select2.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.datatables.net/searchbuilder/1.4.0/css/searchBuilder.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.datatables.net/datetime/1.2.0/css/dataTables.dateTime.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet" type="text/css" />
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="{% static 'assets/images/logo-sm.png' %}">
@@ -48,7 +49,11 @@
         <link href="{% static 'assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css' %}" rel="stylesheet" />
 
         
-
+<style>
+    .dt-down-arrow {
+        display: none;
+    }
+</style>
     </head>
 
     <body data-sidebar="dark">
