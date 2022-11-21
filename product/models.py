@@ -38,6 +38,7 @@ class Hardware(models.Model):
         ('working', 'working'), ('damaged', 'damaged')))
     location = models.ForeignKey(Location,on_delete=models.PROTECT,null=True)
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
+    cost=models.PositiveIntegerField(blank=True)
 
     def __str__(self):
         return self.name + " - " + self.barcode

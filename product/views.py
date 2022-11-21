@@ -87,7 +87,7 @@ class UnAssignedView(generic.ListView):
 
 @login_required
 def AssignedView(request):
-    # sql = "SELECT product_hardware.id, product_hardware.name, product_hardware.assigned_to_id, users_user.username, master_location.location FROM ((product_hardware INNER JOIN users_user ON users_user.id=product_hardware.assigned_to_id)INNER JOIN master_location ON master_location.id=users_user.location_id WHERE product_hardware.assigned_to_id  IS NOT NULL ) "
+    # sql = "SELECT product_hardware.id, product_hardware.name, product_hardware.assigned_to_id, users_user.username, master_location.location FROM ((product_hardware INNER JOIN users_user ON users_user.id=product_hardware.assigned_to_id)INNER JOIN master_location ON master_location.id=users_user.location_id  ) WHERE product_hardware.assigned_to_id IS NOT NULL"
     # abc="WHERE assigned_to_id  IS NOT NULL"
     # sql2 = ""
     # sql3 = sql+sql2
