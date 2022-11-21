@@ -98,7 +98,7 @@ def AssignedView(request):
     context ={
                "hardware":pkid,
          }
-    return render(request,'product/hardware/hardware_assigned_list2.html',context)
+    return render(request,'product/hardware/hardware_assigned_list.html',context)
     
     
        # HARDWARE PRODUCT Assign

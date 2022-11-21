@@ -138,15 +138,15 @@
         <li><a href="javascript: void(0);" class="has-arrow">Company Master</a>
             <ul class="sub-menu" aria-expanded="true">
                 <li><a href="{% url 'BranchList' %}">Branch </a></li>
-                <li><a href="{% url 'EmployeeLocationList' %}"> Employee Location </a></li>
+                <li><a href="{% url 'EmployeeLocationList' %}">  Location </a></li>
             </ul>
         </li>
         <li><a href="javascript: void(0);" class="has-arrow">Product Master </a>
             <ul class="sub-menu" aria-expanded="true">
                 <li><a href="{% url 'CategoryList' %}">Category </a></li>
-                <li><a href="{% url 'SubCategoryList' %}">Sub Category </a></li>
+                {% comment %} <li><a href="#">Sub Category </a></li> {% endcomment %}
                 <li><a href="{% url 'SoftwareTypeList' %}">Software Type </a></li>
-                <li><a href="{% url 'AssetLocationList' %}">Product Location </a></li>
+                {% comment %} <li><a href="#">Product Location </a></li> {% endcomment %}
                 <li><a href="{% url 'BrandList' %}">Brand </a></li>
             </ul>
         </li>

@@ -17,7 +17,7 @@ class SoftwareForm(forms.ModelForm):
 class HardwareCreateForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',	 'category',	'barcode',	'serial',	'vendor',
+        fields = ['name',	 'category','asset_type',	'barcode',	'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
@@ -90,7 +90,7 @@ class HardwareAssignForm(forms.ModelForm):
 class HardwareDetailForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name', 'category',	'barcode',	'serial',	'vendor',
+        fields = ['name', 'category',	'barcode','asset_type'	,'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             "name": forms.TextInput(attrs={'readonly':True}),
@@ -100,7 +100,7 @@ class HardwareDetailForm(forms.ModelForm):
             'purchased_on': forms.TextInput(attrs={'readonly':True}),
             'warranty_expiry': forms.TextInput(attrs={'readonly':True}),
             'tpm_expiry': forms.TextInput(attrs={'readonly':True}),
-            # 'assigned_to': forms.TextInput(attrs={'readonly':True}),
+            'assigned_to': forms.TextInput(attrs={'readonly':True}),
             "barcode": forms.TextInput(attrs={'readonly':True}),
             "serial": forms.TextInput(attrs={'readonly':True}),
             "status": forms.TextInput(attrs={'readonly':True}),

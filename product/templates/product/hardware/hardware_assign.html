@@ -10,7 +10,8 @@
                 </div>
                 <div class="modal-body">
                     <h5>Overflowing text to show scroll behavior</h5>
-                    <form method="post"  id="HardwareCreateForm" data-category-url="{% url 'ajax_load_location' %}">
+                    {% comment %} id="HardwareCreateForm" data-category-url="{% url 'ajax_load_location' %}" {% endcomment %}
+                    <form method="post"  >
                         {% csrf_token %}
     
                         <div class="form-row">

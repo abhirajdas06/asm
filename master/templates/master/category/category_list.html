@@ -51,7 +51,7 @@
                         {% for category in category  %}
                     <tr>
                         <td>{{category.pk}}</td>
-                        <td>{{category.name}}</td>
+                        <td>{{category.category}}</td>
                         <td>
                             <a href="{% url 'CategoryUpdate' category.pk %}">
                                 <button
