@@ -24,9 +24,10 @@ class Hardware(models.Model):
     name = models.CharField(max_length=50)
     # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    asset_type=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='master.Category.asset_type+')
+    # assettype=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='asset_type1')
+    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50,blank=True)
     # category = models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True, related_name='master.Category.category+')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True)
     barcode = models.CharField(max_length=50)
     serial = models.CharField(max_length=50)
     vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT)
@@ -36,7 +37,6 @@ class Hardware(models.Model):
     status = models.CharField(max_length=30, choices=(
         ('working', 'working'), ('damaged', 'damaged')))
     location = models.ForeignKey(Location,on_delete=models.PROTECT,null=True)
-    
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
