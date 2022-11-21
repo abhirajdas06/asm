@@ -1,7 +1,7 @@
 # import
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from master.models import (Company, Branch, Employee_Location)
+from master.models import (Company, Branch,Location)
 
 
 # USER MODEL
@@ -18,6 +18,6 @@ class User(AbstractUser):
         ('admin', 'admin'), ('user', 'user')), null=True)
     branch = models.ForeignKey(Branch, on_delete=models.PROTECT, null=True)
     location = models.ForeignKey(
-        Employee_Location, on_delete=models.CASCADE, null=True)
+        Location, on_delete=models.CASCADE, null=True)
     active = models.BooleanField(("active"), default=True,)
     

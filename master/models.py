@@ -32,10 +32,11 @@ class Branch(models.Model):
         return self.branch_name
 
 
-# USER LOCATION
+#LOCATION
 
 
-class Employee_Location(models.Model):
+class Location(models.Model):
+    location_type=models.CharField(choices=(('Employee Location','Employee Location'),('Asset Location','Asset Location')),max_length=50)
     branch = models.ForeignKey(Branch, on_delete=models.PROTECT)
     location = models.CharField(max_length=50)
 
@@ -77,31 +78,32 @@ class Vendor(models.Model):
 # ASSET LOCATION
 
 
-class Asset_Location(models.Model):
-    branch = models.ForeignKey(Branch, on_delete=models.PROTECT)
-    location = models.CharField(max_length=50)
+# class Asset_Location(models.Model):
+#     branch = models.ForeignKey(Branch, on_delete=models.PROTECT)
+#     location = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.location
+#     def __str__(self):
+#         return self.location
 
 # CATEGORY
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
+    category = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.category
 
 # SUBCATEGORY
 
 
-class SubCategory(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    name = models.CharField(max_length=50)
+# class SubCategory(models.Model):
+#     category = models.ForeignKey(Category, on_delete=models.PROTECT)
+#     name = models.CharField(max_length=50)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 # BRAND
 

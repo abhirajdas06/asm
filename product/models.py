@@ -1,8 +1,8 @@
 from django.db import models
 from users.models import User
 import datetime
-from master.models import (Vendor, Asset_Location,Employee_Location,
-                            Category, SubCategory, Brand, SoftwareType)
+from master.models import (Vendor, Location,
+                            Category,  Brand, SoftwareType)
 
 
 # SOFTWARE PRODUCT
@@ -18,12 +18,15 @@ class Software(models.Model):
     
     
 
+
 # HARDWARE PRODUCT
 class Hardware(models.Model):
     name = models.CharField(max_length=50)
     # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT)
+    # category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    asset_type=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='asset_type')
+    # category = models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True, related_name='category')
     barcode = models.CharField(max_length=50)
     serial = models.CharField(max_length=50)
     vendor = models.ForeignKey(Vendor, on_delete=models.PROTECT)
@@ -32,8 +35,8 @@ class Hardware(models.Model):
     tpm_expiry = models.DateField(auto_now=False, auto_now_add=False)
     status = models.CharField(max_length=30, choices=(
         ('working', 'working'), ('damaged', 'damaged')))
-    location = models.ForeignKey(Asset_Location, on_delete=models.PROTECT,blank=True)
-    emp_loc = models.CharField( max_length=50, blank=True)
+    location = models.ForeignKey(Location,on_delete=models.PROTECT,null=True)
+    
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -45,18 +48,7 @@ class Hardware(models.Model):
     #         # self.subcategory.queryset = SubCategory.objects.none()
     #         # # print(self.subcategory)
     #         # self.brand.queryset = Brand.objects.none()
-    @property
-    def locat(self):
-        if self.assigned_to == None:
-            return self.location
-        else:
-            return self.emp_loc
-    
   
-    
-  
-
-    
     
     # def remaining_days(self):
     #     remaining_days = (self.warranty_expiry - self.purchased_on).days

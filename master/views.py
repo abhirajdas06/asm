@@ -3,10 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
-from .models import (Company, Branch, Employee_Location, Vendor,
-                     Asset_Location, Category, SubCategory, Brand, SoftwareType)
+from .models import (Company, Branch,  Vendor,
+                     Location, Category,  Brand, SoftwareType)
 from .forms import (CompanyForm, BranchForm, Employee_LocationForm, VendorForm,
-                    Asset_LocationForm, CategoryForm, SubCategoryForm, BrandForm, SoftwareTypeForm)
+                    CategoryForm,  BrandForm, SoftwareTypeForm)
+#  Asset_LocationForm,SubCategoryForm,
 
 
 # COMPANY MASTER CREATE
@@ -85,7 +86,7 @@ class EmployeeLocationCreateView(generic.CreateView):
 @method_decorator(login_required, name='dispatch')
 class EmployeeLocationListView(generic.ListView):
     template_name = "master/location/employee_location_list.html"
-    queryset = Employee_Location.objects.all()
+    queryset = Location.objects.all()
     context_object_name = "e_location"
     
 # COMPANY EMPLOYEE LOCATION UPDATE
@@ -93,7 +94,7 @@ class EmployeeLocationListView(generic.ListView):
 class ElocationUpdateView(generic.UpdateView):
     template_name = "master/location/employee_location_create.html"
     form_class=Employee_LocationForm
-    queryset = Employee_Location.objects.all()
+    queryset = Location.objects.all()
     context_object_name = "e_location"
     
     def get_success_url(self):
@@ -131,33 +132,33 @@ class VendorUpdateView(generic.UpdateView):
 
 
 # COMPANY ASSET LOCATION CREATE
-@method_decorator(login_required, name='dispatch')
-class AssetLocationCreateView(generic.CreateView):
-    template_name = 'master/location/asset_location_create.html'
-    form_class = Asset_LocationForm
+# @method_decorator(login_required, name='dispatch')
+# class AssetLocationCreateView(generic.CreateView):
+#     template_name = 'master/location/asset_location_create.html'
+#     form_class = Asset_LocationForm
 
-    def get_success_url(self):
-        messages.success(self.request, 'Branch Created Sucessfully')
-        return reverse("AssetLocationList")
+#     def get_success_url(self):
+#         messages.success(self.request, 'Branch Created Sucessfully')
+#         return reverse("AssetLocationList")
 
 
-# COMPANY ASSET LOCATION LIST
-@method_decorator(login_required, name='dispatch')
-class AssetLocationListView(generic.ListView):
-    template_name = "master/location/asset_location_list.html"
-    queryset = Asset_Location.objects.all()
-    context_object_name = "a_location"
+# # COMPANY ASSET LOCATION LIST
+# @method_decorator(login_required, name='dispatch')
+# class AssetLocationListView(generic.ListView):
+#     template_name = "master/location/asset_location_list.html"
+#     queryset = Asset_Location.objects.all()
+#     context_object_name = "a_location"
     
 # COMPANY ASSET LOCATION UPDATE
-@method_decorator(login_required, name='dispatch')
-class AssetLocationUpdateView(generic.UpdateView):
-    template_name = "master/location/asset_location_create.html"
-    form_class=Asset_LocationForm
-    queryset = Asset_Location.objects.all()
-    context_object_name = "a_location"
+# @method_decorator(login_required, name='dispatch')
+# class AssetLocationUpdateView(generic.UpdateView):
+#     template_name = "master/location/asset_location_create.html"
+#     form_class=Asset_LocationForm
+#     queryset = Asset_Location.objects.all()
+#     context_object_name = "a_location"
     
-    def get_success_url(self):
-        return reverse("AssetLocationList")
+#     def get_success_url(self):
+#         return reverse("AssetLocationList")
 
 
 # PRODUCT CATEGORY CREATE
@@ -192,32 +193,32 @@ class CategoryUpdateView(generic.UpdateView):
 
 # PRODUCT SUBCATEGORY CREATE
 @method_decorator(login_required, name='dispatch')
-class SubCategoryCreateView(generic.CreateView):
-    template_name = 'master/category/sub_category_create.html'
-    form_class = SubCategoryForm
+# class SubCategoryCreateView(generic.CreateView):
+#     template_name = 'master/category/sub_category_create.html'
+#     form_class = SubCategoryForm
 
-    def get_success_url(self):
-        messages.success(self.request, 'Category Created Sucessfully')
-        return reverse("SubCategoryList")
+#     def get_success_url(self):
+#         messages.success(self.request, 'Category Created Sucessfully')
+#         return reverse("SubCategoryList")
 
 
-# PRODUCT SUBCATEGORY LIST
-@method_decorator(login_required, name='dispatch')
-class SubCategoryListView(generic.ListView):
-    template_name = "master/category/sub_category_list.html"
-    queryset = SubCategory.objects.all()
-    context_object_name = "subcategory"
+# # PRODUCT SUBCATEGORY LIST
+# @method_decorator(login_required, name='dispatch')
+# class SubCategoryListView(generic.ListView):
+#     template_name = "master/category/sub_category_list.html"
+#     queryset = Category.objects.all()
+#     context_object_name = "subcategory"
     
 # PRODUCT SUBCATEGORY UPDATE
-@method_decorator(login_required, name='dispatch')
-class SubCategoryUpdateView(generic.UpdateView):
-    template_name = "master/category/sub_category_create.html"
-    form_class=SubCategoryForm
-    queryset = SubCategory.objects.all()
-    context_object_name = "subcategory"
+# @method_decorator(login_required, name='dispatch')
+# class SubCategoryUpdateView(generic.UpdateView):
+#     template_name = "master/category/sub_category_create.html"
+#     form_class=SubCategoryForm
+#     queryset = Category.objects.all()
+#     context_object_name = "subcategory"
     
-    def get_success_url(self):
-        return reverse("SubCategoryList")
+#     def get_success_url(self):
+#         return reverse("SubCategoryList")
 
 
 # PRODUCT BRAND CREATE

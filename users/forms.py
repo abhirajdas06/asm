@@ -1,7 +1,7 @@
 from django import forms
-from .models import (User, Company, Branch, Employee_Location)
+from .models import (User, Company,Branch,Location)
 from django.contrib.auth.forms import UserCreationForm
-from users.models import Employee_Location
+from users.models import Location
 
 #USER CREATION FORM
 class CreateUser(UserCreationForm):
@@ -14,16 +14,16 @@ class CreateUser(UserCreationForm):
     def __init__(self, *args, **kwargs):
             
             super().__init__(*args, **kwargs)
-            self.fields['location'].queryset = Employee_Location.objects.none()
+            self.fields['location'].queryset = Location.objects.none()
                     
             if 'branch' in self.data:
                 try:
                     branch_id = int(self.data.get('branch'))
-                    self.fields['location'].queryset = Employee_Location.objects.filter(branch_id=branch_id).order_by('location')
+                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
                 except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
             elif self.instance.pk:
-                self.fields['location'].queryset = self.instance.category.subcategory_set.order_by('location')
+                self.fields['location'].queryset = self.instance.category_set.order_by('location')
 
 #USER UPDATE FORM
 class UpdateUser(forms.ModelForm):
@@ -48,5 +48,5 @@ class BranchForm(forms.ModelForm):
 #EMPLOYEE LOCATION MASTER FORM
 class Employee_LocationForm(forms.ModelForm):
     class Meta:
-        model = Employee_Location
+        model = Location
         fields = ['branch', 'location']

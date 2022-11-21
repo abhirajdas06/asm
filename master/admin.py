@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Company, Branch, Employee_Location, Vendor, Asset_Location, Category, SubCategory, Brand, SoftwareType)
+from .models import (Company, Branch, Location, Vendor,  Category,  Brand, SoftwareType)
 
 # Register your models here.
-admin.site.register((Company, Branch, Employee_Location, Vendor, Asset_Location, Category, SubCategory, Brand, SoftwareType))
+admin.site.register((Company, Branch, Location, Vendor, Category,  Brand, SoftwareType))

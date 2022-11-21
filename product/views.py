@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib import messages
 from .models import (Software, Hardware)
 from users.models import User
-from master.models import SubCategory,Employee_Location
+from master.models import Category,Location
 from .forms import (SoftwareForm, HardwareForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
 
 
@@ -150,7 +150,7 @@ def HardwareDetailView(request,pk):
 @login_required
 def load_category(request):
     category_id = request.GET.get('category_id')
-    subcategory = SubCategory.objects.filter(category_id=category_id)
+    subcategory = Category.objects.filter(category_id=category_id)
     return render(request, 'product/hardware/subcategory_dropdown_list.html', {'subcategory': subcategory})
 
 @login_required

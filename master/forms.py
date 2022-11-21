@@ -1,5 +1,5 @@
 from django import forms
-from .models import (Company, Branch, Employee_Location, Vendor, Asset_Location, Category, SubCategory, Brand, SoftwareType)
+from .models import (Company, Branch, Location, Vendor,  Category,  Brand, SoftwareType)
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
@@ -25,8 +25,8 @@ class BranchForm(forms.ModelForm):
 
 class Employee_LocationForm(forms.ModelForm):
     class Meta:
-        model = Employee_Location
-        fields = ['branch', 'location']
+        model = Location
+        fields = ['location_type','branch', 'location']
 
 # VENDOR FORM
 
@@ -38,22 +38,22 @@ class VendorForm(forms.ModelForm):
 
 
 #ASSET LOCATION FORM
-class Asset_LocationForm(forms.ModelForm):
-    class Meta:
-        model = Asset_Location
-        fields = ['branch', 'location']
+# class Asset_LocationForm(forms.ModelForm):
+#     class Meta:
+#         model = Location
+#         fields = ['branch', 'location']
 
 #CATEGORY FORM
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ['name']
+        fields = ['asset_type', 'category']
 
 #SUBCATEGORY FORM
-class SubCategoryForm(forms.ModelForm):
-    class Meta:
-        model = SubCategory
-        fields = ['category', 'name']
+# class SubCategoryForm(forms.ModelForm):
+#     class Meta:
+#         model =Category
+#         fields = ['category', 'name']
 
 #BRAND FORM
 class BrandForm(forms.ModelForm):

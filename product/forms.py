@@ -1,6 +1,6 @@
 from django import forms
 from .models import (Software, Hardware)
-from master.models import SubCategory,Brand,Employee_Location 
+from master.models import Category,Brand,Location
 from users.models import User
 
 # COMPANY MASTER FORM
@@ -17,7 +17,7 @@ class SoftwareForm(forms.ModelForm):
 class HardwareCreateForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',	 'category','subcategory',	'barcode',	'serial',	'vendor',
+        fields = ['name',	 'category',	'barcode',	'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
@@ -25,24 +25,24 @@ class HardwareCreateForm(forms.ModelForm):
             'tpm_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
         
-    def __init__(self, *args, **kwargs):
+    # def __init__(self, *args, **kwargs):
             
-            super().__init__(*args, **kwargs)
-            self.fields['subcategory'].queryset = SubCategory.objects.none()
+    #         super().__init__(*args, **kwargs)
+    #         self.fields['category'].queryset = Category.objects.none()
                     
-            if 'category' in self.data:
-                try:
-                    category_id = int(self.data.get('category'))
-                    self.fields['subcategory'].queryset = SubCategory.objects.filter(category_id=category_id).order_by('name')
-                except (ValueError, TypeError):
-                    pass  # invalid input from the client; ignore and fallback to empty City queryset
-            elif self.instance.pk:
-                self.fields['subcategory'].queryset = self.instance.category.subcategory_set.order_by('name')
+    #         if 'category' in self.data:
+    #             try:
+    #                 category_id = int(self.data.get('category'))
+    #                 self.fields['category'].queryset = Category.objects.filter(category_id=category_id).order_by('name')
+    #             except (ValueError, TypeError):
+    #                 pass  # invalid input from the client; ignore and fallback to empty City queryset
+    #         elif self.instance.pk:
+    #             self.fields['subcategory'].queryset = self.instance.category_set.order_by('name')
 
 class HardwareForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',		'category',	'subcategory',	'barcode',	'serial',	'vendor',
+        fields = ['name',		'category',		'barcode',	'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
@@ -57,6 +57,12 @@ class HardwareAssignForm(forms.ModelForm):
         model = Hardware
         fields = ['name',	'barcode',	'serial',	
                   	'status',	'location',	'assigned_to']
+        
+        
+    def __init__(self, *args, **kwargs):
+            
+            super().__init__(*args, **kwargs)
+            self.fields['location'].queryset = Location.objects.all()
         # widgets={
         #     "name": forms.TextInput(attrs={'readonly':True}),
             
@@ -84,12 +90,12 @@ class HardwareAssignForm(forms.ModelForm):
 class HardwareDetailForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name', 'category','subcategory',	'barcode',	'serial',	'vendor',
+        fields = ['name', 'category',	'barcode',	'serial',	'vendor',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             "name": forms.TextInput(attrs={'readonly':True}),
             'category': forms.TextInput(attrs={'readonly':True}),
-            'subcategory': forms.TextInput(attrs={'readonly':True}),
+            
             'vendor': forms.TextInput(attrs={'readonly':True}),
             'purchased_on': forms.TextInput(attrs={'readonly':True}),
             'warranty_expiry': forms.TextInput(attrs={'readonly':True}),
