@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, reverse, redirect
+from django.shortcuts import get_object_or_404, render, reverse, redirect, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
@@ -127,7 +127,7 @@ def HardwareReturn(request,pk):
     # q = Hardware.objects.get(id=pk)
     # q.assigned_to = None
     # q.save()
-    return redirect ("UnAssignAsset")
+    return redirect ("HardwareDetail",(pk))
 
 # HARDWARE PRODUCT Detailview
 # class HardwareDetailView(generic.DetailView):
@@ -140,7 +140,10 @@ def HardwareReturn(request,pk):
 def HardwareDetailView(request,pk):
     pkid= Hardware.objects.get(id=pk)
     soft= Software.objects.filter(installed_on=pkid)
-    form = HardwareDetailForm(instance=pkid)  
+    form = HardwareAssignForm(request.POST or None, instance=pkid)  
+    if form.is_valid():
+        form.save()
+        # return HttpResponseRedirect("/"+pkid)
     context ={
         "form": form,
         "hardware":pkid,

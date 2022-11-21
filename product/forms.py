@@ -55,8 +55,7 @@ class HardwareForm(forms.ModelForm):
 class HardwareAssignForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',	'barcode',	'serial',	
-                  	'status',	'location',	'assigned_to']
+        fields = [	'assigned_to']
         
         
     # def __init__(self, *args, **kwargs):

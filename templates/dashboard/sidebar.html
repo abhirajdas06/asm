@@ -35,7 +35,7 @@
     </a>
     <ul class="sub-menu" aria-expanded="true">
         <li><a href="{% url 'HardwareList' %}">Assets List</a></li>
-        <li><a href="#">Add Asset</a></li>
+        <li><a href="{% url 'HardwareCreate' %}">Add Asset</a></li>
     </ul>
 </li>
 {% comment %} Assets Menu End {% endcomment %}
@@ -62,8 +62,8 @@
         <span>Software </span>
     </a>
     <ul class="sub-menu" aria-expanded="true">
-        <li><a href="#">Assets List</a></li>
-        <li><a href="#">Add Asset</a></li>
+        <li><a href="{% url 'SoftwareList' %}">Assets List</a></li>
+        <li><a href="{% url 'SoftwareCreate' %}">Add Asset</a></li>
     </ul>
 </li>
 {% comment %} Assets Menu End {% endcomment %}
@@ -74,7 +74,7 @@
 
 
 
-{% comment %} Assets Menu {% endcomment %}
+{% comment %} Assets Menu 
 <li>
     <a href="javascript: void(0);" class="has-arrow waves-effect">
         <i class="fas fa-laptop"></i>
@@ -85,10 +85,10 @@
         <li><a href="{% url 'UnAssignAsset' %}">Assets In Stock</a></li>
     </ul>
 </li>
-{% comment %} Assets Menu End {% endcomment %}
+ Assets Menu End {% endcomment %}
 
 
-{% comment %} Product Menu {% endcomment %}
+{% comment %} Product Menu 
 <li>
     <a href="javascript: void(0);" class="has-arrow waves-effect">
         <i class="fas fa-cart-plus"></i>
@@ -97,7 +97,7 @@
     <ul class="sub-menu" aria-expanded="true">
         <li><a href="javascript: void(0);" class="has-arrow">Hardware</a>
             <ul class="sub-menu" aria-expanded="true">
-                {% comment %} <li><a href="{% url 'HardwareList' %}">Hardware List </a></li> {% endcomment %}
+                <li><a href="{% url 'HardwareList' %}">Hardware List </a></li>
                 <li><a href="#">Hardware List </a></li>
                 <li><a href="{% url 'HardwareCreate' %}"> Add Hardware</a></li>
             </ul>
@@ -110,7 +110,7 @@
         </li>
     </ul>
 </li>
-{% comment %} Product Menu End {% endcomment %}
+Product Menu End {% endcomment %}
 
 
 {% comment %} Vendor Menu {% endcomment %}

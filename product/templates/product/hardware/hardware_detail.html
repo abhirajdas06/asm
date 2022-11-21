@@ -1,32 +1,40 @@
 {% extends 'dashboard/index.html' %}
 {% load crispy_forms_tags %}
 {% block title_add %}
-                        <!-- start page title -->
-                        <div class="row align-items-center">
-                          <div class="col-sm-6">
-                              <div class="page-title-box">
-                                  <h4 class="font-size-18"> Detail: {{hardware.name | title}} - {{hardware.barcode}}</h4>
-                                  <ol class="breadcrumb mb-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
-                                    <li class="breadcrumb-item"><a href="{% url 'HardwareList' %}">Hardware</a></li>
-                                    <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li>
-                                  </ol>
-                              </div>
-                          </div>
-                          <div class="col-sm-6">
+<!-- start page title -->
+<div class="row align-items-center">
+    <div class="col-sm-6">
+        <div class="page-title-box">
+            <h4 class="font-size-18"> Detail: {{hardware.name | title}} - {{hardware.barcode}}</h4>
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'HardwareList' %}">Hardware</a></li>
+                <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-sm-6">
 
-                       
-                            <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
-                            <a href="{% url 'HardwareUpdate' hardware.pk %}">
-                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button></a>  
+        <a href="{% url 'HardwareList'%}">
+        <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+        </a>
+        <a href="{% url 'HardwareUpdate' hardware.pk %}">
+            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button></a>
+{% if hardware.assigned_to == None %}
+        <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal"
+            data-target="#myModal{{hardware.pk}}">Assign</button>
+           
+           {% else %}
+            <a href=" {% url 'HardwareReturn' hardware.pk %}">
+                  
+                <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Return in Stock</button>
+            </a>
+{% endif %}
 
-                            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal" data-target="#myModal{{hardware.pk}}">Standard Modal</button>
 
-
-                            
-                      </div>     
-                    </div>     
-                      <!-- end page title -->
+    </div>
+</div>
+<!-- end page title -->
 
 {% endblock title_add %}
 
@@ -35,80 +43,129 @@
 {% include 'product/hardware/hardware_assign.html' %}
 
 
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mt-0 header-title"></h4>
 
-                <form method="post">
-                    {% csrf_token %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="mt-0 header-title"></h4>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.name|as_crispy_field}}
 
-                        </div>
-                        {% comment %} <div class="form-group col-md-3 mb-0">
-                            {{form.brand|as_crispy_field}}
+        {% comment %} <div class="form-row">
+            <div class="form-group col-md-3 mb-0">
+                {{form.name}}
 
-                        </div> {% endcomment %}
+            </div>
 
-                        
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.category|as_crispy_field}}
 
-                        </div>
 
-                        
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.barcode|as_crispy_field}}
+            <div class="form-group col-md-3 mb-0">
+                {{form.category}}
 
-                        </div>
+            </div>
 
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.serial|as_crispy_field}}
 
-                        </div>
+            <div class="form-group col-md-3 mb-0">
+                {{form.barcode}}
 
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.vendor|as_crispy_field}}
+            </div>
 
-                        </div>
+            <div class="form-group col-md-3 mb-0">
+                {{form.serial}}
 
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.purchased_on|as_crispy_field}}
+            </div>
 
-                        </div>
+            <div class="form-group col-md-3 mb-0">
+                {{form.vendor}}
 
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.warranty_expiry|as_crispy_field}}
+            </div>
 
-                        </div>
+            <div class="form-group col-md-3 mb-0">
+                {{form.purchased_on}}
 
-                        <div class="form-group col-md-3 mb-0">
-                            {{form.tpm_expiry|as_crispy_field}}
-                    </div>
-                    <div class="form-group col-md-2 mb-0">
-                        {{form.status|as_crispy_field}}
+            </div>
 
-                    </div>
-                    <div class="form-group col-md-2 mb-0">
-                        {{form.location|as_crispy_field}}
+            <div class="form-group col-md-3 mb-0">
+                {{form.warranty_expiry}}
 
-                    </div>
-                    <div class="form-group col-md-2 mb-0">
-                        {{form.assigned_to|as_crispy_field}}
+            </div>
 
-                    </div>
-                    </div>
-                    {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
-                </form>
-                
+            <div class="form-group col-md-3 mb-0">
+                {{form.tpm_expiry}}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{form.status}}
+
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{form.location}}
+
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{form.assigned_to}}
+
+            </div>
+        </div> {% endcomment %}
+        {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
+        <div class="col-12">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Product Name:</dt>
+                        <dd class="col-sm-3">{{hardware.name}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Asset Type:</dt>
+                        <dd class="col-sm-3">{{hardware.asset_type}}</dd>
+                    </dl>                    
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Asset Category:</dt>
+                        <dd class="col-sm-3">{{hardware.category}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Asset Barcode:</dt>
+                        <dd class="col-sm-3">{{hardware.barcode}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Asset Serial No:</dt>
+                        <dd class="col-sm-3">{{hardware.serial}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Product status:</dt>
+                        <dd class="col-sm-3">{{hardware.status}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Product location:</dt>
+                        <dd class="col-sm-3">{{hardware.location}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Product Assigned To:</dt>
+                        <dd class="col-sm-3">{{hardware.assigned_to}}</dd>
+                    </dl>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Vendor Name:</dt>
+                        <dd class="col-sm-3">{{hardware.vendor}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Purchased On:</dt>
+                        <dd class="col-sm-3">{{hardware.purchased_on}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Warranty Expiry Date:</dt>
+                        <dd class="col-sm-3">{{hardware.warranty_expiry}}</dd>
+                    </dl>
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Product Cost:</dt>
+                        <dd class="col-sm-3">{{hardware.cost}}</dd>
+                    </dl>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <hr>
@@ -117,33 +174,34 @@
 <br>
 <div class="card">
     <div class="card-body">
-<table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                    
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Software Type</th>
-        <th>Purchased On</th>
-        <th>Expiry</th>
+        <table id="datatable" class="table table-bordered dt-responsive nowrap"
+            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Software Type</th>
+                    <th>Purchased On</th>
+                    <th>Expiry</th>
 
 
-        
-    </tr>
-    </thead>
+
+                </tr>
+            </thead>
 
 
-    <tbody>
-        {% for software in software  %}
-    <tr>
-        <td>{{software.name}}</td>
-        <td>{{software.softwaretype}}</td>
-        <td>{{software.purchased_on}}</td>
-        <td>{{software.expiry}}</td>
+            <tbody>
+                {% for software in software %}
+                <tr>
+                    <td>{{software.name}}</td>
+                    <td>{{software.softwaretype}}</td>
+                    <td>{{software.purchased_on}}</td>
+                    <td>{{software.expiry}}</td>
 
-    </tr>
+                </tr>
 
-    {% endfor %}
-    </tbody>
-</table>
+                {% endfor %}
+            </tbody>
+        </table>
 
-{% endblock body %}
+        {% endblock body %}
