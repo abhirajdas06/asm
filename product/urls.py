@@ -3,7 +3,7 @@ from users import views
 from product import views
 
 from .views import (SoftwareCreateView, SoftwareListView,
-                    HardwareCreateView, HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,HardwareDetailView)
+                    HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,HardwareDetailView)
 
 urlpatterns = [
     path('software', SoftwareCreateView.as_view(), name="SoftwareCreate"),
@@ -11,7 +11,7 @@ urlpatterns = [
     path('software/update/<int:pk>', SoftwareUpdateView.as_view(), name="SoftwareUpdate"),
     
     
-    path('hardware', HardwareCreateView.as_view(), name="HardwareCreate"),
+    path('hardware', views.HardwareCreateView, name="HardwareCreate"),
     path('hardware_list', HardwareListView.as_view(), name="HardwareList"),
     path('hardware/update/<int:pk>', HardwareUpdateView.as_view(), name="HardwareUpdate"),
     # path('hardware/detail/<int:pk>', HardwareDetailView.as_view(), name="HardwareDetail"),

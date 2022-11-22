@@ -2,7 +2,7 @@ from django.db import models
 from users.models import User
 import datetime
 from master.models import (Vendor, Location,
-                            Category,  Brand, SoftwareType)
+                            Category,  Branch, SoftwareType)
 
 
 # SOFTWARE PRODUCT
@@ -25,7 +25,7 @@ class Hardware(models.Model):
     # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # assettype=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='asset_type1')
-    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50,blank=True)
+    # asset_type=models.CharField(max_length=50,blank=True)
     # category = models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
     category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True)
     barcode = models.CharField(max_length=50)
@@ -36,6 +36,7 @@ class Hardware(models.Model):
     tpm_expiry = models.DateField(auto_now=False, auto_now_add=False)
     status = models.CharField(max_length=30, choices=(
         ('working', 'working'), ('damaged', 'damaged')))
+    branch= models.ForeignKey(Branch,on_delete=models.PROTECT,null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT,null=True)
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
     cost=models.PositiveIntegerField(blank=True)
@@ -50,7 +51,12 @@ class Hardware(models.Model):
     #         # # print(self.subcategory)
     #         # self.brand.queryset = Brand.objects.none()
   
-    
+    def asset(self):
+        
+        asset_type=Category.objects.filter(category=self.category)
+        return asset_type
+        
+        
     # def remaining_days(self):
     #     remaining_days = (self.warranty_expiry - self.purchased_on).days
         
