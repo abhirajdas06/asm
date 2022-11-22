@@ -25,7 +25,7 @@ class Hardware(models.Model):
     # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # assettype=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='asset_type1')
-    # asset_type=models.CharField(max_length=50,blank=True)
+    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50,blank=True)
     # category = models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
     category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True)
     barcode = models.CharField(max_length=50)
