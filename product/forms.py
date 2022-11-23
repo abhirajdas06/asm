@@ -17,7 +17,7 @@ class SoftwareForm(forms.ModelForm):
 class HardwareCreateForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',	 'category',	'barcode',	'serial',	'vendor','branch','cost',
+        fields = ['name',	 'category','asset_type',	'barcode',	'serial',	'vendor','branch','cost',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
@@ -28,18 +28,24 @@ class HardwareCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
             
             super().__init__(*args, **kwargs)
-            self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
+            # filter(location_type='Asset Location')
+            self.fields['location'].queryset = Location.objects.none()
+            self.fields['category'].queryset = Category.objects.filter(asset_type='IT Assets')
             
-                    
-    #         if 'category' in self.data:
-    #             try:
-    #                 category_id = int(self.data.get('category'))
-    #                 self.fields['category'].queryset = Category.objects.filter(category_id=category_id).order_by('name')
-    #             except (ValueError, TypeError):
-    #                 pass  # invalid input from the client; ignore and fallback to empty City queryset
-    #         elif self.instance.pk:
-    #             self.fields['subcategory'].queryset = self.instance.category_set.order_by('name')
 
+                    
+            if 'branch' in self.data:
+                try:
+                    
+                    branch_id = int(self.data.get('branch'))
+                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                self.fields['location'].queryset = self.instance.category_set.order_by('location')
+   
+                    
+    
 class HardwareUpdateForm(forms.ModelForm):
     class Meta:
         model = Hardware

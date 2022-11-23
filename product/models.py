@@ -25,7 +25,7 @@ class Hardware(models.Model):
     # brand = models.ForeignKey(Brand, on_delete=models.PROTECT)
     # category = models.ForeignKey(Category, on_delete=models.PROTECT)
     # assettype=models.ForeignKey(Category,on_delete=models.PROTECT,null=True, related_name='asset_type1')
-    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50,blank=True)
+    asset_type=models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50,blank=True,default="IT Assets")
     # category = models.CharField(choices= (('IT Assets', 'IT Assets'),('Non IT Assets', 'Non IT Assets')),max_length=50)
     category = models.ForeignKey(Category, on_delete=models.PROTECT,null=True)
     barcode = models.CharField(max_length=50)
@@ -51,10 +51,10 @@ class Hardware(models.Model):
     #         # # print(self.subcategory)
     #         # self.brand.queryset = Brand.objects.none()
   
-    def asset(self):
+    # def asset(self):
         
-        asset_type=Category.objects.filter(category=self.category)
-        return asset_type
+    #     asset_type=Category.objects.filter(category=self.category)
+    #     return asset_type
         
         
     # def remaining_days(self):

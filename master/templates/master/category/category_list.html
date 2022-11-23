@@ -40,9 +40,8 @@
                     <tr>
                         <th>Sr No</th>
                         <th>Category</th>
+                        <th>Asset Type</th>
                         <th>Action</th>
-
-                        
                     </tr>
                     </thead>
 
@@ -52,6 +51,7 @@
                     <tr>
                         <td>{{category.pk}}</td>
                         <td>{{category.category}}</td>
+                        <td>{{category.asset_type}}</td>
                         <td>
                             <a href="{% url 'CategoryUpdate' category.pk %}">
                                 <button

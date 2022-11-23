@@ -196,6 +196,14 @@ def load_location(request):
     return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
 
 
+
+@login_required
+def load_emp_location(request):
+    branch_id = request.GET.get('branch_id')
+    location = Location.objects.filter(branch_id=branch_id).filter(location_type='Asset Location')
+    return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
+
+
     
     
     
