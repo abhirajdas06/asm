@@ -35,5 +35,6 @@
             "statusBarItem.remoteBackground": "#388E3C"
         },
         "minimap.background": "#00000000"
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic"
 }

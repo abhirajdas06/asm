@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import get_object_or_404, render, reverse, redirect
+from django.shortcuts import get_object_or_404, render, reverse, redirect    # type: ignore
 from django.views import generic
 from django.contrib import messages
 from users.models import (User, Company,Location)
@@ -40,7 +40,7 @@ class UserDetailView(generic.DetailView):
                         ).get_context_data(*args, **kwargs)
         profile = get_object_or_404(User, id=self.kwargs['pk'])
 
-        context[profile] = profile
+        # context[profile] = profile
         return context
 
 
@@ -83,9 +83,7 @@ def LogoutUser(request):
     return redirect('Login')
 
 
-@method_decorator(login_required, name='dispatch')
-class Dashboard(generic.TemplateView):
-    template_name = "dashboard/dashboard.html"
+
 
 
 @login_required
@@ -95,8 +93,8 @@ def load_emp_location(request):
     return render(request, 'user/location_dropdown_list.html', {'location': location})
 
 def Dashboard(request):
-    hardware = Hardware.objects.all()
-    hardware_count =hardware.count()
+    it_asset = Hardware.objects.filter(category='IT Assets')
+    it_asset_count =it_asset.count()
     software = Software.objects.all()
     software_count =software.count()
     in_stock = Hardware.objects.exclude(assigned_to__id = None)
@@ -105,11 +103,11 @@ def Dashboard(request):
     assign_count =assign.count()
     context = {
          'in_stock' : in_stock,
-         'hardware' : hardware,
+         'it_asset' : it_asset,
          'software' : software,
          'assign' : assign,
          'in_stock_count' : in_stock_count,
-         'hardware_count' : hardware_count,
+         'it_asset_count' : it_asset_count,
          'software_count' : software_count,
          'assign_count' : assign_count,
      }

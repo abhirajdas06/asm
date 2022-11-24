@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, reverse, redirect, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, reverse, redirect, HttpResponseRedirect  # type: ignore
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
