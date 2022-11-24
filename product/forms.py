@@ -79,11 +79,6 @@ class HardwareAssignForm(forms.ModelForm):
             if 'assigned_to' in self.data:
                 try:
                     location_id = int(self.data.get('assigned_to'))
-                    # user_id=User.objects.filter(id=location_id)
-                    # print(user_id)
-                    # user=User.objects.raw("Select users_user.location_id From prodcut_hardware users_user WHERE product_hardware.assigned_to_id =%s",[user_id])
-                    # print(user)
-                    # self.fields['location'].queryset = Location.objects.filter(location=location_id)
                     self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
                 except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
@@ -112,3 +107,8 @@ class HardwareDetailForm(forms.ModelForm):
         #     "status": forms.TextInput(attrs={'readonly':True}),
         #     "location": forms.TextInput(attrs={'readonly':True}),
         # }        
+        
+class HardwareReturnForm(forms.ModelForm):
+    class Meta:
+        model = Hardware
+        fields = [	'location']

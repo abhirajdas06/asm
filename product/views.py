@@ -70,7 +70,7 @@ def HardwareCreateView(request):
 @method_decorator(login_required, name='dispatch')
 class HardwareListView(generic.ListView):
     template_name = "product/hardware/hardware_list.html"
-    queryset = Hardware.objects.all()
+    queryset = Hardware.objects.all().exclude(status='disposed')
 
     context_object_name = "hardware"
     
@@ -133,16 +133,29 @@ class HardwareAssignView(generic.UpdateView):
 @login_required
 def HardwareReturn(request,pk):
     
-#     queryset = Hardware.objects.raw( Hardware
-# SET assigned_to = None
-# WHERE id=pk;)
-
     Hardware.objects.filter(id=pk).update(assigned_to=None)
-    
     # q = Hardware.objects.get(id=pk)
     # q.assigned_to = None
     # q.save()
     return redirect ("HardwareDetail",(pk))
+    form = HardwareReturnForm(request.POST or None, instance=pk)  
+    if form.is_valid():
+        
+        form.save()
+        
+    context ={
+        "form": form,
+       
+        
+    }
+    return render(request,'product/hardware/hardware_detail.html',context)
+
+
+
+
+
+
+
 
 # HARDWARE PRODUCT Detailview
 # class HardwareDetailView(generic.DetailView):
@@ -155,17 +168,12 @@ def HardwareReturn(request,pk):
 def HardwareDetailView(request,pk):
     pkid= Hardware.objects.get(id=pk)
     soft= Software.objects.filter(installed_on=pkid)
+    
     # locate=Location.objects.filter(location=pkid)
     # locate= Location.objects.filter(=pkid)
+    
     form = HardwareAssignForm(request.POST or None, instance=pkid)  
     if form.is_valid():
-        # user=form.cleaned_data['assigned_to']
-        # if user is not None:
-        #     userlocation= User.objects.raw("SELECT users_user.location_id from users_user WHERE users_user.username=%s ",[user])
-            
-        #     print (userlocation)
-        #     pkid.location= Hardware.objects.filter(id=pk).update(location=userlocation)
-        #     pkid.save()
         form.save()
         # return HttpResponseRedirect("/"+pkid)
     context ={

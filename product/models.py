@@ -35,7 +35,7 @@ class Hardware(models.Model):
     warranty_expiry = models.DateField(auto_now=False, auto_now_add=False)
     tpm_expiry = models.DateField(auto_now=False, auto_now_add=False)
     status = models.CharField(max_length=30, choices=(
-        ('working', 'working'), ('damaged', 'damaged')))
+        ('working', 'working'), ('damaged', 'damaged'),('disposed', 'disposed')))
     branch= models.ForeignKey(Branch,on_delete=models.PROTECT,null=True)
     location = models.ForeignKey(Location,on_delete=models.PROTECT,null=True)
     assigned_to = models.ForeignKey(User, null=True ,blank=True, on_delete=models.PROTECT)
