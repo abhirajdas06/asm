@@ -112,3 +112,8 @@ class HardwareReturnForm(forms.ModelForm):
     class Meta:
         model = Hardware
         fields = [	'location']
+    
+    def __init__(self, *args, **kwargs):
+        
+        super().__init__(*args, **kwargs)
+        self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')

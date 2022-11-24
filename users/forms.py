@@ -13,18 +13,18 @@ class CreateUser(UserCreationForm):
         
     def __init__(self, *args, **kwargs):
             
-            super().__init__(*args, **kwargs)
-            self.fields['location'].queryset = Location.objects.none()
-                    
-            if 'branch' in self.data:
-                try:
-                    
-                    branch_id = int(self.data.get('branch'))
-                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
-                except (ValueError, TypeError):
-                    pass  # invalid input from the client; ignore and fallback to empty City queryset
-            elif self.instance.pk:
-                self.fields['location'].queryset = self.instance.category_set.order_by('location')
+        super().__init__(*args, **kwargs)
+        self.fields['location'].queryset = Location.objects.none()
+                
+        if 'branch' in self.data:
+            try:
+                branch_id = int(self.data.get('branch'))
+                self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).filter(location_type='Employee Location').order_by('location')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            pass
+            # self.fields['location'].queryset = self.instance.category_set.order_by('location')
 
 #USER UPDATE FORM
 class UpdateUser(forms.ModelForm):
