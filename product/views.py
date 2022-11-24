@@ -204,6 +204,22 @@ def load_emp_location(request):
     return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
 
 
+@login_required
+def load_assignuser_location(request):
+    userloc_id = request.GET.get('userlocation_id')
+    # user=User.objects.raw("Select users_user.location_id From prodcut_hardware ,users_user WHERE product_hardware.assigned_to_id =%s",[userloc_id])
+    user=User.objects.filter(id=userloc_id)
+    print(user)
+    location = Location.objects.filter(user__in=User.objects.filter(id=userloc_id))
+    print(location)
+    # .filter(location_type='Employee Location')
+    # user_id=User.objects.filter(id=location_id)
+    # print(user_id)
+    # user=User.objects.raw("Select users_user.location_id From prodcut_hardware users_user WHERE product_hardware.assigned_to_id =%s",[user_id])
+    # print(user)
+    # self.fields['location'].queryset = Location.objects.filter(location=user)
+    return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
+
     
     
     

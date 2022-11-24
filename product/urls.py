@@ -27,6 +27,9 @@ urlpatterns = [
     path('ajax/load-category', views.load_category, name='ajax_load_category'), # AJAX
     path('ajax/load-location', views.load_location, name='ajax_load_location'), # AJAX
     path('ajax/load-emp-location', views.load_emp_location, name='ajax_load_emplocation'), # AJAX
+    path('ajax/load-assignuser-location', views.load_assignuser_location, name='ajax_load_assignuserlocation'), # AJAX
+    
+    
     
     
 ]

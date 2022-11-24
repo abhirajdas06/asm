@@ -10,9 +10,9 @@
                 </div>
                 <div class="modal-body">
                     <h5>Assign {{hardware.name}}</h5>
-                    {% comment %} id="HardwareCreateForm" data-category-url="{% url 'ajax_load_location' %}" {% endcomment %}
+                    {% comment %} id="HardwareCreateForm" data-category-url="{% url 'ajax_load_assignuserlocation' %}" {% endcomment %}
                     
-                    <form method="post" id="HardwareCreateForm" data-category-url="{% url 'ajax_load_location' %}" >
+                    <form method="post" id="HardwareAssignForm" data-category-url="{% url 'ajax_load_assignuserlocation' %}" >
                         {% csrf_token %}
     
                         {% comment %} <div class="form-row">
@@ -67,11 +67,11 @@
                              {% endcomment %}
                         <div class="form-group">
                             {{form.location|as_crispy_field}}
-                                           </div>
+                                           </div> 
                                       
     
          
-                        <div class="form-group col-6">
+                         <div class="form-group col-6">
                             {{form.assigned_to|as_crispy_field}}
     
                         </div>
@@ -88,9 +88,9 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <script type="text/javascript">
+    <!--script type="text/javascript">
 // In your Javascript (external .js resource or <script> tag)
-    $(document).ready(function () {
+    $(document).change(function () {
         
         $('#id_assigned_to').change(function () {
             
@@ -126,5 +126,46 @@
 
         });
 });
+
+</script-->
+
+
+<script type="text/javascript">
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function () {
+
+        $('#id_assigned_to').change(function () {
+
+            const url = $('#HardwareAssignForm');  // get the url of the `load_cities` view
+
+
+            const locationId = $(this).val();  // get the selected country ID from the HTML input
+
+            console.log("working")
+            $.ajax({                                       // initialize an AJAX request
+                url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                data: {
+                    'userlocation_id': locationId       // add the country id to the GET parameters
+                },
+
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                    console.log("working")
+                    $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                    console.log("working")
+                    // {% comment %}                    
+
+                    // let html_data = '<option value="">---------</option>';
+                    // data.forEach(function (city) {
+                    //     html_data += `<option value="${city.id}">${city.name}</option>`
+                    // });
+                    // console.log(html_data);
+                    // $('#id_city').html(html_data); {% endcomment %}
+
+
+                }
+            });
+
+        });
+    });
 
 </script>
