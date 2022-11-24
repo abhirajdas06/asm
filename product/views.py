@@ -6,7 +6,7 @@ from django.contrib import messages
 from .models import (Software, Hardware)
 from users.models import User
 from master.models import Category,Location
-from .forms import (SoftwareForm, HardwareUpdateForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
+from .forms import (SoftwareForm, HardwareUpdateForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm, HardwareReturnForm)
 
 
 # SOFTWARE PRODUCT CREATE
@@ -173,11 +173,15 @@ def HardwareDetailView(request,pk):
     # locate= Location.objects.filter(=pkid)
     
     form = HardwareAssignForm(request.POST or None, instance=pkid)  
+    form2 = HardwareReturnForm(request.POST or None, instance=pkid)  
     if form.is_valid():
         form.save()
+    if form2.is_valid():
+        form2.save()
         # return HttpResponseRedirect("/"+pkid)
     context ={
         "form": form,
+        "form2": form2,
         "hardware":pkid,
         "software":soft,
         # "location":locate,
