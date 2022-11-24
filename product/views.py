@@ -6,7 +6,7 @@ from django.contrib import messages
 from .models import (Software, Hardware)
 from users.models import User
 from master.models import Category,Location
-from .forms import (SoftwareForm, HardwareForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
+from .forms import (SoftwareForm, HardwareUpdateForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm)
 
 
 # SOFTWARE PRODUCT CREATE
@@ -41,14 +41,29 @@ class SoftwareUpdateView(generic.UpdateView):
 
 
 # HARDWARE PRODUCT CREATE
-@method_decorator(login_required, name='dispatch')
-class HardwareCreateView(generic.CreateView):
-    template_name = 'product/hardware/hardware_create.html'
-    form_class = HardwareCreateForm
+# @method_decorator(login_required, name='dispatch')
+# class HardwareCreateView(generic.CreateView):
+#     template_name = 'product/hardware/hardware_create.html'
+#     form_class = HardwareCreateForm
 
-    def get_success_url(self):
-        messages.success(self.request, 'Hardware Created Sucessfully')
-        return reverse("HardwareList")
+#     def get_success_url(self):
+#         messages.success(self.request, 'Hardware Created Sucessfully')
+#         return reverse("HardwareList")
+
+
+@login_required
+def HardwareCreateView(request):
+    form = HardwareCreateForm(request.POST or None)  
+    if form.is_valid():
+        # form.asset_type= Hardware.objects.update(asset_type='IT Assets')
+        form.save()
+        return redirect("HardwareList")
+    context={
+        "form":form
+    }
+        
+    return render(request,'product/hardware/hardware_create.html',context)
+    
 
 
 # HARDWARE PRODUCT LIST
@@ -63,7 +78,7 @@ class HardwareListView(generic.ListView):
 @method_decorator(login_required, name='dispatch')
 class HardwareUpdateView(generic.UpdateView):
     template_name = "product/hardware/hardware_update.html"
-    form_class=HardwareForm
+    form_class=HardwareUpdateForm
     queryset = Hardware.objects.all()
     context_object_name = "hardware"
     
@@ -140,14 +155,24 @@ def HardwareReturn(request,pk):
 def HardwareDetailView(request,pk):
     pkid= Hardware.objects.get(id=pk)
     soft= Software.objects.filter(installed_on=pkid)
+    # locate=Location.objects.filter(location=pkid)
+    # locate= Location.objects.filter(=pkid)
     form = HardwareAssignForm(request.POST or None, instance=pkid)  
     if form.is_valid():
+        # user=form.cleaned_data['assigned_to']
+        # if user is not None:
+        #     userlocation= User.objects.raw("SELECT users_user.location_id from users_user WHERE users_user.username=%s ",[user])
+            
+        #     print (userlocation)
+        #     pkid.location= Hardware.objects.filter(id=pk).update(location=userlocation)
+        #     pkid.save()
         form.save()
         # return HttpResponseRedirect("/"+pkid)
     context ={
         "form": form,
         "hardware":pkid,
         "software":soft,
+        # "location":locate,
         
     }
     return render(request,'product/hardware/hardware_detail.html',context)
@@ -162,10 +187,38 @@ def load_category(request):
 def load_location(request):
     user_id = request.GET.get('id_assigned_to')
     print(user_id)
-    location=User.objects.filter(location=user_id)
+    
+    # location=User.objects.raw("SELECT users_user.id,users_user.location_id  From users_user WHERE users_user.id=%s ",[user_id])
+  
+    # useloc=Location.objects.filter(id=location)
+    location= Location.objects.all()
     print (location)
     return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
 
+
+
+@login_required
+def load_emp_location(request):
+    branch_id = request.GET.get('branch_id')
+    location = Location.objects.filter(branch_id=branch_id).filter(location_type='Asset Location')
+    return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
+
+
+@login_required
+def load_assignuser_location(request):
+    userloc_id = request.GET.get('userlocation_id')
+    # user=User.objects.raw("Select users_user.location_id From prodcut_hardware ,users_user WHERE product_hardware.assigned_to_id =%s",[userloc_id])
+    user=User.objects.filter(id=userloc_id)
+    print(user)
+    location = Location.objects.filter(user__in=User.objects.filter(id=userloc_id))
+    print(location)
+    # .filter(location_type='Employee Location')
+    # user_id=User.objects.filter(id=location_id)
+    # print(user_id)
+    # user=User.objects.raw("Select users_user.location_id From prodcut_hardware users_user WHERE product_hardware.assigned_to_id =%s",[user_id])
+    # print(user)
+    # self.fields['location'].queryset = Location.objects.filter(location=user)
+    return render(request, 'product/hardware/location_dropdown_list.html', {'location': location})
 
     
     

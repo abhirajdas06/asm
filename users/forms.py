@@ -18,6 +18,7 @@ class CreateUser(UserCreationForm):
                     
             if 'branch' in self.data:
                 try:
+                    
                     branch_id = int(self.data.get('branch'))
                     self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
                 except (ValueError, TypeError):
@@ -31,7 +32,13 @@ class UpdateUser(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'employee_code', 'email', 'branch',
                   'user_type', 'office_contact', 'contact', 'location', 'active']
+        
+    def __init__(self, *args, **kwargs):
+            
+            super().__init__(*args, **kwargs)
     
+            self.fields['location'].queryset = Location.objects.filter(location_type='Employee Location')
+             
 
 #COMPANY MASTER FORM
 class CompanyForm(forms.ModelForm):
