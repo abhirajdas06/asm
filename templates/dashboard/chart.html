@@ -1,0 +1,32 @@
+<script>
+    $(document).ready(function () {
+        $('table.display').DataTable();
+    });
+    
+const ctx = document.getElementById('myChart');
+var xValues = ["IT Asset", "Non IT Asset", "Software"];
+var yValues = [{{it_asset_count}}, {{non_it_asset_count}},{{software_count}},];
+var barColors = [
+"#4c70da",
+"#65cca9",
+"#7daafb",
+];
+
+new Chart("myChart", {
+type: "pie",
+data: {
+  labels: xValues,
+  datasets: [{
+    backgroundColor: barColors,
+    data: yValues
+  }]
+},
+options: {
+  title: {
+    display: true,
+    text: "World Wide Wine Production 2018"
+  }
+}
+});
+
+</script>

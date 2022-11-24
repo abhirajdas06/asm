@@ -97,23 +97,35 @@ def load_emp_location(request):
 
 
 def Dashboard(request):
-    it_asset = Hardware.objects.filter(category='IT Assets')
-    it_asset_count =it_asset.count()
+    it_asset = Hardware.objects.filter(asset_type='IT Assets')
+    it_asset_count =it_asset.count()    
+    non_it_asset = Hardware.objects.filter(asset_type='Non IT Assets')
+    non_it_asset_count =non_it_asset.count()
     software = Software.objects.all()
     software_count =software.count()
+    employee = User.objects.all()
+    employee_count =employee.count()
     in_stock = Hardware.objects.exclude(assigned_to__id = None)
     in_stock_count =in_stock.count()    
     assign = Hardware.objects.filter(assigned_to__id = None)
     assign_count =assign.count()
+    working = Hardware.objects.filter(status = 'working')
+    working_count =working.count()
     context = {
          'in_stock' : in_stock,
          'it_asset' : it_asset,
+         'non_it_asset' : non_it_asset,
          'software' : software,
          'assign' : assign,
+         'employee' : employee,
+         'working' : working,
          'in_stock_count' : in_stock_count,
          'it_asset_count' : it_asset_count,
+         'non_it_asset_count' : non_it_asset_count,
          'software_count' : software_count,
          'assign_count' : assign_count,
+         'employee_count' : employee_count,
+         'working_count' : working_count,
      }
     context["in_stock"] = Hardware.objects.exclude(assigned_to__id = None)
     context["assign"] = Hardware.objects.filter(assigned_to__id = None)
