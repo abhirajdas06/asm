@@ -44,12 +44,13 @@ var yValues1 = [{% for data in year_count  %}{{data}},{% endfor %}];
 var barColors1 = "#00a399";
 var d =   Math.max({% for data in year_count  %}{{data}},{% endfor %})
 new Chart("bargraph", {
-  type: "bar",
+  type: "line",
   data: {
     labels: xValues1,
     datasets: [{
-      backgroundColor: barColors1,
-      data: yValues1
+      borderColor: barColors1,
+      data: yValues1,
+      fill: false
     }]
   },
   
@@ -97,7 +98,7 @@ new Chart("softbargraph", {
   data: {
     labels: xValues1,
     datasets: [{
-      backgroundColor: barColors1,
+      borderColor: "#3e95cd",
       data: yValues1,
       fill: false
     }]
