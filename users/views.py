@@ -89,9 +89,10 @@ def LogoutUser(request):
 
 
 @login_required
-def load_emp_location(request):
+def load_empuser_location(request):
     branch_id = request.GET.get('branch_id')
     location = Location.objects.filter(branch_id=branch_id).filter(location_type='Employee Location')
+    print(location)
     return render(request, 'user/location_dropdown_list.html', {'location': location})
 
 

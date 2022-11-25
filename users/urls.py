@@ -17,5 +17,5 @@ urlpatterns = [
     
     path('<int:pk>', UserDetailView.as_view(), name="UserDetail"),
     
-    path('ajax/load-emp-location', views.load_emp_location, name='ajax_load_emplocation'), # AJAX
+    path('ajax/load-emp-location', views.load_empuser_location, name='ajax_load_empuserlocation'), # AJAX 
 ]

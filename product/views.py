@@ -132,23 +132,23 @@ class HardwareAssignView(generic.UpdateView):
 # HARDWARE PRODUCT Return in Stock
 @login_required
 def HardwareReturn(request,pk):
-    
-    Hardware.objects.filter(id=pk).update(assigned_to=None)
-    # q = Hardware.objects.get(id=pk)
-    # q.assigned_to = None
-    # q.save()
-    return redirect ("HardwareDetail",(pk))
-    form = HardwareReturnForm(request.POST or None, instance=pk)  
-    if form.is_valid():
+    pass
+    # Hardware.objects.filter(id=pk).update(assigned_to=None)
+    # # q = Hardware.objects.get(id=pk)
+    # # q.assigned_to = None
+    # # q.save()
+    # return redirect ("HardwareDetail",(pk))
+    # form = HardwareReturnForm(request.POST or None, instance=pk)  
+    # if form.is_valid():
         
-        form.save()
+    #     form.save()
         
-    context ={
-        "form": form,
+    # context ={
+    #     "form": form,
        
         
-    }
-    return render(request,'product/hardware/hardware_detail.html',context)
+    # }
+    # return render(request,'product/hardware/hardware_detail.html',context)
 
 
 
