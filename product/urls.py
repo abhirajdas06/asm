@@ -18,7 +18,7 @@ urlpatterns = [
     path('hardware/detail/<int:pk>', views.HardwareDetailView, name="HardwareDetail"),
     path('hardware/assign/<int:pk>', HardwareAssignView.as_view(), name="HardwareAssign"),
     # path('hardware/return/<int:pk>', HardwareReturnView.as_view(), name="HardwareReturn"),
-    path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
+    # path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
     
     
     path('assignassets', views.AssignedView, name="AssignAsset"),

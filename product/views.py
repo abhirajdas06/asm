@@ -130,9 +130,9 @@ class HardwareAssignView(generic.UpdateView):
         return reverse("AssignAsset")
 
 # HARDWARE PRODUCT Return in Stock
-@login_required
-def HardwareReturn(request,pk):
-    pass
+# @login_required
+# def HardwareReturn(request,pk):
+#     pass
     # Hardware.objects.filter(id=pk).update(assigned_to=None)
     # # q = Hardware.objects.get(id=pk)
     # # q.assigned_to = None
