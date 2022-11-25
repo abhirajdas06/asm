@@ -4,6 +4,11 @@
     });
     
 
+
+
+{% comment %} Asset Type Pie Chat {% endcomment %}
+  
+  
 var xValues = ['IT Assets', 'Non IT Assets', 'Software'];
 var yValues = [{{it_asset_count}}, {{non_it_asset_count}},{{software_count}},];
 var barColors = [
@@ -30,8 +35,11 @@ options: {
 });
 
 
+{% comment %} Hardware Annually Purchase Bar Graph {% endcomment %}
+
+
 const autocolors = window['chartjs-plugin-autocolors'];
-var xValues1 = [{% for data in year %}{{data}},{% endfor %}];
+var xValues1 = [{% for data in year %}'{{data}}',{% endfor %}];
 var yValues1 = [{% for data in year_count  %}{{data}},{% endfor %}];
 var barColors1 = "#00a399";
 var d =   Math.max({% for data in year_count  %}{{data}},{% endfor %})
@@ -69,7 +77,7 @@ new Chart("bargraph", {
     legend: {display: false},
     title: {
       display: true,
-      text: "Purchase History (Annually)"
+      text: "Hardware Annually Purchase Report "
     }
 
   }
@@ -77,17 +85,21 @@ new Chart("bargraph", {
 
 
 
-var xValues1 = [{% for data in year %}{{data}},{% endfor %}];
-var yValues1 = [{% for data in year_count  %}{{data}},{% endfor %}];
-var barColors1 = "#5DADE2";
-var d =   Math.max({% for data in year_count  %}{{data}},{% endfor %})
-new Chart("itbar", {
-  type: "bar",
+
+{% comment %} Software Annually Purchase Bar Graph {% endcomment %}
+
+var xValues1 = [{% for data in soft_year %}'{{data}}',{% endfor %}];
+var yValues1 = [{% for data in soft_year_count  %}{{data}},{% endfor %}];
+var barColors1 = "#7DCEA0";
+var d =   Math.max({% for data in soft_year_count  %}{{data}},{% endfor %})
+new Chart("softbargraph", {
+  type: "line",
   data: {
     labels: xValues1,
     datasets: [{
       backgroundColor: barColors1,
-      data: yValues1
+      data: yValues1,
+      fill: false
     }]
   },
   
@@ -115,11 +127,105 @@ new Chart("itbar", {
     legend: {display: false},
     title: {
       display: true,
-      text: "Purchase History (Annually)"
+      text: "Software Annually Purchase Report"
+    }
+
+  }
+});
+
+
+
+{% comment %} IT Assets Bar Graph {% endcomment %}
+
+
+var xValues2 = [{% for data in it_asset_cat %}'{{data}}',{% endfor %}];
+var yValues2 = [{% for data in it_asset_cat_count %}{{data}},{% endfor %}];
+var barColors2 = "#5DADE2";
+var d =   Math.max({% for data in it_asset_cat_count %}{{data}},{% endfor %})
+new Chart("itbar", {
+  type: "bar",
+  data: {
+    labels: xValues2,
+    datasets: [{
+      backgroundColor: barColors2,
+      data: yValues2
+    }]
+  },
+  
+  options: {
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              userCallback: function(label, index, labels) {
+                  // when the floored value is the same as the value we have a whole number
+                  if (Math.floor(label) === label) {
+                      return label;
+                  }
+                 
+                  
+
+              }, 
+              
+              suggestedMax:d+5
+              
+          }
+          
+      }],
+  },
+    legend: {display: false},
+    title: {
+      display: true,
+      text: " IT Assets"
     }
   }
 });
 
+{% comment %} IT Assets Bar Graph {% endcomment %}
+
+
+var xValues2 = [{% for data in non_it_asset_cat %}'{{data}}',{% endfor %}];
+var yValues2 = [{% for data in non_it_asset_cat_count %}{{data}},{% endfor %}];
+var barColors2 = "#5DADE2";
+var d =   Math.max({% for data in it_asset_cat_count %}{{data}},{% endfor %})
+new Chart("nonitbar", {
+  type: "bar",
+  data: {
+    labels: xValues2,
+    datasets: [{
+      backgroundColor: barColors2,
+      data: yValues2
+    }]
+  },
+  
+  options: {
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              userCallback: function(label, index, labels) {
+                  // when the floored value is the same as the value we have a whole number
+                  if (Math.floor(label) === label) {
+                      return label;
+                  }
+                 
+                  
+
+              }, 
+              
+              suggestedMax:d+5
+              
+          }
+          
+      }],
+  },
+    legend: {display: false},
+    title: {
+      display: true,
+      text: " Non IT Assets"
+    }
+  }
+});
 
 
 </script>

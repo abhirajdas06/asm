@@ -7,6 +7,7 @@ from .forms import (CreateUser, UpdateUser, CompanyForm)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from product.models import Hardware, Software
+from master.models import Category
 from django.db.models import Count
 
 
@@ -116,6 +117,18 @@ def Dashboard(request):
     working_count =working.count()
     year = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('purchased_on__year', flat=True)
     year_count = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('total', flat=True)
+    soft_year = Software.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('purchased_on__year', flat=True)
+    soft_year_count = Software.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('total', flat=True)
+
+    
+    it_asset_cat1 = Hardware.objects.filter(asset_type='IT Assets').values('category').annotate(total=Count('id')).values_list('category', flat=True)
+    it_asset_cat = Category.objects.filter(id__in=it_asset_cat1)
+    it_asset_cat_count = Hardware.objects.filter(asset_type='IT Assets').values('category').annotate(total=Count('id')).values_list('total', flat=True)
+
+    non_it_asset_cat1 = Hardware.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('category', flat=True)
+    non_it_asset_cat = Category.objects.filter(id__in=non_it_asset_cat1)
+    non_it_asset_cat_count = Hardware.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('total', flat=True)
+
     context = {
         #DATA
          'in_stock'     : in_stock,
@@ -126,8 +139,14 @@ def Dashboard(request):
          'employee'     : employee,
          'working'      : working,
          'year'         : year,
+         'soft_year'         : soft_year,
+         'it_asset_cat':it_asset_cat,
+         'non_it_asset_cat':non_it_asset_cat,
+         
          
          #COUNT
+         'it_asset_cat_count':it_asset_cat_count,
+         'non_it_asset_cat_count':non_it_asset_cat_count,
          'in_stock_count'       : in_stock_count,
          'it_asset_count'       : it_asset_count,
          'non_it_asset_count'   : non_it_asset_count,
@@ -135,7 +154,8 @@ def Dashboard(request):
          'assign_count'         : assign_count,
          'employee_count'       : employee_count,
          'working_count'        : working_count,
-         'year_count'           : year_count
+         'year_count'           : year_count,
+         'soft_year_count'           : soft_year_count
      }
     context["in_stock"] = Hardware.objects.exclude(assigned_to__id = None)
     context["assign"] = Hardware.objects.filter(assigned_to__id = None)
