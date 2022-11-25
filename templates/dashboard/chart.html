@@ -3,8 +3,8 @@
         $('table.display').DataTable();
     });
     
-const ctx = document.getElementById('myChart');
-var xValues = ["IT Asset", "Non IT Asset", "Software"];
+
+var xValues = ['IT Assets', 'Non IT Assets', 'Software'];
 var yValues = [{{it_asset_count}}, {{non_it_asset_count}},{{software_count}},];
 var barColors = [
 "#4c70da",
@@ -24,9 +24,102 @@ data: {
 options: {
   title: {
     display: true,
-    text: "World Wide Wine Production 2018"
+    text: "Asset Types"
   }
 }
 });
+
+
+const autocolors = window['chartjs-plugin-autocolors'];
+var xValues1 = [{% for data in year %}{{data}},{% endfor %}];
+var yValues1 = [{% for data in year_count  %}{{data}},{% endfor %}];
+var barColors1 = "#00a399";
+var d =   Math.max({% for data in year_count  %}{{data}},{% endfor %})
+new Chart("bargraph", {
+  type: "bar",
+  data: {
+    labels: xValues1,
+    datasets: [{
+      backgroundColor: barColors1,
+      data: yValues1
+    }]
+  },
+  
+  options: {
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              userCallback: function(label, index, labels) {
+                  // when the floored value is the same as the value we have a whole number
+                  if (Math.floor(label) === label) {
+                      return label;
+                  }
+                 
+                  
+
+              }, 
+              
+              suggestedMax:d+5
+              
+          }
+          
+      }],
+  },
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Purchase History (Annually)"
+    }
+
+  }
+});
+
+
+
+var xValues1 = [{% for data in year %}{{data}},{% endfor %}];
+var yValues1 = [{% for data in year_count  %}{{data}},{% endfor %}];
+var barColors1 = "#5DADE2";
+var d =   Math.max({% for data in year_count  %}{{data}},{% endfor %})
+new Chart("itbar", {
+  type: "bar",
+  data: {
+    labels: xValues1,
+    datasets: [{
+      backgroundColor: barColors1,
+      data: yValues1
+    }]
+  },
+  
+  options: {
+    scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero: true,
+              userCallback: function(label, index, labels) {
+                  // when the floored value is the same as the value we have a whole number
+                  if (Math.floor(label) === label) {
+                      return label;
+                  }
+                 
+                  
+
+              }, 
+              
+              suggestedMax:d+5
+              
+          }
+          
+      }],
+  },
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Purchase History (Annually)"
+    }
+  }
+});
+
+
 
 </script>

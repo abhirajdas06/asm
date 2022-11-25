@@ -7,6 +7,8 @@ from .forms import (CreateUser, UpdateUser, CompanyForm)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from product.models import Hardware, Software
+from django.db.models import Count
+
 
 # User Create View
 @method_decorator(login_required, name='dispatch')
@@ -105,27 +107,34 @@ def Dashboard(request):
     software_count =software.count()
     employee = User.objects.all()
     employee_count =employee.count()
-    in_stock = Hardware.objects.exclude(assigned_to__id = None)
+    in_stock = Hardware.objects.filter(assigned_to__id = None)
     in_stock_count =in_stock.count()    
-    assign = Hardware.objects.filter(assigned_to__id = None)
+    assign = Hardware.objects.exclude(assigned_to__id = None)
     assign_count =assign.count()
     working = Hardware.objects.filter(status = 'working')
     working_count =working.count()
+    year = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('purchased_on__year', flat=True)
+    year_count = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('total', flat=True)
     context = {
-         'in_stock' : in_stock,
-         'it_asset' : it_asset,
+        #DATA
+         'in_stock'     : in_stock,
+         'it_asset'     : it_asset,
          'non_it_asset' : non_it_asset,
-         'software' : software,
-         'assign' : assign,
-         'employee' : employee,
-         'working' : working,
-         'in_stock_count' : in_stock_count,
-         'it_asset_count' : it_asset_count,
-         'non_it_asset_count' : non_it_asset_count,
-         'software_count' : software_count,
-         'assign_count' : assign_count,
-         'employee_count' : employee_count,
-         'working_count' : working_count,
+         'software'     : software,
+         'assign'       : assign,
+         'employee'     : employee,
+         'working'      : working,
+         'year'         : year,
+         
+         #COUNT
+         'in_stock_count'       : in_stock_count,
+         'it_asset_count'       : it_asset_count,
+         'non_it_asset_count'   : non_it_asset_count,
+         'software_count'       : software_count,
+         'assign_count'         : assign_count,
+         'employee_count'       : employee_count,
+         'working_count'        : working_count,
+         'year_count'           : year_count
      }
     context["in_stock"] = Hardware.objects.exclude(assigned_to__id = None)
     context["assign"] = Hardware.objects.filter(assigned_to__id = None)
