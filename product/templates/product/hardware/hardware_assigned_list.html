@@ -68,7 +68,7 @@
               <th>Status</th>
               <th>Location</th>
               <th>Assigned To</th>
-              <th>Action</th>
+              {% comment %} <th>Action</th> {% endcomment %}
             </tr>
           </thead>
 
@@ -118,15 +118,12 @@
                 >
               </td>
               {% endcomment %}
-              <td>                                                       
-                <a href=" {% url 'HardwareReturn' hardware.pk %}">
-                  
-                    <button type="button" class="btn btn-sm btn-success">Return in Stock</button>
-                </a>
+              {% comment %} <td>                                                       
+                
                 <a href="{% url 'HardwareDetail' hardware.pk %}">
                     <button type="button" class="btn btn-sm btn-info">View</button>
                 </a>
-            </td>
+            </td> {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>
