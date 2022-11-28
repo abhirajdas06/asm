@@ -59,14 +59,14 @@
 
           {% comment %} <td> <a href="{% url 'UserUpdate' user.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
               edit</button></a></td> {% endcomment %}
-              <td>
+              {% comment %} <td>
                 <a href="{% url 'UserUpdate' user.pk %}">
                   <button class="btn btn-success " type="button"  aria-haspopup="true" aria-expanded="false">
                       Edit 
                   </button>
                 </a>
               
-              </td>
+              </td> {% endcomment %}
       </tr>
     {% endfor %}
     </tbody>
