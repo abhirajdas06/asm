@@ -5,7 +5,7 @@ $(document).ready(function () {
         scrollX:        false,
         scrollCollapse: false,
         lengthChange: !1,
-        buttons: ["copy", "excel", "pdf", "colvis"],
+        buttons: ["copy", "excel", "colvis"],
         
       })
       .buttons()
@@ -50,7 +50,7 @@ $(document).ready(function() {
       ],
       columnDefs: [
           {
-              targets: [-1,-2,-3,-4,-5,-6],
+              targets: [-1,-4,-5,-6],
               visible: false
           }
       ]
@@ -58,7 +58,7 @@ $(document).ready(function() {
 } );
 
 $(document).ready(function() {
-    $('#employee').DataTable( {
+    $('#software').DataTable( {
         dom: 'QBfrtip',
         scrollY:500,
   
@@ -72,7 +72,52 @@ $(document).ready(function() {
         ],
         columnDefs: [
             {
-                targets: [-1,-2,-3,-4,-5,-6],
+                targets: [],
+                visible: false
+            }
+        ]
+    } );
+  } );
+
+  $(document).ready(function() {
+    $('#colvis').DataTable( {
+        dom: 'QBfrtip',
+        scrollY:500,
+  
+        buttons: [
+            {
+                extend: 'colvis',
+                postfixButtons: [ 'colvisRestore' ]
+            }
+            
+            
+        ],
+        columnDefs: [
+            {
+                targets: [],
+                visible: false
+            }
+        ]
+    } );
+  } );
+
+  
+  $(document).ready(function() {
+    $('#vendor').DataTable( {
+        dom: 'QBfrtip',
+        scrollY:500,
+  
+        buttons: [
+            {
+                extend: 'colvis',
+                postfixButtons: [ 'colvisRestore' ]
+            }
+            
+            
+        ],
+        columnDefs: [
+            {
+                targets: [,-4,-3],
                 visible: false
             }
         ]

@@ -34,14 +34,14 @@
 
             <div class="card-body">
 
-                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="colvis" class="table table-striped" >
                     
                     <thead>
                     <tr>
                         <th>Sr No</th>
                         <th>Category</th>
                         <th>Asset Type</th>
-                        <th>Action</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
                     </tr>
                     </thead>
 
@@ -49,10 +49,10 @@
                     <tbody>
                         {% for category in category  %}
                     <tr>
-                        <td>{{category.pk}}</td>
-                        <td>{{category.category}}</td>
+                        <td><a href="{% url 'CategoryUpdate' category.pk %}">{{category.pk}}</a></td>
+                        <td><a href="{% url 'CategoryUpdate' category.pk %}">{{category.category}}</a></td>
                         <td>{{category.asset_type}}</td>
-                        <td>
+                        {% comment %} <td>
                             <a href="{% url 'CategoryUpdate' category.pk %}">
                                 <button
                                   class="btn btn-success"
@@ -64,7 +64,7 @@
                                 </button>
                               </a>
                             
-                           </td>
+                           </td> {% endcomment %}
 
                         
                     </tr>

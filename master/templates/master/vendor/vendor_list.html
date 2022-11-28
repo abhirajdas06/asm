@@ -34,28 +34,27 @@
    
 
         <table
-          id="datatable-buttons"
-          class="table table-bordered dt-responsive nowrap"
-          style="border-collapse: collapse; border-spacing: 0; width: 100%"
+          id="vendor"
+          class="table table-striped" 
         >
           <thead>
             <tr>
               <th>Vendor Name</th>
               <th>Vendor Number</th>
-              <th>Contact Number</th>
+              <th>Office Contact</th>
               <th>Email</th>
               <th>Website</th>
               <th>Address</th>
               <th>Contact Person Name</th>
-              <th>Contact Person Contact</th>
-              <th>Action</th>
+              <th>Point Of Contact</th>
+              {% comment %} <th>Action</th> {% endcomment %}
             </tr>
           </thead>
 
           <tbody>
             {% for vendor in vendor %}
             <tr>
-              <td>{{vendor.vendor_name | title}}</td>
+              <td> <a href="{% url 'VendorUpdate' vendor.pk  %}">{{vendor.vendor_name | title}}</a></td>
               <td>{{vendor.vendor_code}}</td>
               <td>{{vendor.vendor_contact}}</td>
               <td>{{vendor.vendor_email}}</td>
@@ -63,13 +62,13 @@
               <td>{{vendor.vendor_address}}</td>
               <td>{{vendor.vendor_contact_person}}</td>
               <td>{{vendor.vendor_contact_person_contact}}</td>
-              <td>
+              {% comment %} <td>
                 <a href="{% url 'VendorUpdate' vendor.pk  %}">
                   <button class="btn btn-success" type="button" aria-haspopup="true" aria-expanded="false">
                     Edit
                   </button>
                 </a>
-              </td>
+              </td> {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>
