@@ -29,20 +29,34 @@ class UserListView(generic.ListView):
 # User Detail View
 
 
-@method_decorator(login_required, name='dispatch')
-class UserDetailView(generic.DetailView):
-    template_name = "user/user_detail.html"
-    model = User
+# @method_decorator(login_required, name='dispatch')
+# class UserDetailView(generic.DetailView):
+#     template_name = "user/user_detail.html"
+#     model = User
 
-    def get_context_data(self, *args,  **kwargs):
-        user = User.objects.all()
-        context = super(UserDetailView, self,
-                        ).get_context_data(*args, **kwargs)
-        profile = get_object_or_404(User, id=self.kwargs['pk'])
+#     def get_context_data(self, *args,  **kwargs):
+#         user = User.objects.all()
+#         context = super(UserDetailView, self,
+#                         ).get_context_data(*args, **kwargs)
+#         profile = get_object_or_404(User, id=self.kwargs['pk'])
 
-        # context[profile] = profile
-        return context
+#         # context[profile] = profile
+#         return context
 
+@login_required
+def UserDetailView(request,pk):
+    userpk=User.objects.get(id=pk)
+    print(userpk)
+    
+    pkid= Hardware.objects.filter(assigned_to_id=userpk)
+    print(pkid)
+        
+    context ={
+        "user":userpk,
+        "hardware":pkid,
+        }
+    return render(request,'user/user_detail.html',context)
+    
 
 # User Update View
 

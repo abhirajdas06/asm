@@ -46,7 +46,7 @@
       <tbody>
         {% for user in user  %}
         <tr>
-          <td>{{user.first_name|title }} {{user.last_name|title }}</td>
+          <td><a href="{% url 'UserDetail' user.pk %}">{{user.first_name|title }} {{user.last_name|title }}</a></td>
           <td>{{user.employee_code}}</td>
           <td>{{user.username}}</td>
           <td>{{user.email}}</td>
