@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from product.models import Hardware, Software
 from master.models import Category
-from django.db.models import Count
+from django.db.models import Count, Sum
 
 
 # User Create View
@@ -116,6 +116,7 @@ def Dashboard(request):
     working = Hardware.objects.filter(status = 'working')
     working_count =working.count()
     year = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('purchased_on__year', flat=True)
+    count = Hardware.objects.filter(purchased_on__year='2022').aggregate(Sum('cost'))
     year_count = Hardware.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('total', flat=True)
     soft_year = Software.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('purchased_on__year', flat=True)
     soft_year_count = Software.objects.values('purchased_on__year').annotate(total=Count('id')).values_list('total', flat=True)
@@ -139,6 +140,7 @@ def Dashboard(request):
          'employee'     : employee,
          'working'      : working,
          'year'         : year,
+         'count':count,
          'soft_year'         : soft_year,
          'it_asset_cat':it_asset_cat,
          'non_it_asset_cat':non_it_asset_cat,

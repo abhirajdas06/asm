@@ -56,3 +56,25 @@ $(document).ready(function() {
       ]
   } );
 } );
+
+$(document).ready(function() {
+    $('#employee').DataTable( {
+        dom: 'QBfrtip',
+        scrollY:500,
+  
+        buttons: [
+            {
+                extend: 'colvis',
+                postfixButtons: [ 'colvisRestore' ]
+            }
+            
+            
+        ],
+        columnDefs: [
+            {
+                targets: [-1,-2,-3,-4,-5,-6],
+                visible: false
+            }
+        ]
+    } );
+  } );
