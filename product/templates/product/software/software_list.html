@@ -39,7 +39,7 @@
                 <a href="{% url 'SoftwareCreate' %}"><button type="button" class=" btn btn-outline-purple btn-lg btn-block">Add Software</button>
                 </a></div>
 
-                <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="software" class="table table-striped" >
                     
                     <thead>
                     <tr>
@@ -48,7 +48,7 @@
                         <th>Purchased On</th>
                         <th>Expiry</th>
                         <th>Installed on</th>
-                        <th>Action</th>
+                        {% comment %} <th>Action</th> {% endcomment %}
                         
                     </tr>
                     </thead>
@@ -57,16 +57,16 @@
                     <tbody>
                         {% for software in software  %}
                     <tr>
-                        <td>{{software.name}}</td>
+                        <td><a href="{% url 'SoftwareUpdate' software.pk %}">{{software.name}}</a></td>
                         <td>{{software.softwaretype}}</td>
                         <td>{{software.purchased_on}}</td>
                         <td>{{software.expiry}}</td>
                         <td>{{software.installed_on}}</td>
-                        <td> 
+                        {% comment %} <td> 
                             <a href="{% url 'SoftwareUpdate' software.pk %}">       
                                 <button type="button" class="btn btn-sm btn-success">Edit</button>
                               </a>
-                        </td>
+                        </td> {% endcomment %}
                     </tr>
                     {% endfor %}
                     </tbody>

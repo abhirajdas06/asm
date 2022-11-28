@@ -37,24 +37,23 @@
     <div class="card">
       <div class="card-body">
         <table
-          id="datatable-buttons"
-          class="table table-bordered dt-responsive nowrap"
-          style="border-collapse: collapse; border-spacing: 0; width: 100%"
+          id="colvis"
+          class="table table-striped" 
         >
           <thead>
             <tr>
               <th>Sr No</th>
               <th>Software Type</th>
-              <th>Action</th>
+              {% comment %} <th>Action</th> {% endcomment %}
             </tr>
           </thead>
 
           <tbody>
             {% for s_type in s_type %}
             <tr>
-              <td>{{s_type.pk}}</td>
-              <td>{{s_type.type}}</td>
-              <td>
+              <td><a href="{% url 'SoftwareTypeUpdate' s_type.pk %}">{{s_type.pk}}</a></td>
+              <td><a href="{% url 'SoftwareTypeUpdate' s_type.pk %}">{{s_type.type}}</a></td>
+              {% comment %} <td>
                 <a href="{% url 'SoftwareTypeUpdate' s_type.pk %}">
                   <button
                     class="btn btn-success"
@@ -65,7 +64,7 @@
                     Edit
                   </button>
                 </a>
-              </td>
+              </td> {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>

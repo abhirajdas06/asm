@@ -37,24 +37,23 @@
     <div class="card">
       <div class="card-body">
         <table
-          id="datatable-buttons"
-          class="table table-bordered dt-responsive nowrap"
-          style="border-collapse: collapse; border-spacing: 0; width: 100%"
+          id="colvis"
+          class="table table-striped" 
         >
           <thead>
             <tr>
               <th>Branch</th>
               <th>Location</th>
-              <th>Edit</th>
+              {% comment %} <th>Edit</th> {% endcomment %}
             </tr>
           </thead>
 
           <tbody>
             {% for e_location in e_location %}
             <tr>
-              <td>{{e_location.branch}}</td>
+              <td><a href="{% url 'E_locationUpdate' e_location.pk %}">{{e_location.branch}}</a></td>
               <td>{{e_location.location}}</td>
-              <td>
+              {% comment %} <td>
                 <a href="{% url 'E_locationUpdate' e_location.pk %}">
                   <button
                     class="btn btn-success"
@@ -65,7 +64,7 @@
                     Edit
                   </button>
                 </a>
-              </td>
+              </td> {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>
