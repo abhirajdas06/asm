@@ -49,18 +49,18 @@ class HardwareCreateForm(forms.ModelForm):
 class HardwareUpdateForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = ['name',		'category',		'barcode',	'serial',	'vendor',
+        fields = ['name',		'category',		'barcode',	'serial',	'vendor','branch',
                   'purchased_on',	'warranty_expiry',	'tpm_expiry',	'status',	'location',	'assigned_to']
         widgets = {
             'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
             'warranty_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
             'tpm_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
         }
-    def __init__(self, *args, **kwargs):
+    # def __init__(self, *args, **kwargs):
             
-            super().__init__(*args, **kwargs)
-            self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
- 
+    #         super().__init__(*args, **kwargs)
+    #         self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
+           
  
 class HardwareAssignForm(forms.ModelForm):
     class Meta:
@@ -76,15 +76,15 @@ class HardwareAssignForm(forms.ModelForm):
             self.fields['location'].queryset = Location.objects.none()
            
                     
-    #         if 'assigned_to' in self.data:
-    #             try:
-    #                 location_id = int(self.data.get('assigned_to'))
-    #                 self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
-    #             except (ValueError, TypeError):
-    #                 pass  # invalid input from the client; ignore and fallback to empty City queryset
-    #         elif self.instance.pk:
-    #             pass
-    # #             # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
+            if 'assigned_to' in self.data:
+                try:
+                    location_id = int(self.data.get('assigned_to'))
+                    self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                pass
+    #             # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
    
 class HardwareDetailForm(forms.ModelForm):
     class Meta:
@@ -111,7 +111,7 @@ class HardwareDetailForm(forms.ModelForm):
 class HardwareReturnForm(forms.ModelForm):
     class Meta:
         model = Hardware
-        fields = [	'location']
+        fields = [	'branch','location']
     
     def __init__(self, *args, **kwargs):
         

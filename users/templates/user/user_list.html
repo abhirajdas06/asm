@@ -38,7 +38,7 @@
             <th>Role</th>
             <th>Branch</th>
             <th>Location</th>
-            <th></th>
+            {% comment %} <th></th> {% endcomment %}
 
         </tr>
       </thead>
@@ -55,6 +55,7 @@
           <td>{{user.user_type}}</td>
           <td>{{user.branch}}</td>
           <td>{{user.location}}</td>
+        
 
           {% comment %} <td> <a href="{% url 'UserUpdate' user.pk %}"><button class = "btn btn-outline-purple btn-lg btn-block">
               edit</button></a></td> {% endcomment %}

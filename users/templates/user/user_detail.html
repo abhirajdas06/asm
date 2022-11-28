@@ -7,20 +7,23 @@
         <div class="page-title-box">
             <h4 class="font-size-18"> Detail:  {{user.first_name | title}} {{user.last_name | title}} </h4>
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'HardwareList' %}">Hardware</a></li>
-                <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li>
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Employee</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'UserList' %}">Employee List</a></li>
+                <li class="breadcrumb-item"><a href="#">{{user.first_name}} {{user.last_name}}</a></li>
+                {% comment %} <li class="breadcrumb-item active">Edit {{hardware.name}} - {{hardware.barcode}}</li> {% endcomment %}
             </ol>
         </div>
     </div>
     <div class="col-sm-6">
 
-        <a href="{% url 'HardwareList'%}">
-        <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
-        </a>
         
-            <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button>
+        <button onclick="history.back()" type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Back</button>
+        
+        
+            <a href="{% url 'UserUpdate' user.pk %}">
+                <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right">Edit {{hardware.name | title}}</button>
             {{hardware.name | title}}
+            </a>
     
 {% comment %} {% if hardware.assigned_to == None %}
         <button type="button" class="btn btn-primary  w-lg mt-4 mr-4 float-right" data-toggle="modal"
