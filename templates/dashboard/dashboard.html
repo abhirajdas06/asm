@@ -94,13 +94,15 @@
 </div>
 
 
-{% comment %} {% for data in year %}{{data}},{% endfor %} {% endcomment %}
-{% comment %} {% for data in year_count  %}{{data}},{% endfor %} {% endcomment %}
+{% for data in year %}{{data}},{% endfor %}
+{% comment %} {% for data in count  %}{{data}},{% endfor %} {% endcomment %}
+{% comment %} {{count}} {% endcomment %}
+{{count}}
 {% comment %} 
 {% for data in it_asset_cat %}{{data}},{% endfor %}
 {% for data in it_asset_cat_count %}{{data}},{% endfor %} {% endcomment %}
 
-
+{% comment %} {{year}} {% endcomment %}
 
 {% include  'dashboard/chart.html' %}
 
