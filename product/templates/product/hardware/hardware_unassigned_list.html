@@ -62,7 +62,7 @@
               <th>Status</th>
               <th>Location</th>
               <th>Assigned To</th>
-              <th>Action</th>
+              {% comment %} <th>Action</th> {% endcomment %}
             </tr>
           </thead>
 
@@ -117,14 +117,14 @@
                 >
               </td>
               {% endcomment %}
-              <td>                                                       
+              {% comment %} <td>                                                       
                 <a href="{% url 'HardwareAssign' hardware.pk %}"> 
                     <button type="button" class="btn btn-sm btn-success">Assign</button>
                 </a>
                 <a href="{% url 'HardwareDetail' hardware.pk %}">
                   <button type="button" class="btn btn-sm btn-info">View</button>
               </a>
-              </td>
+              </td> {% endcomment %}
             </tr>
             {% endfor %}
           </tbody>

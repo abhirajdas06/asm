@@ -3,7 +3,9 @@ from users import views
 from product import views
 
 from .views import (SoftwareCreateView, SoftwareListView,
-                    HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,HardwareDetailView)
+                    HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,
+                    HardwareDetailView,AssignedAssetReportListView,UnAssignedAssetReportListView,
+                    DisposedAssetListView,SoftwareInUseListView,SoftwareInStockListView)
 
 urlpatterns = [
     path('software', SoftwareCreateView.as_view(), name="SoftwareCreate"),
@@ -18,7 +20,7 @@ urlpatterns = [
     path('hardware/detail/<int:pk>', views.HardwareDetailView, name="HardwareDetail"),
     path('hardware/assign/<int:pk>', HardwareAssignView.as_view(), name="HardwareAssign"),
     # path('hardware/return/<int:pk>', HardwareReturnView.as_view(), name="HardwareReturn"),
-    path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
+    # path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
     
     
     path('assignassets', views.AssignedView, name="AssignAsset"),
@@ -30,6 +32,13 @@ urlpatterns = [
     path('ajax/load-assignuser-location', views.load_assignuser_location, name='ajax_load_assignuserlocation'), # AJAX
     
     
+    
+    #Reports
+    path('hardware_assigned-asset',AssignedAssetReportListView.as_view(), name="AssignedAssetReport"),
+    path('hardware_unassigned-asset',UnAssignedAssetReportListView.as_view(), name="UnAssignedAssetReport"),
+    path('hardware-disposed-asset', DisposedAssetListView.as_view(), name="DisposedAsset"),
+    path('software-in-use', SoftwareInUseListView.as_view(), name="SoftwareInUse"),
+    path('software-in-stock', SoftwareInStockListView.as_view(), name="SoftwareInStock"),
     
     
 ]

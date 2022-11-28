@@ -129,41 +129,7 @@ class HardwareAssignView(generic.UpdateView):
     def get_success_url(self):
         return reverse("AssignAsset")
 
-# HARDWARE PRODUCT Return in Stock
-@login_required
-def HardwareReturn(request,pk):
-    pass
-    # Hardware.objects.filter(id=pk).update(assigned_to=None)
-    # # q = Hardware.objects.get(id=pk)
-    # # q.assigned_to = None
-    # # q.save()
-    # return redirect ("HardwareDetail",(pk))
-    # form = HardwareReturnForm(request.POST or None, instance=pk)  
-    # if form.is_valid():
-        
-    #     form.save()
-        
-    # context ={
-    #     "form": form,
-       
-        
-    # }
-    # return render(request,'product/hardware/hardware_detail.html',context)
 
-
-
-
-
-
-
-
-# HARDWARE PRODUCT Detailview
-# class HardwareDetailView(generic.DetailView):
-#     model = Hardware
-  
-#     template_name= "product/hardware/hardware_detail.html"
-    
-    
 @login_required
 def HardwareDetailView(request,pk):
     pkid= Hardware.objects.get(id=pk)
@@ -235,3 +201,48 @@ def load_assignuser_location(request):
     
     
     
+#*****************************************Report Views*********************************
+
+# AssignedAssetReportListView
+
+@method_decorator(login_required, name='dispatch')
+class AssignedAssetReportListView(generic.ListView):
+    template_name = "product/hardware/hardware_assigned_list.html"
+    queryset = Hardware.objects.exclude(assigned_to__id=None)
+
+    context_object_name = "hardware"
+    
+    
+# UnAssignedAssetReportListView
+@method_decorator(login_required, name='dispatch')
+class UnAssignedAssetReportListView(generic.ListView):
+    template_name = "product/hardware/hardware_unassigned_list.html"
+    queryset = Hardware.objects.filter(assigned_to__id=None).exclude(status='disposed')
+
+    context_object_name = "hardware"
+
+
+# DisposedAssetListView
+@method_decorator(login_required, name='dispatch')
+class DisposedAssetListView(generic.ListView):
+    template_name = "product/hardware/hardware_disposedasset.html"
+    queryset = Hardware.objects.filter(status='disposed')
+
+    context_object_name = "hardware"
+    
+    
+# SoftwareInUseListView
+@method_decorator(login_required, name='dispatch')
+class SoftwareInUseListView(generic.ListView):
+    template_name = "product/software/software_inuse_list.html"
+    queryset = Software.objects.exclude(installed_on__id=None)
+
+    context_object_name = "software"
+    
+# SoftwareInStockListView    
+@method_decorator(login_required, name='dispatch')
+class SoftwareInStockListView(generic.ListView):
+    template_name = "product/software/software_instock_list.html"
+    queryset = Software.objects.filter(installed_on__id=None)
+
+    context_object_name = "software"
