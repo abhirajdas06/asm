@@ -70,16 +70,18 @@
                                 {{form.branch|as_crispy_field}}
     
                         </div>   {% endcomment %}
-                        <div class="form-group">
+                        <div class="form-group col-6">
+                            {{form.assigned_to|as_crispy_field}}
+    
+                        </div>
+                        
+                        <div class="form-group col-6">
                             {{form.location|as_crispy_field}}
                                            </div> 
                                       
     
          
-                         <div class="form-group ">
-                            {{form.assigned_to|as_crispy_field}}
-    
-                        </div>
+                        
                         
                         {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
                   
