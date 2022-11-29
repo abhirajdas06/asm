@@ -116,4 +116,17 @@ class HardwareReturnForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         
         super().__init__(*args, **kwargs)
-        self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
+        self.fields['location'].queryset = Location.objects.none()
+        
+        if 'branch' in self.data:
+            try:
+                print ("try hu mai")
+                    
+                branch_id = int(self.data.get('id_branch'))
+                self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+            except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            pass
+                # self.fields['location'].queryset = self.instance.master_location.order_by('location')
+   
