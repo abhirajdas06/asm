@@ -6,7 +6,7 @@ from users.models import (User, Company,Location)
 from .forms import (CreateUser, UpdateUser, CompanyForm)
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from product.models import Hardware, Software
+from product.models import Hardware, Software,Nonitasset
 from master.models import Category
 from django.db.models import Count, Sum
 
@@ -117,7 +117,7 @@ def load_empuser_location(request):
 def Dashboard(request):
     it_asset = Hardware.objects.filter(asset_type='IT Assets')
     it_asset_count =it_asset.count()    
-    non_it_asset = Hardware.objects.filter(asset_type='Non IT Assets')
+    non_it_asset = Nonitasset.objects.filter(asset_type='Non IT Assets')
     non_it_asset_count =non_it_asset.count()
     software = Software.objects.all()
     software_count =software.count()
@@ -140,9 +140,9 @@ def Dashboard(request):
     it_asset_cat = Category.objects.filter(id__in=it_asset_cat1)
     it_asset_cat_count = Hardware.objects.filter(asset_type='IT Assets').values('category').annotate(total=Count('id')).values_list('total', flat=True)
 
-    non_it_asset_cat1 = Hardware.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('category', flat=True)
+    non_it_asset_cat1 = Nonitasset.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('category', flat=True)
     non_it_asset_cat = Category.objects.filter(id__in=non_it_asset_cat1)
-    non_it_asset_cat_count = Hardware.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('total', flat=True)
+    non_it_asset_cat_count = Nonitasset.objects.filter(asset_type='Non IT Assets').values('category').annotate(total=Count('id')).values_list('total', flat=True)
 
     context = {
         #DATA
