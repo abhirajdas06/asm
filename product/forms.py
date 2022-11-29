@@ -1,5 +1,5 @@
 from django import forms
-from .models import (Software, Hardware)
+from .models import (Software, Hardware,Nonitasset)
 from master.models import Category,Brand,Location
 from users.models import User
 
@@ -76,14 +76,14 @@ class HardwareAssignForm(forms.ModelForm):
             self.fields['location'].queryset = Location.objects.none()
            
                     
-            if 'assigned_to' in self.data:
-                try:
-                    location_id = int(self.data.get('assigned_to'))
-                    self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
-                except (ValueError, TypeError):
-                    pass  # invalid input from the client; ignore and fallback to empty City queryset
-            elif self.instance.pk:
-                pass
+            # if 'assigned_to' in self.data:
+            #     try:
+            #         location_id = int(self.data.get('assigned_to'))
+            #         self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
+            #     except (ValueError, TypeError):
+            #         pass  # invalid input from the client; ignore and fallback to empty City queryset
+            # elif self.instance.pk:
+            #     pass
     #             # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
    
 class HardwareDetailForm(forms.ModelForm):
@@ -118,15 +118,77 @@ class HardwareReturnForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['location'].queryset = Location.objects.none()
         
-        if 'branch' in self.data:
-            try:
-                print ("try hu mai")
+        # if 'branch' in self.data:
+        #     try:
+        #         print ("try hu mai")
                     
-                branch_id = int(self.data.get('id_branch'))
-                self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
-            except (ValueError, TypeError):
-                    pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            pass
-                # self.fields['location'].queryset = self.instance.master_location.order_by('location')
+        #         branch_id = int(self.data.get('id_branch'))
+        #         self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+        #     except (ValueError, TypeError):
+        #             pass  # invalid input from the client; ignore and fallback to empty City queryset
+        # elif self.instance.pk:
+        #     pass
+        #         # self.fields['location'].queryset = self.instance.master_location.order_by('location')
    
+   
+   
+# Non It Asset model form
+class NonITAssetCreateForm(forms.ModelForm):
+    class Meta:
+        model = Nonitasset
+        fields = ['name','asset_type','category','barcode','serial','description','vendor','purchased_on','warranty_expiry',
+                  'branch','location','cost']
+        
+        
+        widgets = {
+            'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
+            'warranty_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
+            
+        }
+    def __init__(self, *args, **kwargs):
+            
+            super().__init__(*args, **kwargs)
+            self.fields['category'].queryset = Category.objects.filter(asset_type='Non IT Assets')
+            
+            
+# Non It Asset model form
+class NonITAssetUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Nonitasset
+        fields = ['name','asset_type','category','barcode','serial','description','vendor','purchased_on','warranty_expiry',
+                  'branch','location','assigned_to','cost']
+        
+        
+        widgets = {
+            'purchased_on': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
+            'warranty_expiry': forms.DateInput(format=('%Y-%m-%d'), attrs={'class': 'form-control', 'placeholder': 'Select a date', 'type': 'date'}),
+            
+        }
+        
+class NonITAssetAssignForm(forms.ModelForm):
+    class Meta:
+        model = Nonitasset
+        fields = ['assigned_to','location']
+        
+        
+   
+    
+    def __init__(self, *args, **kwargs):
+            
+            super().__init__(*args, **kwargs)
+            self.fields['location'].queryset = Location.objects.none()
+            
+            
+            
+class NonITAssetReturnForm(forms.ModelForm):
+    class Meta:
+        model = Nonitasset
+        fields = ['branch','location']
+        
+        
+   
+    
+    def __init__(self, *args, **kwargs):
+            
+            super().__init__(*args, **kwargs)
+            # self.fields['location'].queryset = Location.objects.none()

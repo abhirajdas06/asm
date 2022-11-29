@@ -3,9 +3,12 @@ from users import views
 from product import views
 
 from .views import (SoftwareCreateView, SoftwareListView,
-                    HardwareListView,SoftwareUpdateView,HardwareUpdateView,UnAssignedView,HardwareAssignView,
+                    HardwareListView,SoftwareUpdateView,HardwareUpdateView,HardwareAssignView,
                     HardwareDetailView,AssignedAssetReportListView,UnAssignedAssetReportListView,
-                    DisposedAssetListView,SoftwareInUseListView,SoftwareInStockListView)
+                    DisposedAssetListView,SoftwareInUseListView,SoftwareInStockListView,NonITAssetListView,
+NonITAssetUpdateView,NonITAssetAssignView,
+# UnAssignedView,
+)
 
 urlpatterns = [
     path('software', SoftwareCreateView.as_view(), name="SoftwareCreate"),
@@ -24,7 +27,7 @@ urlpatterns = [
     
     
     path('assignassets', views.AssignedView, name="AssignAsset"),
-    path('unassignassets', UnAssignedView.as_view(), name="UnAssignAsset"),
+    # path('unassignassets', UnAssignedView.as_view(), name="UnAssignAsset"),
     
     path('ajax/load-category', views.load_category, name='ajax_load_category'), # AJAX
     path('ajax/load-location', views.load_location, name='ajax_load_location'), # AJAX
@@ -40,5 +43,12 @@ urlpatterns = [
     path('software-in-use', SoftwareInUseListView.as_view(), name="SoftwareInUse"),
     path('software-in-stock', SoftwareInStockListView.as_view(), name="SoftwareInStock"),
     
-    
+    path('non-it-assets', views.NonITAssetCreateView, name="NonITAssetCreate"),
+    path('non-it-assets-list', NonITAssetListView.as_view(), name="NonITAssetList"),
+    path('non-it-assets/update/<int:pk>', NonITAssetUpdateView.as_view(), name="NonITAssetUpdate"),
+    # path('hardware/detail/<int:pk>', HardwareDetailView.as_view(), name="HardwareDetail"),
+    path('non-it-asset/detail/<int:pk>',views.NonITAssetDetailView, name="NonITAssetDetail"),
+    path('non-it-assets/assign/<int:pk>', NonITAssetAssignView.as_view(), name="NonITAssetAssign"),
+    # path('hardware/return/<int:pk>', HardwareReturnView.as_view(), name="HardwareReturn"),
+    # path('hardware/return/<int:pk>', views.HardwareReturn, name="HardwareReturn"),
 ]

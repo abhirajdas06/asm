@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib import messages
-from .models import (Software, Hardware)
+from .models import (Software, Hardware,Nonitasset)
 from users.models import User
 from master.models import Category,Location
-from .forms import (SoftwareForm, HardwareUpdateForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm, HardwareReturnForm)
+from .forms import (SoftwareForm, HardwareUpdateForm,HardwareDetailForm, HardwareAssignForm, HardwareCreateForm, HardwareReturnForm,NonITAssetCreateForm,NonITAssetUpdateForm,NonITAssetAssignForm,NonITAssetReturnForm)
 
 
 # SOFTWARE PRODUCT CREATE
@@ -86,12 +86,12 @@ class HardwareUpdateView(generic.UpdateView):
         return reverse("HardwareList")
     
     
-@method_decorator(login_required, name='dispatch') 
-class UnAssignedView(generic.ListView):
-    template_name = "product/hardware/hardware_unassigned_list.html"
-    # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NULL')
-    queryset = Hardware.objects.filter(assigned_to__id = None)
-    context_object_name = "hardware"
+# @method_decorator(login_required, name='dispatch') 
+# class UnAssignedView(generic.ListView):
+#     template_name = "product/hardware/hardware_unassigned_list.html"
+#     # queryset = Product.objects.raw('Select * From product_product Where "assign_to_id" IS NULL')
+#     queryset = Hardware.objects.filter(assigned_to__id = None)
+#     context_object_name = "hardware"
 
 # @method_decorator(login_required, name='dispatch')    
 # class AssignedView(generic.ListView):
@@ -246,3 +246,78 @@ class SoftwareInStockListView(generic.ListView):
     queryset = Software.objects.filter(installed_on__id=None)
 
     context_object_name = "software"
+    
+    
+    
+    
+# *********************NON IT ASSET VIEWS************************************
+
+
+
+class NonITAssetAssignView(generic.UpdateView):
+    pass
+
+
+
+# NON IT ASSET PRODUCT Create
+@login_required
+def NonITAssetCreateView(request):
+    form = NonITAssetCreateForm(request.POST or None)  
+    if form.is_valid():
+        form.save()
+        return redirect("NonITAssetList")
+    context={
+        "form":form
+    }
+        
+    return render(request,'product/nonitasset/nonitasset_create.html',context)
+    
+
+
+# NON IT ASSET PRODUCT LIST
+# @method_decorator(login_required, name='dispatch')
+class NonITAssetListView(generic.ListView):
+    
+    template_name = "product/nonitasset/nonitasset_list.html"
+    queryset = Nonitasset.objects.all()
+
+    context_object_name = "hardware"
+    
+    # NON IT ASSET PRODUCT UPDATE
+# @method_decorator(login_required, name='dispatch')
+class NonITAssetUpdateView(generic.UpdateView):
+    
+    template_name = "product/nonitasset/nonitasset_update.html"
+    form_class=NonITAssetUpdateForm
+    queryset = Nonitasset.objects.all()
+    context_object_name = "hardware"
+    
+    def get_success_url(self):
+        return reverse("NonITAssetList")
+    
+    
+    
+@login_required
+def NonITAssetDetailView(request,pk):
+    pkid= Nonitasset.objects.get(id=pk)
+    # soft= Software.objects.filter(installed_on=pkid)
+    
+    # locate=Location.objects.filter(location=pkid)
+    # locate= Location.objects.filter(=pkid)
+    
+    form = NonITAssetAssignForm(request.POST or None, instance=pkid)  
+    form2 = NonITAssetReturnForm(request.POST or None, instance=pkid)  
+    if form.is_valid():
+        form.save()
+    if form2.is_valid():
+        form2.save()
+        # return HttpResponseRedirect("/"+pkid)
+    context ={
+        "form": form,
+        "form2": form2,
+        "hardware":pkid,
+        # "software":soft,
+        # "location":locate,
+        
+    }
+    return render(request,'product/nonitasset/nonitasset_detail.html',context)
