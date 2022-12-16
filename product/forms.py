@@ -34,15 +34,15 @@ class HardwareCreateForm(forms.ModelForm):
             
 
                     
-            # if 'branch' in self.data:
-            #     try:
+            if 'branch' in self.data:
+                try:
                     
-            #         branch_id = int(self.data.get('branch'))
-            #         self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
-            #     except (ValueError, TypeError):
-            #         pass  # invalid input from the client; ignore and fallback to empty City queryset
-            # elif self.instance.pk:
-            #     self.fields['location'].queryset = self.instance.category_set.order_by('location')
+                    branch_id = int(self.data.get('branch'))
+                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                self.fields['location'].queryset = self.instance.category_set.order_by('location')
    
                     
     
