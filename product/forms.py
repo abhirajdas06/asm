@@ -76,15 +76,15 @@ class HardwareAssignForm(forms.ModelForm):
             self.fields['location'].queryset = Location.objects.none()
            
                     
-            # if 'assigned_to' in self.data:
-            #     try:
-            #         location_id = int(self.data.get('assigned_to'))
-            #         self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
-            #     except (ValueError, TypeError):
-            #         pass  # invalid input from the client; ignore and fallback to empty City queryset
-            # elif self.instance.pk:
-            #     pass
-    #             # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
+            if 'assigned_to' in self.data:
+                try:
+                    location_id = int(self.data.get('assigned_to'))
+                    self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                pass
+                # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
    
 class HardwareDetailForm(forms.ModelForm):
     class Meta:
@@ -118,17 +118,17 @@ class HardwareReturnForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['location'].queryset = Location.objects.none()
         
-        # if 'branch' in self.data:
-        #     try:
-        #         print ("try hu mai")
+        if 'branch' in self.data:
+            try:
+                print ("try hu mai")
                     
-        #         branch_id = int(self.data.get('id_branch'))
-        #         self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
-        #     except (ValueError, TypeError):
-        #             pass  # invalid input from the client; ignore and fallback to empty City queryset
-        # elif self.instance.pk:
-        #     pass
-        #         # self.fields['location'].queryset = self.instance.master_location.order_by('location')
+                branch_id = int(self.data.get('id_branch'))
+                self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+            except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            pass
+                # self.fields['location'].queryset = self.instance.master_location.order_by('location')
    
    
    
