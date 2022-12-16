@@ -18,7 +18,7 @@ class CreateUser(UserCreationForm):
                 
         if 'branch' in self.data:
             try:
-                branch_id = int(self.data.get('branch'))
+                branch_id = (self.data.get('branch'))
                 self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).filter(location_type='Employee Location').order_by('location')
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset

@@ -37,7 +37,7 @@ class HardwareCreateForm(forms.ModelForm):
             if 'branch' in self.data:
                 try:
                     
-                    branch_id = int(self.data.get('branch'))
+                    branch_id = (self.data.get('branch'))
                     self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
                 except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
@@ -78,7 +78,7 @@ class HardwareAssignForm(forms.ModelForm):
                     
             if 'assigned_to' in self.data:
                 try:
-                    location_id = int(self.data.get('assigned_to'))
+                    location_id = (self.data.get('assigned_to'))
                     self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
                 except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
@@ -122,7 +122,7 @@ class HardwareReturnForm(forms.ModelForm):
             try:
                 print ("try hu mai")
                     
-                branch_id = int(self.data.get('id_branch'))
+                branch_id = (self.data.get('id_branch'))
                 self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
             except (ValueError, TypeError):
                     pass  # invalid input from the client; ignore and fallback to empty City queryset
