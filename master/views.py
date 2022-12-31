@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, reverse, redirect
+from django.shortcuts import get_object_or_404, render,reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
@@ -94,7 +94,7 @@ class EmployeeLocationListView(generic.ListView):
 class ElocationUpdateView(generic.UpdateView):
     template_name = "master/location/employee_location_create.html"
     form_class=Employee_LocationForm
-    queryset = Location.objects.all()
+    queryset = Location.objects.all().order_by("branch")
     context_object_name = "e_location"
     
     def get_success_url(self):

@@ -100,7 +100,7 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
             console.log("function started")
-            $('#id_branch').change(function () {
+            $('#id_branch').load(function () {
                 
                 console.log("branch id fetched")
                 const url = $('#HardwareReturnForm');  // get the url of the `load_cities` view

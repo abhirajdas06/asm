@@ -44,6 +44,7 @@
           <thead>
             <tr>
               <th>Branch</th>
+              <th>Location Type</th>
               <th>Location</th>
               <th>Action</th>
             </tr>
@@ -53,6 +54,7 @@
             {% for a_location in a_location %}
             <tr>
               <td>{{a_location.branch}}</td>
+              <td>{{a_location.location_type}}</td>
               <td>{{a_location.location}}</td>
               <td>
                 <a href="{% url 'AssetLocationUpdate' a_location.pk  %}">

@@ -78,6 +78,7 @@ class HardwareAssignForm(forms.ModelForm):
                     
             if 'assigned_to' in self.data:
                 try:
+                    #branch_id = int(self.data.get('id_branch')) pehle int tha 
                     location_id = (self.data.get('assigned_to'))
                     self.fields['location'].queryset = Location.objects.filter(user__in=User.objects.filter(id=location_id))
                 except (ValueError, TypeError):
@@ -118,10 +119,9 @@ class HardwareReturnForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['location'].queryset = Location.objects.none()
         
-        if 'branch' in self.data:
+        if 'branch' in self.data: 
             try:
-                print ("try hu mai")
-                    
+                #branch_id = int(self.data.get('id_branch')) pehle int tha 
                 branch_id = (self.data.get('id_branch'))
                 self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
             except (ValueError, TypeError):

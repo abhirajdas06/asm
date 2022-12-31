@@ -50,7 +50,7 @@ urlpatterns = [
     path('branch_list', BranchListView.as_view(), name="BranchList"),
     
     path('employee_location', EmployeeLocationCreateView.as_view(),name="EmployeeLocationCreate"),
-    path('employee_location_list', EmployeeLocationListView.as_view(), name="EmployeeLocationList"),
+    path('location_list', EmployeeLocationListView.as_view(), name="EmployeeLocationList"),
     path('employee_location/update/<int:pk>', ElocationUpdateView.as_view(), name="E_locationUpdate"),
     
     path('vendor', VendorCreateView.as_view(), name="VendorCreate"),
