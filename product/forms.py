@@ -1,6 +1,6 @@
 from django import forms
 from .models import (Software, Hardware,Nonitasset)
-from master.models import Category,Brand,Location
+from master.models import Category,Brand,Location,Branch
 from users.models import User
 
 # COMPANY MASTER FORM
@@ -67,9 +67,6 @@ class HardwareAssignForm(forms.ModelForm):
         model = Hardware
         fields = [	'assigned_to','location']
         
-        
-   
-    
     def __init__(self, *args, **kwargs):
             
             super().__init__(*args, **kwargs)
@@ -86,6 +83,43 @@ class HardwareAssignForm(forms.ModelForm):
             elif self.instance.pk:
                 pass
                 # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
+                
+class HardwareReturnForm(forms.ModelForm):
+    class Meta:
+        model = Hardware
+        fields = ['branch','location']
+    
+    # def __init__(self, *args, **kwargs):
+        
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['location'].queryset = Location.objects.none()
+    #     self.fields['branch'].queryset = Branch.objects.all()
+        
+    #     if 'branch_name' in self.data: 
+    #         try:
+    #             #branch_id = int(self.data.get('id_branch')) pehle int tha 
+    #             branch_id = (self.data.get('id_branch'))
+    #             self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
+    #         except (ValueError, TypeError):
+    #                 pass  # invalid input from the client; ignore and fallback to empty City queryset
+    #     elif self.instance.pk:
+    #         pass
+    #            # self.fields['location'].queryset = self.instance.master_location.order_by('location')
+    def __init__(self, *args, **kwargs):
+                
+            super().__init__(*args, **kwargs)
+            self.fields['location'].queryset = Location.objects.none()
+                    
+            if 'branch' in self.data:
+                try:
+                    branch_id = (self.data.get('branch'))
+                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).filter(location_type='Asset Location').order_by('location')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                pass
+                # self.fields['location'].queryset = self.instance.category_set.order_by('location')
+    
    
 class HardwareDetailForm(forms.ModelForm):
     class Meta:
@@ -109,28 +143,7 @@ class HardwareDetailForm(forms.ModelForm):
         #     "location": forms.TextInput(attrs={'readonly':True}),
         # }        
         
-class HardwareReturnForm(forms.ModelForm):
-    class Meta:
-        model = Hardware
-        fields = [	'branch','location']
-    
-    def __init__(self, *args, **kwargs):
-        
-        super().__init__(*args, **kwargs)
-        self.fields['location'].queryset = Location.objects.none()
-        
-        if 'branch' in self.data: 
-            try:
-                #branch_id = int(self.data.get('id_branch')) pehle int tha 
-                branch_id = (self.data.get('id_branch'))
-                self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).order_by('location')
-            except (ValueError, TypeError):
-                    pass  # invalid input from the client; ignore and fallback to empty City queryset
-        elif self.instance.pk:
-            pass
-                # self.fields['location'].queryset = self.instance.master_location.order_by('location')
-   
-   
+
    
 # Non It Asset model form
 class NonITAssetCreateForm(forms.ModelForm):

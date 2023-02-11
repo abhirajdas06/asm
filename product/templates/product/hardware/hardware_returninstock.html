@@ -15,57 +15,6 @@
                     <form method="post" id="HardwareReturnForm" data-category-url="{% url 'ajax_load_emplocation' %}" >
                         {% csrf_token %}
     
-                        {% comment %} <div class="form-row">
-                            <div class="form-group">
-                                {{form.name|as_crispy_field }}
-    
-                            </div>
-                            <div class="form-group">
-                                {{form.brand|as_crispy_field}}
-    
-                            </div>  
-                            <div class="form-group">
-                                {{form.category|as_crispy_field}}
-    
-                            </div>
-    
-                            <div class="form-group">
-                                {{form.subcategory|as_crispy_field}}
-    
-                            </div>
-                            <div class="form-group">
-                                {{form.barcode|as_crispy_field}}
-    
-                            </div>
-    
-                            <div class="form-group">
-                                {{form.serial|as_crispy_field}}
-    
-                            </div>
-    
-                           <div class="form-group">
-                                {{form.vendor|as_crispy_field}}
-    
-                            </div> 
-    
-                            <div class="form-group">
-                                {{form.purchased_on|as_crispy_field}}
-    
-                            </div>
-    
-                            <div class="form-group">
-                                {{form.warranty_expiry|as_crispy_field}}
-    
-                            </div>
-    
-                            <div class="form-group">
-                                {{form.tpm_expiry|as_crispy_field}}
-                        </div>
-                        <div class="form-group">
-                            {{form.status|as_crispy_field}}
-    
-                        </div> 
-                             {% endcomment %}
                              <div class="form-group">
                                 {{form2.branch|as_crispy_field}}
     
@@ -76,12 +25,7 @@
                                       
     
          
-                         {% comment %} <div class="form-group col-6">
-                            {{form.assigned_to|as_crispy_field}}
-    
-                        </div> {% endcomment %}
-                        
-                        {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
+                         
                   
                 </div>
                 <div class="modal-footer">
@@ -94,13 +38,13 @@
     </div><!-- /.modal -->
 
    
-    {% block javascript %}
+    {% comment %} {% block javascript %} {% endcomment %}
 
- <script type="text/javascript">
+ <!--script type="text/javascript">
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
             console.log("function started")
-            $('#id_branch').load(function () {
+            $('#id_branch').change(function () {
                 
                 console.log("branch id fetched")
                 const url = $('#HardwareReturnForm');  // get the url of the `load_cities` view
@@ -118,7 +62,7 @@
                     },
 
                     success: function (data) {   // `data` is the return of the `load_cities` view function
-                        console.log("working")
+                        console.log(data)
                         $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
                         console.log("working")
                         // {% comment %}                    
@@ -137,7 +81,46 @@
             });
         });
 
-    </script>
+    </script-->
+    <script type="text/javascript">
+        // In your Javascript (external .js resource or <script> tag)
+            $(document).ready(function () {
+                
+                $('#id_branch').change(function () {
+                    
+                    const url = $('#HardwareReturnForm');  // get the url of the `load_cities` view
+                        
+                    const branchId = $(this).val();  // get the selected country ID from the HTML input
+                    console.log("working")
+                    $.ajax({                                       // initialize an AJAX request
+                        url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
+                        data: {
+                            'branch_id': branchId       // add the country id to the GET parameters
+                        },
+                        
+                        success: function (data) 
+                        {   // `data` is the return of the `load_cities` view function
+                            console.log(data)
+                            $("#id_location").html(data);  // replace the contents of the city input with the data that came from the server
+                            console.log("working")
+                            // {% comment %}                    
+        
+                            // let html_data = '<option value="">---------</option>';
+                            // data.forEach(function (city) {
+                            //     html_data += `<option value="${city.id}">${city.name}</option>`
+                            // });
+                            // console.log(html_data);
+                            // $('#id_city').html(html_data); {% endcomment %}
+        
+                            
+                        }
+                    });
+        
+                });
+        });
+        
+            
+        </script>
+    </body>
 
-
-    {% endblock javascript %}
+    {% comment %} {% endblock javascript %} {% endcomment %}

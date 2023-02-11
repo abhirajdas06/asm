@@ -103,10 +103,8 @@
             $('#id_branch').change(function () {
                 
                 const url = $('#UserCreateForm');  // get the url of the `load_cities` view
-                
-    
+                    
                 const branchId = $(this).val();  // get the selected country ID from the HTML input
-                
                 console.log("working")
                 $.ajax({                                       // initialize an AJAX request
                     url: url.attr('data-category-url'),                    // set the url of the request (= /persons/ajax/load-cities/ )
