@@ -42,6 +42,7 @@
 {% endif %}
 
 
+
     </div>
 </div>
 <!-- end page title -->
@@ -49,9 +50,13 @@
 {% endblock title_add %}
 
 {% block body %}
-{% include 'product/hardware/hardware_returninstock.html' %}
+
+{% if hardware.assigned_to == None %}
 {% include 'product/hardware/hardware_assign.html' %}
 
+{% else %}
+{% include 'product/hardware/hardware_returninstock.html' %}
+{% endif %}
 
 
 
@@ -117,7 +122,6 @@
         </div> {% endcomment %}
         {% comment %} <button type="submit" class="btn btn-outline-primary">Submit</button> {% endcomment %}
         <div class="col-12">
-
             <div class="row">
                 <div class="col-md-6">
                     <dl class="row mb-0">
@@ -152,10 +156,7 @@
                         <dt class="col-sm-6">Product Assigned To:</dt>
                         <dd class="col-sm-6">{{hardware.assigned_to}}</dd>
                     </dl>
-
                 </div>
-
-
                 <div class="col-md-6">
                     <dl class="row mb-0">
                         <dt class="col-sm-6">Vendor Name:</dt>
@@ -178,29 +179,21 @@
         </div>
     </div>
 </div>
-
 <hr>
-
 <h4 class="font-size-18"> Software Installed on: {{hardware.name | title}} - {{hardware.barcode}}</h4>
 <br>
 <div class="card">
     <div class="card-body">
         <table id="datatable" class="table table-bordered dt-responsive nowrap"
             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Software Type</th>
                     <th>Purchased On</th>
                     <th>Expiry</th>
-
-
-
                 </tr>
             </thead>
-
-
             <tbody>
                 {% for software in software %}
                 <tr>
@@ -208,11 +201,8 @@
                     <td>{{software.softwaretype}}</td>
                     <td>{{software.purchased_on}}</td>
                     <td>{{software.expiry}}</td>
-
                 </tr>
-
                 {% endfor %}
             </tbody>
         </table>
-
-        {% endblock body %}
+{% endblock body %}

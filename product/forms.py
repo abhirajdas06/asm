@@ -60,6 +60,23 @@ class HardwareUpdateForm(forms.ModelForm):
             
     #         super().__init__(*args, **kwargs)
     #         self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
+    def __init__(self, *args, **kwargs):
+                
+            super().__init__(*args, **kwargs)
+            # branchname = (self.data.get('branch_id'))
+            # self.fields['location'].queryset = Location.objects.filter(branch_id=branchname).filter(location_type='Asset Location')
+            self.fields['location'].queryset = Location.objects.filter(location_type='Asset Location')
+            # self.fields['branch'].queryset = Branch.objects.none()
+                    
+            if 'branch' in self.data:
+                try:
+                    branch_id = (self.data.get('branch'))
+                    self.fields['location'].queryset = Location.objects.filter(branch_id=branch_id).filter(location_type='Asset Location').order_by('location')
+                except (ValueError, TypeError):
+                    pass  # invalid input from the client; ignore and fallback to empty City queryset
+            elif self.instance.pk:
+                pass
+                # self.fields['location'].queryset = self.instance.category_set.order_by('location')
            
  
 class HardwareAssignForm(forms.ModelForm):
@@ -83,6 +100,21 @@ class HardwareAssignForm(forms.ModelForm):
             elif self.instance.pk:
                 pass
                 # self.fields['location'].queryset = self.instance.assigned_to.order_by('location')
+                
+        # widgets = {
+        #     "name": forms.TextInput(attrs={'readonly':True}),
+        #     'category': forms.TextInput(attrs={'readonly':True}),
+            
+        #     'vendor': forms.TextInput(attrs={'readonly':True}),
+        #     'purchased_on': forms.TextInput(attrs={'readonly':True}),
+        #     'warranty_expiry': forms.TextInput(attrs={'readonly':True}),
+        #     'tpm_expiry': forms.TextInput(attrs={'readonly':True}),
+        #     'assigned_to': forms.TextInput(attrs={'readonly':True}),
+        #     "barcode": forms.TextInput(attrs={'readonly':True}),
+        #     "serial": forms.TextInput(attrs={'readonly':True}),
+        #     "status": forms.TextInput(attrs={'readonly':True}),
+        #     "location": forms.TextInput(attrs={'readonly':True}),
+        # }  
                 
 class HardwareReturnForm(forms.ModelForm):
     class Meta:
@@ -109,6 +141,7 @@ class HardwareReturnForm(forms.ModelForm):
                 
             super().__init__(*args, **kwargs)
             self.fields['location'].queryset = Location.objects.none()
+            # self.fields['branch'].queryset = Branch.objects.none()
                     
             if 'branch' in self.data:
                 try:

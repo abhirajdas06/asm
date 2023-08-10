@@ -110,8 +110,6 @@ def AssignedView(request):
     pkid= Hardware.objects.exclude(assigned_to__id = None)
     
     print(pkid)
-    
-    
     context ={
                "hardware":pkid,
          }
